@@ -1,5 +1,4 @@
 # bhex openapi
 
-* openapi doc
-* python sdk
-* java sdk
+* Openapi directory: include the openapi doc
+* SDK directory: include java and python sdk

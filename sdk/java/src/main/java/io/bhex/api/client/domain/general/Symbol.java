@@ -1,0 +1,110 @@
+package io.bhex.api.client.domain.general;
+
+
+
+import io.bhex.api.client.constant.BHexConstants;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class Symbol implements Serializable {
+
+    private List<SymbolFilter> filters;
+
+    private String exchangeId;
+    private String symbol;
+    private SymbolStatus status;
+    private String baseAsset;
+    private int baseAssetPrecision;
+    private String quoteAsset;
+    private int quotePrecision;
+    private boolean icebergAllowed;
+
+    public List<SymbolFilter> getFilters() {
+        return filters;
+    }
+
+    public void setFilters(List<SymbolFilter> filters) {
+        this.filters = filters;
+    }
+
+    public String getExchangeId() {
+        return exchangeId;
+    }
+
+    public void setExchangeId(String exchangeId) {
+        this.exchangeId = exchangeId;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public SymbolStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(SymbolStatus status) {
+        this.status = status;
+    }
+
+    public String getBaseAsset() {
+        return baseAsset;
+    }
+
+    public void setBaseAsset(String baseAsset) {
+        this.baseAsset = baseAsset;
+    }
+
+    public int getBaseAssetPrecision() {
+        return baseAssetPrecision;
+    }
+
+    public void setBaseAssetPrecision(int baseAssetPrecision) {
+        this.baseAssetPrecision = baseAssetPrecision;
+    }
+
+    public String getQuoteAsset() {
+        return quoteAsset;
+    }
+
+    public void setQuoteAsset(String quoteAsset) {
+        this.quoteAsset = quoteAsset;
+    }
+
+    public int getQuotePrecision() {
+        return quotePrecision;
+    }
+
+    public void setQuotePrecision(int quotePrecision) {
+        this.quotePrecision = quotePrecision;
+    }
+
+    public boolean isIcebergAllowed() {
+        return icebergAllowed;
+    }
+
+    public void setIcebergAllowed(boolean icebergAllowed) {
+        this.icebergAllowed = icebergAllowed;
+    }
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
+                .append("symbol", symbol)
+                .append("status", status)
+                .append("baseAsset", baseAsset)
+                .append("baseAssetPrecision", baseAssetPrecision)
+                .append("quoteAsset", quoteAsset)
+                .append("quotePrecision", quotePrecision)
+                .append("icebergAllowed", icebergAllowed)
+                .append("filters", filters)
+                .toString();
+    }
+}
