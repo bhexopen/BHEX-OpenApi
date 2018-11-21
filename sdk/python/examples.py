@@ -9,7 +9,7 @@ if __name__ == '__main__':
         "https": "",
     }
 
-    b = BhexClient(api_key='', secret='', proxies=proxies)
+    b = BhexClient(api_key='', secret='', entry_point='', proxies=proxies)
 
     print(b.time())
 

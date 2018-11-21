@@ -6,9 +6,9 @@ description = "Python SDK for Bhex REST API (https://www.bhex.com)"
 
 setup(
     name="bhex",
-    version="0.0.1",
+    version="1.0.1",
     author="Bhex",
-    author_email="support@bhex.com",
+    author_email="pip@bhex.com",
     description=description,
     long_description=description,
     long_description_content_type="text/markdown",
