@@ -130,7 +130,7 @@ timestamp | 1538323200000
 
     ```
     (HMAC SHA256)
-    [linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v3/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+    [linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
     ```
 
 ### Example 2: As a request body
@@ -147,7 +147,7 @@ timestamp | 1538323200000
 
     ```
     (HMAC SHA256)
-    [linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v3/order' -d 'symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+    [linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v1/order' -d 'symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
     ```
 
 ### Example 3: Mixed query string and request body
@@ -165,7 +165,7 @@ timestamp | 1538323200000
 
     ```
     (HMAC SHA256)
-    [linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v3/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
+    [linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
     ```
 
 Note that the signature is different in example 3.
@@ -600,7 +600,7 @@ OR
 ## Account endpoints
 ### New order  (TRADE)
 ```
-POST /opanapi/v3/order  (HMAC SHA256)
+POST /opanapi/v1/order  (HMAC SHA256)
 ```
 Send in a new order.
 
@@ -619,8 +619,8 @@ timeInForce | ENUM | NO |
 quantity | DECIMAL | YES |
 price | DECIMAL | NO |
 newClientOrderId | STRING | NO | A unique id for the order. Automatically generated if not sent.
-stopPrice | DECIMAL | NO | Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders.
-icebergQty | DECIMAL | NO | Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order.
+stopPrice | DECIMAL | NO | Used with `STOP_LOSS`, `STOP_LOSS_LIMIT`, `TAKE_PROFIT`, and `TAKE_PROFIT_LIMIT` orders. Unavailable
+icebergQty | DECIMAL | NO | Used with `LIMIT`, `STOP_LOSS_LIMIT`, and `TAKE_PROFIT_LIMIT` to create an iceberg order. Unavailable
 recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
@@ -659,7 +659,7 @@ Trigger order price rules against market price for both MARKET and LIMIT version
 
 ### Test new order (TRADE)
 ```
-POST /opanapi/v3/order/test (HMAC SHA256)
+POST /opanapi/v1/order/test (HMAC SHA256)
 ```
 Test new order creation and signature/recvWindow long.
 Creates and validates a new order but does not send it into the matching engine.
@@ -669,7 +669,7 @@ Creates and validates a new order but does not send it into the matching engine.
 
 **Parameters:**
 
-Same as `POST /opanapi/v3/order`
+Same as `POST /opanapi/v1/order`
 
 
 **Response:**
@@ -679,7 +679,7 @@ Same as `POST /opanapi/v3/order`
 
 ### Query order (USER_DATA)
 ```
-GET /opanapi/v3/order (HMAC SHA256)
+GET /opanapi/v1/order (HMAC SHA256)
 ```
 Check an order's status.
 
@@ -724,7 +724,7 @@ Notes:
 
 ### Cancel order (TRADE)
 ```
-DELETE /opanapi/v3/order  (HMAC SHA256)
+DELETE /opanapi/v1/order  (HMAC SHA256)
 ```
 Cancel an active order.
 
@@ -754,7 +754,7 @@ Either `orderId` or `clientOrderId` must be sent.
 
 ### Current open orders (USER_DATA)
 ```
-GET /opanapi/v3/openOrders  (HMAC SHA256)
+GET /opanapi/v1/openOrders  (HMAC SHA256)
 ```
 Get all open orders on a symbol. **Careful** when accessing this with no symbol.
 
@@ -799,7 +799,7 @@ timestamp | LONG | YES |
 
 ### History orders (USER_DATA)
 ```
-GET /opanapi/v3/historyOrders (HMAC SHA256)
+GET /opanapi/v1/historyOrders (HMAC SHA256)
 ```
 Get all orders of the account;  canceled, filled or rejected.
 
@@ -846,7 +846,7 @@ timestamp | LONG | YES |
 
 ### Account information (USER_DATA)
 ```
-GET /opanapi/v3/account (HMAC SHA256)
+GET /opanapi/v1/account (HMAC SHA256)
 ```
 Get current account information.
 
@@ -884,7 +884,7 @@ timestamp | LONG | YES |
 
 ### Account trade list (USER_DATA)
 ```
-GET /opanapi/v3/myTrades  (HMAC SHA256)
+GET /opanapi/v1/myTrades  (HMAC SHA256)
 ```
 Get trades for a specific account.
 

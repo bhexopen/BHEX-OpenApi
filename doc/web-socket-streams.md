@@ -3,9 +3,13 @@
 * The base endpoint is: **wss://$HOST**
 * Raw streams are accessed at **/openapi/quote/ws/v1**
 * Combined stream events are wrapped as follows: 
+
+***Note***:
+You must add **HOST** to your request headers
+
 ```json
 {
-  "symbol": "$exchangeId0.$symbol0,$exchangeId1.$symbol1",
+  "symbol": "$symbol0,$symbol1",
   "topic": "$topic",
   "event": "$event"
 }
@@ -27,7 +31,7 @@ The Trade Streams push raw trade information; each trade has a unique buyer and 
 **Payload:**
 ```json
 {
-    "symbol": "301.LTCBTC",
+    "symbol": "LTCBTC",
     "topic": "trade",
     "data": [{
         "t": 1528631035415,//time
@@ -66,7 +70,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 **Payload:**
 ```json
 {
-    "symbol": "301.LTCBTC",
+    "symbol": "LTCBTC",
     "topic": "kline_1m",
     "data": [{
          "t": "1531193421003",//time
@@ -96,7 +100,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 **Payload:**
 ```json
 {
-    "symbol": "301.LTCBTC",
+    "symbol": "LTCBTC",
     "topic": "realtimes",
     "data": [{
         "t": "1531193421003",//time
@@ -106,7 +110,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
         "l": "0.1531193168802",//low price
         "o": "0.1531193171219", //open price
         "v": "0.0", //volume  
-        "e": "301" //exchange id
+        "e": "301" //ignored
     },{
         "t": "1531193421003",//time
         "s": "LTCBTC", // symbol
@@ -115,7 +119,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
         "l": "0.1531193168802",//low price
         "o": "0.1531193171219", //open price
         "v": "0.0", //volume  
-        "e": "301" //exchange id
+        "e": "301" //ignored
     }]
 }
 ```
@@ -129,7 +133,7 @@ The Depth Streams for symbols.
 
 ```json
 {
-    "symbol": "301.LTCBTC",
+    "symbol": "LTCBTC",
     "topic": "depth",
     "data": [{
         "t": 1528618006671, //time
