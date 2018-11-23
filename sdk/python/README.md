@@ -13,7 +13,9 @@ pip install bhex
 Usage
 -----
 
-Init bhex client
+#### REST API
+
+Init bhex client:
 ```python
 b = BhexClient(api_key='', secret='')
 ```
@@ -27,6 +29,47 @@ proxies = {
 }
 
 b = BhexClient(api_key='', secret='', proxies=proxies)
+```
+
+#### Web Socket
+
+##### Init
+
+Init bhex websocket client:
+```python
+client = BhexWss(api_key='', secret='')
+```
+
+##### Subscribe
+Subscribe trades:
+```python
+client.subscribe_to_trades(symbol='BTCUSDT', callback=handler)
+```
+
+Subscribe Kline/Candlestick:
+```python
+client.subscribe_to_kline(symbol='BTCUSDT', interval='5m', callback=handler)
+```
+
+Subscribe market tickers:
+```python
+client.subscribe_to_realtimes(symbol='BTCUSDT,ETHUSDT', callback=handler)
+```
+
+Subscribe book depth tickers:
+```python
+client.subscribe_to_depth(symbol='BTCUSDT', callback=handler)
+```
+
+Subscribe user data:
+```python
+client.user_data_stream(callback=handler)
+```
+
+##### Start
+Start websocket thread
+```python
+client.start()
 ```
 
 API List

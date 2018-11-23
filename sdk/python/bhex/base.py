@@ -50,6 +50,10 @@ class Request(object):
         uri = self._create_api_uri(path, version)
         return self._request('POST', uri, signed, **kwargs)
 
+    def _put(self, path, signed=False, version=API_VERSION, **kwargs):
+        uri = self._create_api_uri(path, version)
+        return self._request('PUT', uri, signed, **kwargs)
+
     def _delete(self, path, signed=False, version=API_VERSION, **kwargs):
         uri = self._create_api_uri(path, version)
         return self._request('DELETE', uri, signed, **kwargs)
@@ -63,11 +67,11 @@ class Request(object):
         kwargs['timeout'] = 10
 
         date_type = 'data' if method == 'POST' else 'params'
+        if date_type not in kwargs:
+            kwargs[date_type] = {}
 
+        kwargs[date_type]['timestamp'] = int(time.time() * 1000)
         if signed:
-            if date_type not in kwargs:
-                kwargs[date_type] = {}
-            kwargs[date_type]['timestamp'] = int(time.time() * 1000)
             kwargs[date_type]['signature'] = self._generate_signature(kwargs[date_type])
 
         kwargs['headers'] = {

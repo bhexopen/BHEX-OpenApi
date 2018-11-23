@@ -9,7 +9,7 @@ if __name__ == '__main__':
         "https": "",
     }
 
-    b = BhexClient(api_key='', secret='', entry_point='', proxies=proxies)
+    b = BhexClient(api_key='', secret='', proxies=proxies)
 
     print(b.time())
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     print(b.ticker_24hr('BTCUSDT'))
 
-    print(b.order_new(symbol='BTCUSDT', side='BUY', type='LIMIT', quantity='0.01', price='1000', timeInForce='GTC'))
+    print(b.order_new(symbol='btceth', side='BUY', type='LIMIT', quantity='0.01', price='1000', timeInForce='GTC'))
 
     print(b.order_get(order_id='230906618880078080'))
 
@@ -38,3 +38,10 @@ if __name__ == '__main__':
     print(b.account())
 
     print(b.my_trades())
+
+    listen_key = b.stream_get_listen_key()
+    print(listen_key)
+
+    print(b.stream_keepalive(listen_key.get('listenKey')))
+
+    print(b.stream_close(listen_key.get('listenKey')))

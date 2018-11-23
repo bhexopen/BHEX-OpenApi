@@ -130,3 +130,27 @@ class BhexClient(Request):
         Account trade list (USER_DATA)
         """
         return self._get('myTrades', signed=True, params=params)
+
+    def stream_get_listen_key(self):
+        """
+        Start user data stream (USER_STREAM)
+        """
+        return self._post('userDataStream', signed=True)
+
+    def stream_keepalive(self, listen_key):
+        """
+        Keepalive user data stream (USER_STREAM)
+        """
+        params = {
+            'listenKey': listen_key
+        }
+        return self._put('userDataStream', signed=True, params=params)
+
+    def stream_close(self, listen_key):
+        """
+        Close user data stream (USER_STREAM)
+        """
+        params = {
+            'listenKey': listen_key
+        }
+        return self._delete('userDataStream', signed=True, params=params)
