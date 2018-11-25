@@ -1,13 +1,15 @@
-# Web Socket Streams for BHex (2018-09-25)
-# General WSS information
+# Web Socket Streams for BlueHelix Broker (2018-09-25)
+
+## General WSS information
+
 * The base endpoint is: **wss://$HOST**
 * Raw streams are accessed at **/openapi/quote/ws/v1**
-* Combined stream events are wrapped as follows: 
+* Combined stream events are wrapped as follows:
 
 ***Note***:
 You must add **HOST** to your request headers
 
-```json
+```javascript
 {
   "symbol": "$symbol0,$symbol1",
   "topic": "$topic",
@@ -17,19 +19,22 @@ You must add **HOST** to your request headers
 ```
 
 | name | values |
-| :--- | :---- | 
+| :--- | :---- |
 | topic | realtimes,trade,kline_$interval,depth|
 | event | sub,cancel,cancel_all|
 | interval | 1m,3m,5m,15m,30m,1h,2h,6h,8h,12,1d,3d,1w,1M|
 
-# Detailed Stream information
-## Trade Streams
+## Detailed Stream information
+
+### Trade Streams
+
 The Trade Streams push raw trade information; each trade has a unique buyer and seller.
 
 **Stream Name:** trades
 
 **Payload:**
-```json
+
+```javascript
 {
     "symbol": "LTCBTC",
     "topic": "trade",
@@ -42,7 +47,8 @@ The Trade Streams push raw trade information; each trade has a unique buyer and 
 }
 ```
 
-## Kline/Candlestick Streams
+### Kline/Candlestick Streams
+
 The Kline/Candlestick Stream push updates to the current klines/candlestick every second.
 
 **Kline/Candlestick chart intervals:**
@@ -68,7 +74,8 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 **Stream Name:** kline
 
 **Payload:**
-```json
+
+```javascript
 {
     "symbol": "LTCBTC",
     "topic": "kline_1m",
@@ -92,13 +99,15 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 }
 ```
 
-## Market Tickers Stream
+### Market Tickers Stream
+
 24hr Ticker statistics for a symbol that changed in an array.
 
 **Stream Name:** realtimes
 
 **Payload:**
-```json
+
+```javascript
 {
     "symbol": "LTCBTC",
     "topic": "realtimes",
@@ -124,14 +133,15 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 }
 ```
 
-## Partial Book Depth Streams
+### Partial Book Depth Streams
+
 The Depth Streams for symbols.
 
 **Stream Name:** depth
 
 **Payload:**
 
-```json
+```javascript
 {
     "symbol": "LTCBTC",
     "topic": "depth",
@@ -157,4 +167,3 @@ The Depth Streams for symbols.
     }]
 }
 ```
-

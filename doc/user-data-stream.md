@@ -1,7 +1,7 @@
-[TOC]
-
 # User Data Streams for BlueHelix Broker (2018-09-25)
-# General WSS information
+
+## General WSS information
+
 * A User Data Stream `listenKey` is valid for 60 minutes after creation.
 * Doing a `PUT` on a `listenKey` will extend its validity for 60 minutes.
 * Doing a `DELETE` on a `listenKey` will close the stream.
@@ -9,11 +9,14 @@
 * A single connection to api endpoint is only valid for 24 hours; expect to be disconnected at the 24 hour mark
 * User data stream payloads are **not guaranteed** to be in order during heavy periods; **make sure to order your updates using E**
 
-# API Endpoints
-## Create a listenKey
-```
+## API Endpoints
+
+### Create a listenKey
+
+```shell
 POST /api/v1/userDataStream
 ```
+
 Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
 
 **Weight:**
@@ -27,16 +30,19 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 **Response:**
-```json
+
+```javascript
 {
   "listenKey": "1A9LWJjuMwKWYP4QQPw34GRm8gz3x5AephXSuqcDef1RnzoBVhEeGE963CoS1Sgj"
 }
 ```
 
-## Ping/Keep-alive a listenKey
-```
+### Ping/Keep-alive a listenKey
+
+```shell
 PUT /api/v1/userDataStream
 ```
+
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
 
 **Weight:**
@@ -51,14 +57,17 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 **Response:**
-```json
+
+```javascript
 {}
 ```
 
-## Close a listenKey
-```
+### Close a listenKey
+
+```shell
 DELETE /api/v1/userDataStream
 ```
+
 Close out a user data stream.
 
 **Weight:**
@@ -73,16 +82,20 @@ recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 **Response:**
-```json
+
+```javascript
 {}
 ```
 
-# Web Socket Payloads
-## Account Update
+## Web Socket Payloads
+
+### Account Update
+
 Account state is updated with the `outboundAccountInfo` event.
 
 **Payload:**
-```json
+
+```javascript
 {
   "e": "outboundAccountInfo",   // Event type
   "E": 1499405658849,           // Event time
@@ -104,12 +117,14 @@ Account state is updated with the `outboundAccountInfo` event.
 }
 ```
 
-## Order Update
+### Order Update
+
 Orders are updated with the `executionReport` event. Check the API documentation and below for relevant enum definitions.
 Average price can be found by doing `Z` divided by `z`.
 
 **Payload:**
-```json
+
+```javascript
 {
   "e": "executionReport",        // Event type
   "E": 1499405658658,            // Event time
@@ -149,4 +164,3 @@ Average price can be found by doing `Z` divided by `z`.
 * CANCELED
 * REJECTED
 * TRADE
-
