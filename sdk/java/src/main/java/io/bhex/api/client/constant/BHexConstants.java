@@ -6,17 +6,14 @@ public class BHexConstants {
 
     public static final long DEFAULT_RECEIVING_WINDOW = 5_000L;
 
-//    public static final String API_BASE_URL = "http://local.bhex.cn:7128";
-    public static final String API_BASE_URL = "https://www.bhex.us/";
-//    public static final String API_BASE_URL = "http://www.bhex.cn";
+    public static final String API_BASE_URL = "https://api.bhex.com/";
 
     /**
      * Streaming API base URL.
      */
-    public static final String WS_API_BASE_URL = "ws://www.bhex.us/openapi/quote/v1";
+    public static final String WS_API_BASE_URL = "wss://wsapi.bhex.com/openapi/quote/ws/v1";
 
-    public static final String WS_API_USER_URL = "ws://www.bhex.us/openapi/ws/";
-//    public static final String WS_API_USER_URL = "http://local.bhex.cn:7128/openapi/ws/";
+    public static final String WS_API_USER_URL = "wss://wsapi.bhex.com/openapi/ws/";
 
 
     public static final String API_KEY_HEADER = "X-BH-APIKEY";

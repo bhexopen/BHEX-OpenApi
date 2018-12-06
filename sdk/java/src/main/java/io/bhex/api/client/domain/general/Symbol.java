@@ -16,9 +16,9 @@ public class Symbol implements Serializable {
     private String symbol;
     private SymbolStatus status;
     private String baseAsset;
-    private int baseAssetPrecision;
+    private String baseAssetPrecision;
     private String quoteAsset;
-    private int quotePrecision;
+    private String quotePrecision;
     private boolean icebergAllowed;
 
     public List<SymbolFilter> getFilters() {
@@ -61,13 +61,6 @@ public class Symbol implements Serializable {
         this.baseAsset = baseAsset;
     }
 
-    public int getBaseAssetPrecision() {
-        return baseAssetPrecision;
-    }
-
-    public void setBaseAssetPrecision(int baseAssetPrecision) {
-        this.baseAssetPrecision = baseAssetPrecision;
-    }
 
     public String getQuoteAsset() {
         return quoteAsset;
@@ -75,14 +68,6 @@ public class Symbol implements Serializable {
 
     public void setQuoteAsset(String quoteAsset) {
         this.quoteAsset = quoteAsset;
-    }
-
-    public int getQuotePrecision() {
-        return quotePrecision;
-    }
-
-    public void setQuotePrecision(int quotePrecision) {
-        this.quotePrecision = quotePrecision;
     }
 
     public boolean isIcebergAllowed() {
@@ -93,6 +78,21 @@ public class Symbol implements Serializable {
         this.icebergAllowed = icebergAllowed;
     }
 
+    public String getBaseAssetPrecision() {
+        return baseAssetPrecision;
+    }
+
+    public void setBaseAssetPrecision(String baseAssetPrecision) {
+        this.baseAssetPrecision = baseAssetPrecision;
+    }
+
+    public String getQuotePrecision() {
+        return quotePrecision;
+    }
+
+    public void setQuotePrecision(String quotePrecision) {
+        this.quotePrecision = quotePrecision;
+    }
 
     @Override
     public String toString() {

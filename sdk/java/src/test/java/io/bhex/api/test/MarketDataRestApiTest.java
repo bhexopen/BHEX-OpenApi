@@ -12,7 +12,7 @@ public class MarketDataRestApiTest {
 
     public static void main(String[] args) {
 
-        BHexApiClientFactory factory = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY,Constants.SECRIT_KEY);
+        BHexApiClientFactory factory = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY,Constants.SECRET_KEY);
         BHexApiRestClient client = factory.newRestClient();
         String symbol = "BTCUSDT";
 

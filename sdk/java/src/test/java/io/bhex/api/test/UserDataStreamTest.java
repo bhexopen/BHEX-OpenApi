@@ -5,7 +5,6 @@ import io.bhex.api.client.BHexApiRestClient;
 import io.bhex.api.client.BHexApiWebSocketClient;
 import io.bhex.api.client.constant.BHexConstants;
 import io.bhex.api.test.constant.Constants;
-import lombok.extern.slf4j.Slf4j;
 
 //@Slf4j
 public class UserDataStreamTest {
@@ -13,7 +12,7 @@ public class UserDataStreamTest {
     public static void main(String[] args) {
 //
         BHexApiWebSocketClient client = BHexApiClientFactory.newInstance().newWebSocketClient();
-        BHexApiRestClient restClient = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY,Constants.SECRIT_KEY).newRestClient();
+        BHexApiRestClient restClient = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY,Constants.SECRET_KEY).newRestClient();
 
         System.out.println("\n ------Get Listen Key -----");
         System.out.println();

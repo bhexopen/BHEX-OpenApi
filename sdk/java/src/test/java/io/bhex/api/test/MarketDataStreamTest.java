@@ -11,15 +11,15 @@ public class MarketDataStreamTest {
         BHexApiWebSocketClient client = BHexApiClientFactory.newInstance().newWebSocketClient();
 
         // depth
-        client.onDepthEvent("301.BTCUSDT", response -> System.out.println(response));
+        client.onDepthEvent("BTCUSDT", response -> System.out.println(response));
 //
         // kline
-        client.onCandlestickEvent("301.BTCUSDT", CandlestickInterval.ONE_MINUTE, response -> System.out.println(response));
+        client.onCandlestickEvent("BTCUSDT", CandlestickInterval.ONE_MINUTE, response -> System.out.println(response));
 
         // trades
-        client.onTradeEvent("301.BTCUSDT",response -> System.out.println(response));
+        client.onTradeEvent("BTCUSDT",response -> System.out.println(response));
 
         // ticker for 24 hour
-        client.onTicker24HourEvent("301.BTCUSDT",response -> System.out.println(response));
+        client.onTicker24HourEvent("BTCUSDT",response -> System.out.println(response));
     }
 }

@@ -9,7 +9,7 @@ public class UserDataStreamRestApiTest {
 
     public static void main(String[] args) {
 
-        BHexApiClientFactory factory = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY,Constants.SECRIT_KEY);
+        BHexApiClientFactory factory = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY,Constants.SECRET_KEY);
         BHexApiRestClient client = factory.newRestClient();
 
         System.out.println("\n ------start user data stream-----");

@@ -14,6 +14,14 @@ public class OpenOrderRequest extends OrderRequest {
         this.limit = limit;
     }
 
+    public OpenOrderRequest(String symbol ,Integer limit) {
+        super();
+        this.symbol = symbol;
+        this.limit = limit;
+    }
+
+    private String symbol;
+
     private Integer limit;
 
     public Integer getLimit() {
@@ -22,6 +30,14 @@ public class OpenOrderRequest extends OrderRequest {
 
     public void setLimit(Integer limit) {
         this.limit = limit;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public String toString() {

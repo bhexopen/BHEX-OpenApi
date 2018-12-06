@@ -92,7 +92,8 @@ public interface BHexApiService {
 
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/openapi/account/v1/openOrders")
-    Call<List<Order>> getOpenOrders(@Query("limit") Integer limit,
+    Call<List<Order>> getOpenOrders(@Query("symbol") String symbol,
+                                    @Query("limit") Integer limit,
                                     @Query("recvWindow") Long recvWindow,
                                     @Query("timestamp") Long timestamp);
 

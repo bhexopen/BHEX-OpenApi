@@ -88,7 +88,7 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
 
     @Override
     public List<Order> getOpenOrders(OpenOrderRequest orderRequest) {
-        return executeSync(bHexApiService.getOpenOrders(orderRequest.getLimit(), orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
+        return executeSync(bHexApiService.getOpenOrders(orderRequest.getSymbol(),orderRequest.getLimit(), orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
     }
 
     @Override
