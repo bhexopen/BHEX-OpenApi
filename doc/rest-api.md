@@ -344,9 +344,9 @@ NONE
     "symbol": "ETHBTC",
     "status": "TRADING",
     "baseAsset": "ETH",
-    "baseAssetPrecision": 8,
+    "baseAssetPrecision": "0.001",
     "quoteAsset": "BTC",
-    "quotePrecision": 8,
+    "quotePrecision": "0.01",
     "icebergAllowed": false,
     "filters": [{
       "filterType": "PRICE_FILTER",
@@ -820,6 +820,7 @@ GET all open orders on a symbol. **Careful** when accessing this with no symbol.
 
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
+symbol | String | NO |
 orderId | LONG | NO |
 limit | INT | NO | Default 500; max 1000.
 recvWindow | LONG | NO |
@@ -869,6 +870,7 @@ GET all orders of the account;  canceled, filled or rejected.
 
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
+symbol | String | NO |
 orderId | LONG | NO |
 startTime | LONG | NO |
 endTime | LONG | NO |

@@ -14,7 +14,7 @@ class Request(object):
     API_VERSION = 'v1'
     QUOTE_API_VERSION = 'v1'
 
-    def __init__(self, api_key, secret, entry_point='https://www.bhex.com/openapi/', proxies=None):
+    def __init__(self, api_key, secret, entry_point='https://api.bhex.com/openapi/', proxies=None):
 
         if not entry_point.endswith('/'):
             entry_point = entry_point + '/'

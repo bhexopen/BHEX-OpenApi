@@ -161,6 +161,7 @@ Average price can be found by doing `Z` divided by `z`.
 **Execution types:**
 
 * NEW
+* PARTIALLY_FILLED
+* FILLED
 * CANCELED
 * REJECTED
-* TRADE
