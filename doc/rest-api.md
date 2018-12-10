@@ -132,7 +132,7 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://api.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
 ```
 
 #### Example 2: As a request body
@@ -149,7 +149,7 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v1/order' -d 'symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://api.bhex.com/openapi/v1/order' -d 'symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
 ```
 
 #### Example 3: Mixed query string and request body
@@ -167,7 +167,7 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://www.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
+[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://api.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
 ```
 
 Note that the signature is different in example 3.
@@ -284,7 +284,7 @@ NONE
 #### Check server time
 
 ```shell
-GET /opanapi/v1/time
+GET /openapi/v1/time
 ```
 
 Test connectivity to the Rest API and get the current server time.
@@ -306,7 +306,7 @@ NONE
 #### Broker information
 
 ```shell
-GET /opanapi/v1/brokerInfo
+GET /openapi/v1/brokerInfo
 ```
 
 Current broker trading rules and symbol information
@@ -371,7 +371,7 @@ NONE
 #### Order book
 
 ```shell
-GET /opanapi/quote/v1/depth
+GET /openapi/quote/v1/depth
 ```
 
 **Weight:**
@@ -424,7 +424,7 @@ limit | INT | NO | Default 100; max 100.
 #### Recent trades list
 
 ```shell
-GET /opanapi/quote/v1/trades
+GET /openapi/quote/v1/trades
 ```
 
 Get recent trades (up to last 500).
@@ -455,7 +455,7 @@ limit | INT | NO | Default 500; max 1000.
 #### Kline/Candlestick data
 
 ```shell
-GET /opanapi/quote/v1/klines
+GET /openapi/quote/v1/klines
 ```
 
 Kline/candlestick bars for a symbol.
@@ -499,7 +499,7 @@ limit | INT | NO | Default 500; max 1000.
 #### 24hr ticker price change statistics
 
 ```shell
-GET /opanapi/quote/v1/ticker/24hr
+GET /openapi/quote/v1/ticker/24hr
 ```
 
 24 hour price change statistics. **Careful** when accessing this with no symbol.
@@ -548,7 +548,7 @@ OR
 #### Symbol price ticker
 
 ```shell
-GET /opanapi/quote/v1/ticker/price
+GET /openapi/quote/v1/ticker/price
 ```
 
 Latest price for a symbol or symbols.
@@ -590,7 +590,7 @@ OR
 #### Symbol order book ticker
 
 ```shell
-GET /opanapi/quote/v1/ticker/bookTicker
+GET /openapi/quote/v1/ticker/bookTicker
 ```
 
 Best price/qty on the order book for a symbol or symbols.
@@ -644,7 +644,7 @@ OR
 #### New order  (TRADE)
 
 ```shell
-POST /opanapi/v1/order  (HMAC SHA256)
+POST /openapi/v1/order  (HMAC SHA256)
 ```
 
 Send in a new order.
@@ -705,7 +705,7 @@ Trigger order price rules against market price for both MARKET and LIMIT version
 #### Test new order (TRADE)
 
 ```shell
-POST /opanapi/v1/order/test (HMAC SHA256)
+POST /openapi/v1/order/test (HMAC SHA256)
 ```
 
 Test new order creation and signature/recvWindow long.
@@ -716,7 +716,7 @@ Creates and validates a new order but does not send it into the matching engine.
 
 **Parameters:**
 
-Same as `POST /opanapi/v1/order`
+Same as `POST /openapi/v1/order`
 
 **Response:**
 
@@ -727,7 +727,7 @@ Same as `POST /opanapi/v1/order`
 #### Query order (USER_DATA)
 
 ```shell
-GET /opanapi/v1/order (HMAC SHA256)
+GET /openapi/v1/order (HMAC SHA256)
 ```
 
 Check an order's status.
@@ -775,7 +775,7 @@ Notes:
 #### Cancel order (TRADE)
 
 ```shell
-DELETE /opanapi/v1/order  (HMAC SHA256)
+DELETE /openapi/v1/order  (HMAC SHA256)
 ```
 
 Cancel an active order.
@@ -808,7 +808,7 @@ Either `orderId` or `clientOrderId` must be sent.
 #### Current open orders (USER_DATA)
 
 ```shell
-GET /opanapi/v1/openOrders  (HMAC SHA256)
+GET /openapi/v1/openOrders  (HMAC SHA256)
 ```
 
 GET all open orders on a symbol. **Careful** when accessing this with no symbol.
@@ -858,7 +858,7 @@ timestamp | LONG | YES |
 #### History orders (USER_DATA)
 
 ```shell
-GET /opanapi/v1/historyOrders (HMAC SHA256)
+GET /openapi/v1/historyOrders (HMAC SHA256)
 ```
 
 GET all orders of the account;  canceled, filled or rejected.
@@ -910,7 +910,7 @@ timestamp | LONG | YES |
 #### Account information (USER_DATA)
 
 ```shell
-GET /opanapi/v1/account (HMAC SHA256)
+GET /openapi/v1/account (HMAC SHA256)
 ```
 
 GET current account information.
@@ -951,7 +951,7 @@ timestamp | LONG | YES |
 #### Account trade list (USER_DATA)
 
 ```shell
-GET /opanapi/v1/myTrades  (HMAC SHA256)
+GET /openapi/v1/myTrades  (HMAC SHA256)
 ```
 
 GET trades for a specific account.
@@ -1000,7 +1000,7 @@ Specifics on how user data streams work is in another document.
 #### Start user data stream (USER_STREAM)
 
 ```shell
-POST /opanapi/v1/userDataStream
+POST /openapi/v1/userDataStream
 ```
 
 Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
@@ -1026,7 +1026,7 @@ timestamp | LONG | YES |
 #### Keepalive user data stream (USER_STREAM)
 
 ```shell
-PUT /opanapi/v1/userDataStream
+PUT /openapi/v1/userDataStream
 ```
 
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
@@ -1051,7 +1051,7 @@ timestamp | LONG | YES |
 #### Close user data stream (USER_STREAM)
 
 ```shell
-DELETE /opanapi/v1/userDataStream
+DELETE /openapi/v1/userDataStream
 ```
 
 Close out a user data stream.
