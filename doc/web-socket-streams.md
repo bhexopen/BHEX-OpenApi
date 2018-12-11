@@ -137,6 +137,15 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 The Depth Streams for symbols.
 
+Here is the book dump instructions：
+* The book dump frequency：Every 300ms, if book version changed.
+* The book dump depth：300 for asks and bids each.
+* The book version change event：
+  * order enters book
+  * order leaves book
+  * order quantity or amount changes
+  * order is finished
+
 **Stream Name:** depth
 
 **Payload:**
