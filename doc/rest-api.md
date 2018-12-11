@@ -828,7 +828,7 @@ timestamp | LONG | YES |
 
 **Notes:**
 
-* If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+* If `orderId` is set, it will get orders > that `orderId`. Otherwise most recent orders are returned.
 
 **Response:**
 
@@ -880,7 +880,7 @@ timestamp | LONG | YES |
 
 **Notes:**
 
-* If `orderId` is set, it will get orders >= that `orderId`. Otherwise most recent orders are returned.
+* If `orderId` is set, it will get orders > that `orderId`. Otherwise most recent orders are returned.
 
 **Response:**
 
@@ -972,7 +972,7 @@ timestamp | LONG | YES |
 
 **Notes:**
 
-* If `fromId` is set, it will get orders >= that `fromId`. Otherwise most recent orders are returned.
+* If `fromId` is set, it will get orders > that `fromId`. Otherwise most recent orders are returned.
 
 **Response:**
 
@@ -989,6 +989,49 @@ timestamp | LONG | YES |
     "time": 1499865549590,
     "isBuyer": true,
     "isMaker": false
+  }
+]
+```
+
+#### Account deposit list (USER_DATA)
+
+```shell
+GET /openapi/v1/depositOrders  (HMAC SHA256)
+```
+
+GET deposit orders for a specific account.
+
+**Weight:**
+5
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+startTime | LONG | NO |
+endTime | LONG | NO |
+fromId | LONG | NO | Deposit OrderId to fetch from. Default gets most recent deposit orders.
+limit | INT | NO | Default 500; max 1000.
+recvWindow | LONG | NO |
+timestamp | LONG | YES |
+
+**Notes:**
+
+* If `fromId` is set, it will get orders > that `fromId`. Otherwise most recent orders are returned.
+
+**Response:**
+
+```javascript
+[
+  {
+	"orderId": 100234,
+	"token": "EOS",
+	"address": "deposit2bh",
+	"addressTag": "19012584",
+	"fromAddress": "clarkkent",
+	"fromAddressTag": "19029901",
+	"time": 1499865549590,
+	"quantity": "1.01"
   }
 ]
 ```
