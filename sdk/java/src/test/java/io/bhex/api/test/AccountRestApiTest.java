@@ -59,6 +59,10 @@ public class AccountRestApiTest {
         List<Trade> tradeList = client.getMyTrades(new MyTradeRequest(2));
         System.out.println(tradeList);
 
+        System.out.println("\n ------get deposit order -----");
+        List<DepositOrder> list = client.getDepositOrders(new DepositOrderRequest());
+        System.out.println(list);
+
     }
 
 }

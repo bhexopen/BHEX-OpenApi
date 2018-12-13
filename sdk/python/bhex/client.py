@@ -154,3 +154,9 @@ class BhexClient(Request):
             'listenKey': listen_key
         }
         return self._delete('userDataStream', signed=True, params=params)
+
+    def deposit_orders(self, **params):
+        """
+        GET deposit orders for a specific account.
+        """
+        return self._get('depositOrders', signed=True, params=params)

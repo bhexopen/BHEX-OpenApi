@@ -109,6 +109,12 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
     }
 
     @Override
+    public List<DepositOrder> getDepositOrders(DepositOrderRequest request) {
+        return executeSync(bHexApiService.getDepositOrders(request.getToken(), request.getStartTime(), request.getEndTime(),request.getFromId(), request.getLimit(),
+                request.getRecvWindow(), request.getTimestamp()));
+    }
+
+    @Override
     public String startUserDataStream(Long recvWindow, Long timestamp) {
         return executeSync(bHexApiService.startUserDataStream(recvWindow,timestamp)).toString();
     }

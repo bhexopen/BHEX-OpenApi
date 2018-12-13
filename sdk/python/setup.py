@@ -16,7 +16,7 @@ def read(*parts):
 
 setup(
     name="bhex",
-    version="1.0.5",
+    version="1.0.6",
     author="Bhex",
     author_email="pip@bhex.com",
     description=description,

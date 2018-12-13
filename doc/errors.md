@@ -198,6 +198,39 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 * Order has been filled.
 
+### -1140 ORDER_AMOUNT_TOO_SMALL
+
+* Transaction amount lower than the minimum.
+
+### -1141 ORDER_DUPLICATED
+
+* Duplicate clientOrderId
+
+### -1142 ORDER_CANCELLED
+
+* Order has been canceled
+
+### -1143 ORDER_NOT_FOUND_ON_ORDER_BOOK
+
+* Cannot be found on order book
+
+### -1144 ORDER_LOCKED
+
+* Order has been locked
+
+### -1145 ORDER_NOT_SUPPORT_CANCELLATION
+
+* This order type does not support cancellation
+
+### -1146 ORDER_CREATION_TIMEOUT
+
+* Order creation timeout
+
+### -1147 ORDER_CANCELLATION_TIMEOUT
+
+* Order cancellation timeout
+
+
 ### -2010 NEW_ORDER_REJECTED
 
 * NEW_ORDER_REJECTED

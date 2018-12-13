@@ -25,11 +25,17 @@ if __name__ == '__main__':
 
     print(b.ticker_24hr('BTCUSDT'))
 
-    print(b.order_new(symbol='btceth', side='BUY', type='LIMIT', quantity='0.01', price='1000', timeInForce='GTC'))
+    result = b.order_new(symbol='BTCUSDT', side='BUY', type='LIMIT', quantity='10', price='0.1', timeInForce='GTC')
 
-    print(b.order_get(order_id='230906618880078080'))
+    print(result)
 
-    print(b.order_cancel(order_id='230912728362004736'))
+    order_id = result['orderId']
+
+    print(order_id)
+
+    print(b.order_get(order_id=order_id))
+
+    print(b.order_cancel(order_id=order_id))
 
     print(b.open_orders())
 
@@ -40,8 +46,11 @@ if __name__ == '__main__':
     print(b.my_trades())
 
     listen_key = b.stream_get_listen_key()
+
     print(listen_key)
 
     print(b.stream_keepalive(listen_key.get('listenKey')))
 
     print(b.stream_close(listen_key.get('listenKey')))
+
+    print(b.deposit_orders())

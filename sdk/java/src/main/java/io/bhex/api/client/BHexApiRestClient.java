@@ -108,6 +108,13 @@ public interface BHexApiRestClient {
     List<Trade> getMyTrades(MyTradeRequest request);
 
     /**
+     * Get deposit order
+     * @param request
+     * @return
+     */
+    List<DepositOrder> getDepositOrders(DepositOrderRequest request);
+
+    /**
      * Start a new user data stream.
      *
      * @return a listen key that can be used with data streams

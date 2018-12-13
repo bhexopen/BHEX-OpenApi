@@ -148,3 +148,8 @@ b.account()
 b.my_trades()
 ```
 
+#### deposit orders
+```python
+b.deposit_orders()
+```
+

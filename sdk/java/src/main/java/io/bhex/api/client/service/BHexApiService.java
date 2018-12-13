@@ -119,6 +119,18 @@ public interface BHexApiService {
                                   @Query("recvWindow") Long recvWindow,
                                   @Query("timestamp") Long timestamp);
 
+
+
+    @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/openapi/account/v1/depositOrders")
+    Call<List<DepositOrder>> getDepositOrders(@Query("token") String token,
+                                  @Query("startTime") Long startTime,
+                                  @Query("endTime") Long endTime,
+                                  @Query("fromId") Long fromId,
+                                  @Query("limit") Integer limit,
+                                  @Query("recvWindow") Long recvWindow,
+                                  @Query("timestamp") Long timestamp);
+
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/openapi/account/v1/userDataStream")
     Call<ListenKey> startUserDataStream(@Query("recvWindow") Long recvWindow,
