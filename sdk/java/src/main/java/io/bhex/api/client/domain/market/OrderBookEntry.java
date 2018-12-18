@@ -43,17 +43,4 @@ public class OrderBookEntry {
     }
 
 
-    public static void main(String[] args) {
-
-        String abc = "[\"3.90000000\", \"431.00000000\"]";
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            OrderBookEntry o = mapper.readValue(abc,OrderBookEntry.class);
-            System.out.println(o);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 }

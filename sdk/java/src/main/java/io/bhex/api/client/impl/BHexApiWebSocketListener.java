@@ -36,7 +36,6 @@ public class BHexApiWebSocketListener<T> extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
         ObjectMapper mapper = new ObjectMapper();
-//        System.out.println("onMessage:" + text);
         try {
             T event = null;
             if (eventClass == null) {

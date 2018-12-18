@@ -76,7 +76,6 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
         ObjectMapper mapper = new ObjectMapper();
         try {
             String channel = mapper.writeValueAsString(request);
-            System.out.println(channel);
             return createNewWebSocket(channel, new BHexApiWebSocketListener<>(callback, TradeEvent.class));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -94,7 +93,6 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
         ObjectMapper mapper = new ObjectMapper();
         try {
             String channel = mapper.writeValueAsString(request);
-            System.out.println(channel);
             return createNewWebSocket(channel, new BHexApiWebSocketListener<>(callback, TickerEvent.class));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -110,7 +108,6 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
         ObjectMapper mapper = new ObjectMapper();
         try {
             String channel = mapper.writeValueAsString(request);
-            System.out.println(channel);
             return createNewUserWebSocket(channel,listenKey, new BHexApiWebSocketUserListener<>(callback));
         } catch (JsonProcessingException e) {
             e.printStackTrace();

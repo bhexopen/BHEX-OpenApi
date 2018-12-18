@@ -16,7 +16,7 @@ public class CancelOrderResponse {
 
     private String symbol;
 
-    private String orderId;
+    private Long orderId;
 
     private String clientOrderId;
 
@@ -38,11 +38,11 @@ public class CancelOrderResponse {
         this.symbol = symbol;
     }
 
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
