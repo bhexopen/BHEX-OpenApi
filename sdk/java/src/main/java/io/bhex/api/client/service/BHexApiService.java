@@ -24,7 +24,7 @@ public interface BHexApiService {
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     Call<ServerTime> getServerTime();
 
-    @GET("/openapi/general/v1/brokerInfo")
+    @GET("/openapi/v1/brokerInfo")
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     Call<BrokerInfo> getBrokerInfo();
 

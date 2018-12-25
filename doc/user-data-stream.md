@@ -142,11 +142,11 @@ Average price can be found by doing `Z` divided by `z`.
   "X": "NEW",                    // Current order status
   // "r": "NONE",                   // Order reject reason; will be an error code.
   "i": 4293153,                  // Order ID
-  // "l": "0.00000000",             // Last executed quantity
+  "l": "0.00000000",             // Last executed quantity
   "z": "0.00000000",             // Cumulative filled quantity
-  // "L": "0.00000000",             // Last executed price
-  // "n": "0",                      // Commission amount
-  // "N": null,                     // Commission asset
+  "L": "0.00000000",             // Last executed price
+  "n": "0",                      // Commission amount
+  "N": null,                     // Commission asset
   // "T": 1499405658657,            // Transaction time
   // "t": -1,                       // Trade ID
   // "I": 8641984,                  // Ignore
