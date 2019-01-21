@@ -1,11 +1,13 @@
 package io.bhex.api.client.domain.market;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.bhex.api.client.constant.BHexConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 24 hour price change statistics for a ticker.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TickerStatistics {
 
     private Long exchangeId;

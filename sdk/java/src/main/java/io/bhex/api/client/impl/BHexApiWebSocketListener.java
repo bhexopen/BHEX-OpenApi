@@ -3,6 +3,7 @@ package io.bhex.api.client.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.bhex.api.client.BHexApiCallback;
+import io.bhex.api.client.constant.BHexConstants;
 import io.bhex.api.client.exception.BHexApiException;
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -23,6 +24,8 @@ public class BHexApiWebSocketListener<T> extends WebSocketListener {
 
     private boolean closing = false;
 
+    private boolean failure = false;
+
     public BHexApiWebSocketListener(BHexApiCallback<T> callback, Class<T> eventClass) {
         this.callback = callback;
         this.eventClass = eventClass;
@@ -33,8 +36,16 @@ public class BHexApiWebSocketListener<T> extends WebSocketListener {
         this.eventTypeReference = eventTypeReference;
     }
 
+    public boolean getFailure() {
+        return failure;
+    }
+
     @Override
     public void onMessage(WebSocket webSocket, String text) {
+        this.failure = false;
+        if (text.contains(BHexConstants.PONG_MSG_KEY) || text.contains(BHexConstants.PING_MSG_KEY)) {
+            return;
+        }
         ObjectMapper mapper = new ObjectMapper();
         try {
             T event = null;
@@ -56,6 +67,7 @@ public class BHexApiWebSocketListener<T> extends WebSocketListener {
 
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+        this.failure = true;
         if (!closing) {
             callback.onFailure(t);
         }

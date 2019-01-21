@@ -13,20 +13,21 @@ public class HistoryOrderRequest extends OrderRequest {
 
     private Integer limit;
 
-    public HistoryOrderRequest(){}
+    public HistoryOrderRequest() {
+    }
 
     public HistoryOrderRequest(Integer limit) {
         super();
         this.limit = limit;
     }
 
-    public HistoryOrderRequest(Long orderId , Integer limit) {
+    public HistoryOrderRequest(Long orderId, Integer limit) {
         super();
         this.orderId = orderId;
         this.limit = limit;
     }
 
-    public HistoryOrderRequest(Long orderId ,Long startTime,Long endTime ,Integer limit) {
+    public HistoryOrderRequest(Long orderId, Long startTime, Long endTime, Integer limit) {
         super();
         this.orderId = orderId;
         this.startTime = startTime;

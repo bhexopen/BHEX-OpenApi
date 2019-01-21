@@ -10,205 +10,205 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 
-  /**
-   * Symbol that the order was put on.
-   */
-  private String symbol;
+    /**
+     * Symbol that the order was put on.
+     */
+    private String symbol;
 
-  /**
-   * Order id.
-   */
-  private Long orderId;
+    /**
+     * Order id.
+     */
+    private Long orderId;
 
-  /**
-   * Client order id.
-   */
-  private String clientOrderId;
+    /**
+     * Client order id.
+     */
+    private String clientOrderId;
 
-  /**
-   * Price.
-   */
-  private String price;
+    /**
+     * Price.
+     */
+    private String price;
 
-  /**
-   * Original quantity.
-   */
-  private String origQty;
+    /**
+     * Original quantity.
+     */
+    private String origQty;
 
-  /**
-   * Original quantity.
-   */
-  private String executedQty;
+    /**
+     * Original quantity.
+     */
+    private String executedQty;
 
-  /**
-   * Cumulative quote quantity
-   */
-  private String cummulativeQuoteQty;
+    /**
+     * Cumulative quote quantity
+     */
+    private String cummulativeQuoteQty;
 
-  /**
-   * Order status.
-   */
-  private OrderStatus status;
+    /**
+     * Order status.
+     */
+    private OrderStatus status;
 
-  /**
-   * Time in force to indicate how long will the order remain active.
-   */
-  private TimeInForce timeInForce;
+    /**
+     * Time in force to indicate how long will the order remain active.
+     */
+    private TimeInForce timeInForce;
 
-  /**
-   * Type of order.
-   */
-  private OrderType type;
+    /**
+     * Type of order.
+     */
+    private OrderType type;
 
-  /**
-   * Buy/Sell order side.
-   */
-  private OrderSide side;
+    /**
+     * Buy/Sell order side.
+     */
+    private OrderSide side;
 
-  /**
-   * Used with stop orders.
-   */
-  private String stopPrice;
+    /**
+     * Used with stop orders.
+     */
+    private String stopPrice;
 
-  /**
-   * Used with iceberg orders.
-   */
-  private String icebergQty;
+    /**
+     * Used with iceberg orders.
+     */
+    private String icebergQty;
 
-  /**
-   * Order timestamp.
-   */
-  private long time;
+    /**
+     * Order timestamp.
+     */
+    private long time;
 
-  public String getSymbol() {
-    return symbol;
-  }
+    public String getSymbol() {
+        return symbol;
+    }
 
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
-  }
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
-  public Long getOrderId() {
-    return orderId;
-  }
+    public Long getOrderId() {
+        return orderId;
+    }
 
-  public void setOrderId(Long orderId) {
-    this.orderId = orderId;
-  }
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
 
-  public String getClientOrderId() {
-    return clientOrderId;
-  }
+    public String getClientOrderId() {
+        return clientOrderId;
+    }
 
-  public void setClientOrderId(String clientOrderId) {
-    this.clientOrderId = clientOrderId;
-  }
+    public void setClientOrderId(String clientOrderId) {
+        this.clientOrderId = clientOrderId;
+    }
 
-  public String getPrice() {
-    return price;
-  }
+    public String getPrice() {
+        return price;
+    }
 
-  public void setPrice(String price) {
-    this.price = price;
-  }
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
-  public String getOrigQty() {
-    return origQty;
-  }
+    public String getOrigQty() {
+        return origQty;
+    }
 
-  public void setOrigQty(String origQty) {
-    this.origQty = origQty;
-  }
+    public void setOrigQty(String origQty) {
+        this.origQty = origQty;
+    }
 
-  public String getExecutedQty() {
-    return executedQty;
-  }
+    public String getExecutedQty() {
+        return executedQty;
+    }
 
-  public void setExecutedQty(String executedQty) {
-    this.executedQty = executedQty;
-  }
+    public void setExecutedQty(String executedQty) {
+        this.executedQty = executedQty;
+    }
 
-  public OrderStatus getStatus() {
-    return status;
-  }
+    public OrderStatus getStatus() {
+        return status;
+    }
 
-  public void setStatus(OrderStatus status) {
-    this.status = status;
-  }
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
 
-  public TimeInForce getTimeInForce() {
-    return timeInForce;
-  }
+    public TimeInForce getTimeInForce() {
+        return timeInForce;
+    }
 
-  public void setTimeInForce(TimeInForce timeInForce) {
-    this.timeInForce = timeInForce;
-  }
+    public void setTimeInForce(TimeInForce timeInForce) {
+        this.timeInForce = timeInForce;
+    }
 
-  public OrderType getType() {
-    return type;
-  }
+    public OrderType getType() {
+        return type;
+    }
 
-  public void setType(OrderType type) {
-    this.type = type;
-  }
+    public void setType(OrderType type) {
+        this.type = type;
+    }
 
-  public OrderSide getSide() {
-    return side;
-  }
+    public OrderSide getSide() {
+        return side;
+    }
 
-  public void setSide(OrderSide side) {
-    this.side = side;
-  }
+    public void setSide(OrderSide side) {
+        this.side = side;
+    }
 
-  public String getStopPrice() {
-    return stopPrice;
-  }
+    public String getStopPrice() {
+        return stopPrice;
+    }
 
-  public void setStopPrice(String stopPrice) {
-    this.stopPrice = stopPrice;
-  }
+    public void setStopPrice(String stopPrice) {
+        this.stopPrice = stopPrice;
+    }
 
-  public String getIcebergQty() {
-    return icebergQty;
-  }
+    public String getIcebergQty() {
+        return icebergQty;
+    }
 
-  public void setIcebergQty(String icebergQty) {
-    this.icebergQty = icebergQty;
-  }
+    public void setIcebergQty(String icebergQty) {
+        this.icebergQty = icebergQty;
+    }
 
-  public long getTime() {
-    return time;
-  }
+    public long getTime() {
+        return time;
+    }
 
-  public void setTime(long time) {
-    this.time = time;
-  }
+    public void setTime(long time) {
+        this.time = time;
+    }
 
-  public String getCummulativeQuoteQty() {
-    return cummulativeQuoteQty;
-  }
+    public String getCummulativeQuoteQty() {
+        return cummulativeQuoteQty;
+    }
 
-  public void setCummulativeQuoteQty(String cummulativeQuoteQty) {
-    this.cummulativeQuoteQty = cummulativeQuoteQty;
-  }
+    public void setCummulativeQuoteQty(String cummulativeQuoteQty) {
+        this.cummulativeQuoteQty = cummulativeQuoteQty;
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
-        .append("symbol", symbol)
-        .append("orderId", orderId)
-        .append("clientOrderId", clientOrderId)
-        .append("price", price)
-        .append("origQty", origQty)
-        .append("executedQty", executedQty)
-        .append("cummulativeQuoteQty",cummulativeQuoteQty)
-        .append("status", status)
-        .append("timeInForce", timeInForce)
-        .append("type", type)
-        .append("side", side)
-        .append("stopPrice", stopPrice)
-        .append("icebergQty", icebergQty)
-        .append("time", time)
-        .toString();
-  }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
+                .append("symbol", symbol)
+                .append("orderId", orderId)
+                .append("clientOrderId", clientOrderId)
+                .append("price", price)
+                .append("origQty", origQty)
+                .append("executedQty", executedQty)
+                .append("cummulativeQuoteQty", cummulativeQuoteQty)
+                .append("status", status)
+                .append("timeInForce", timeInForce)
+                .append("type", type)
+                .append("side", side)
+                .append("stopPrice", stopPrice)
+                .append("icebergQty", icebergQty)
+                .append("time", time)
+                .toString();
+    }
 }

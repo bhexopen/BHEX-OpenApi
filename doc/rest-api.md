@@ -271,7 +271,7 @@ GET /openapi/v1/ping
 Test connectivity to the Rest API.
 
 **Weight:**
-1
+0
 
 **Parameters:**
 NONE
@@ -291,7 +291,7 @@ GET /openapi/v1/time
 Test connectivity to the Rest API and get the current server time.
 
 **Weight:**
-1
+0
 
 **Parameters:**
 NONE
@@ -313,7 +313,7 @@ GET /openapi/v1/brokerInfo
 Current broker trading rules and symbol information
 
 **Weight:**
-1
+0
 
 **Parameters:**
 NONE

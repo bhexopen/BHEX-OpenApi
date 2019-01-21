@@ -1,12 +1,10 @@
 package io.bhex.api.client.domain.channel;
 
-public enum  EventType {
+public enum EventType {
 
     SUB("sub"),
     CANCEL("cancel"),
     CANCEL_ALL("cancel_all"),
-
-
 
 
     ACCOUNT_INFO("outboundAccountInfo"),

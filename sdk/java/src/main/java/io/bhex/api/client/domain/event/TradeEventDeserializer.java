@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.bhex.api.client.domain.market.OrderBookEntry;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +22,8 @@ public class TradeEventDeserializer extends JsonDeserializer<TradeEvent> {
             JsonNode trade = node.get("data");
 
             ObjectMapper objectMapper = new ObjectMapper();
-            List<TradeItem> itemList = objectMapper.readValue(trade.toString(),new TypeReference<List<TradeItem>>(){});
+            List<TradeItem> itemList = objectMapper.readValue(trade.toString(), new TypeReference<List<TradeItem>>() {
+            });
 
             TradeEvent event = new TradeEvent();
             event.setSymbol(node.get("symbol").asText());

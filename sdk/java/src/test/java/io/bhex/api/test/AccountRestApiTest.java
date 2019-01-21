@@ -18,19 +18,19 @@ public class AccountRestApiTest {
         BHexApiRestClient client = factory.newRestClient();
 
         System.out.println("\n ------limit buy-----");
-        NewOrderResponse response1 = client.newOrder(NewOrder.limitBuy("BTCUSDT", TimeInForce.GTC,"0.01","5678.9"));
+        NewOrderResponse response1 = client.newOrder(NewOrder.limitBuy("BTCUSDT", TimeInForce.GTC, "0.01", "5678.9"));
         System.out.println(response1);
 //
         System.out.println("\n ------limit sell-----");
-        NewOrderResponse response2 = client.newOrder(NewOrder.limitSell("BTCUSDT",TimeInForce.GTC,"0.01","1001"));
+        NewOrderResponse response2 = client.newOrder(NewOrder.limitSell("BTCUSDT", TimeInForce.GTC, "0.01", "1001"));
         System.out.println(response2);
 
         System.out.println("\n ------market buy-----");
-        NewOrderResponse response3 = client.newOrder(NewOrder.marketBuy("BTCUSDT","10"));
+        NewOrderResponse response3 = client.newOrder(NewOrder.marketBuy("BTCUSDT", "10"));
         System.out.println(response3);
 
         System.out.println("\n ------market sell-----");
-        NewOrderResponse response4 = client.newOrder(NewOrder.marketSell("BTCUSDT","0.01"));
+        NewOrderResponse response4 = client.newOrder(NewOrder.marketSell("BTCUSDT", "0.01"));
         System.out.println(response4);
 
         System.out.println("\n ------get order status-----");
@@ -42,7 +42,7 @@ public class AccountRestApiTest {
         System.out.println(cancelOrderResponse);
 
         System.out.println("\n ------get open orders-----");
-        List<Order> openOrderList = client.getOpenOrders(new OpenOrderRequest("BTCUSDT",5));
+        List<Order> openOrderList = client.getOpenOrders(new OpenOrderRequest("BTCUSDT", 5));
         System.out.println(openOrderList);
 //
         System.out.println("\n ------get history orders-----");

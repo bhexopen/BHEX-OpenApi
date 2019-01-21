@@ -14,7 +14,7 @@ public class OpenOrderRequest extends OrderRequest {
         this.limit = limit;
     }
 
-    public OpenOrderRequest(String symbol ,Integer limit) {
+    public OpenOrderRequest(String symbol, Integer limit) {
         super();
         this.symbol = symbol;
         this.limit = limit;

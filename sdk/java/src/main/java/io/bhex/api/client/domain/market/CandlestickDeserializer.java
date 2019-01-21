@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 
-public class CandlestickDeserializer  extends JsonDeserializer<Candlestick> {
+public class CandlestickDeserializer extends JsonDeserializer<Candlestick> {
 
     @Override
     public Candlestick deserialize(JsonParser jp, DeserializationContext ctx) throws IOException {

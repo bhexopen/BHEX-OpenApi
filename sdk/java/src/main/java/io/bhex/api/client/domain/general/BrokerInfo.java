@@ -64,7 +64,7 @@ public class BrokerInfo {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
                 .append("timezone", timezone)
                 .append("serverTime", serverTime)
-                .append("brokerFilters",brokerFilters)
+                .append("brokerFilters", brokerFilters)
                 .append("rateLimits", rateLimits)
                 .append("symbols", symbols)
                 .toString();

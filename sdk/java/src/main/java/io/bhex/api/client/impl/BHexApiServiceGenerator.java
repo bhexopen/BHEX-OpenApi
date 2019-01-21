@@ -1,5 +1,7 @@
 package io.bhex.api.client.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.bhex.api.client.BHexApiError;
 import io.bhex.api.client.constant.BHexConstants;
 import io.bhex.api.client.exception.BHexApiException;
@@ -25,11 +27,14 @@ public class BHexApiServiceGenerator {
             .pingInterval(20, TimeUnit.SECONDS)
             .build();
 
-    private static final Converter.Factory converterFactory = JacksonConverterFactory.create();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+    private static final Converter.Factory converterFactory = JacksonConverterFactory.create(OBJECT_MAPPER);
 
     @SuppressWarnings("unchecked")
     private static final Converter<ResponseBody, BHexApiError> errorBodyConverter =
-            (Converter<ResponseBody, BHexApiError>)converterFactory.responseBodyConverter(
+            (Converter<ResponseBody, BHexApiError>) converterFactory.responseBodyConverter(
                     BHexApiError.class, new Annotation[0], null);
 
     public static <S> S createService(Class<S> serviceClass) {

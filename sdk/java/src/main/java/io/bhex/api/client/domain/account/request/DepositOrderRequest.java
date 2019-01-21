@@ -29,7 +29,7 @@ public class DepositOrderRequest extends OrderRequest {
         this.limit = limit;
     }
 
-    public DepositOrderRequest(String token , Long fromId, Long startTime, Long endTime, Integer limit) {
+    public DepositOrderRequest(String token, Long fromId, Long startTime, Long endTime, Integer limit) {
         super();
         this.token = token;
         this.fromId = fromId;

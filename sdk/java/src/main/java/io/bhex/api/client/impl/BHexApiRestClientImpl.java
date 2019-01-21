@@ -41,16 +41,16 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
     }
 
 
-    public OrderBook getOrderBook(String symbol ,Integer limit){
-        return executeSync(bHexApiService.getOrderBook(symbol,limit));
+    public OrderBook getOrderBook(String symbol, Integer limit) {
+        return executeSync(bHexApiService.getOrderBook(symbol, limit));
     }
 
-    public List<TradeHistoryItem> getTrades( String symbol, Integer limit){
-        return executeSync(bHexApiService.getTrades(symbol,limit));
+    public List<TradeHistoryItem> getTrades(String symbol, Integer limit) {
+        return executeSync(bHexApiService.getTrades(symbol, limit));
     }
 
-    public List<Candlestick> getCandlestickBars( String symbol, CandlestickInterval interval, Long startTime, Long endTime, Integer limit) {
-        return executeSync(bHexApiService.getCandlestickBars(symbol,interval.getIntervalId(),startTime,endTime,limit));
+    public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Long startTime, Long endTime, Integer limit) {
+        return executeSync(bHexApiService.getCandlestickBars(symbol, interval.getIntervalId(), startTime, endTime, limit));
     }
 
     public TickerStatistics get24HrPriceStatistics(String symbol) {
@@ -62,7 +62,7 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
         return executeSync(bHexApiService.getLatestPrice(symbol));
     }
 
-    public BookTicker getBookTicker( String symbol) {
+    public BookTicker getBookTicker(String symbol) {
         return executeSync(bHexApiService.getBookTicker(symbol));
     }
 
@@ -88,7 +88,7 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
 
     @Override
     public List<Order> getOpenOrders(OpenOrderRequest orderRequest) {
-        return executeSync(bHexApiService.getOpenOrders(orderRequest.getSymbol(),orderRequest.getLimit(), orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
+        return executeSync(bHexApiService.getOpenOrders(orderRequest.getSymbol(), orderRequest.getLimit(), orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
     }
 
     @Override
@@ -110,23 +110,23 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
 
     @Override
     public List<DepositOrder> getDepositOrders(DepositOrderRequest request) {
-        return executeSync(bHexApiService.getDepositOrders(request.getToken(), request.getStartTime(), request.getEndTime(),request.getFromId(), request.getLimit(),
+        return executeSync(bHexApiService.getDepositOrders(request.getToken(), request.getStartTime(), request.getEndTime(), request.getFromId(), request.getLimit(),
                 request.getRecvWindow(), request.getTimestamp()));
     }
 
     @Override
     public String startUserDataStream(Long recvWindow, Long timestamp) {
-        return executeSync(bHexApiService.startUserDataStream(recvWindow,timestamp)).toString();
+        return executeSync(bHexApiService.startUserDataStream(recvWindow, timestamp)).toString();
     }
 
     @Override
-    public void keepAliveUserDataStream(String listenKey,Long recvWindow, Long timestamp) {
-        executeSync(bHexApiService.keepAliveUserDataStream(listenKey,recvWindow,timestamp));
+    public void keepAliveUserDataStream(String listenKey, Long recvWindow, Long timestamp) {
+        executeSync(bHexApiService.keepAliveUserDataStream(listenKey, recvWindow, timestamp));
     }
 
     @Override
-    public void closeUserDataStream(String listenKey,Long recvWindow, Long timestamp) {
-        executeSync(bHexApiService.closeAliveUserDataStream(listenKey,recvWindow,timestamp));
+    public void closeUserDataStream(String listenKey, Long recvWindow, Long timestamp) {
+        executeSync(bHexApiService.closeAliveUserDataStream(listenKey, recvWindow, timestamp));
     }
 
 }

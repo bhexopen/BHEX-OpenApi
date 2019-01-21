@@ -109,6 +109,7 @@ public interface BHexApiRestClient {
 
     /**
      * Get deposit order
+     *
      * @param request
      * @return
      */

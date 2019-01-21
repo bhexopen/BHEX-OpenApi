@@ -17,9 +17,9 @@ public class MarketDataStreamTest {
         client.onCandlestickEvent("BTCUSDT", CandlestickInterval.ONE_MINUTE, response -> System.out.println(response));
 
         // trades
-        client.onTradeEvent("BTCUSDT",response -> System.out.println(response));
+        client.onTradeEvent("BTCUSDT", response -> System.out.println(response));
 
         // ticker for 24 hour
-        client.onTicker24HourEvent("BTCUSDT",response -> System.out.println(response));
+        client.onTicker24HourEvent("BTCUSDT", response -> System.out.println(response));
     }
 }

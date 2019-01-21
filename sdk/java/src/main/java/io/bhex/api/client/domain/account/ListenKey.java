@@ -9,18 +9,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ListenKey {
 
-  private String listenKey;
+    private String listenKey;
 
-  public String getListenKey() {
-    return listenKey;
-  }
+    public String getListenKey() {
+        return listenKey;
+    }
 
-  public void setListenKey(String listenKey) {
-    this.listenKey = listenKey;
-  }
+    public void setListenKey(String listenKey) {
+        this.listenKey = listenKey;
+    }
 
-  @Override
-  public String toString() {
-    return listenKey;
-  }
+    @Override
+    public String toString() {
+        return listenKey;
+    }
 }

@@ -1,7 +1,6 @@
 package io.bhex.api.client.domain.general;
 
 
-
 import io.bhex.api.client.constant.BHexConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

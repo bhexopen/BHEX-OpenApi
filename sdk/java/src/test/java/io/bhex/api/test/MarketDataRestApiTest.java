@@ -12,7 +12,7 @@ public class MarketDataRestApiTest {
 
     public static void main(String[] args) {
 
-        BHexApiClientFactory factory = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY,Constants.SECRET_KEY);
+        BHexApiClientFactory factory = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY, Constants.SECRET_KEY);
         BHexApiRestClient client = factory.newRestClient();
         String symbol = "BTCUSDT";
 
@@ -25,15 +25,15 @@ public class MarketDataRestApiTest {
         System.out.println(serverTime);
 
         System.out.println("\n ------get order book-----");
-        OrderBook orderBook = client.getOrderBook(symbol,100);
+        OrderBook orderBook = client.getOrderBook(symbol, 100);
         System.out.println(orderBook);
 
         System.out.println("\n ------get recent trades-----");
-        List<TradeHistoryItem> tradeHistoryItemList = client.getTrades(symbol,10);
+        List<TradeHistoryItem> tradeHistoryItemList = client.getTrades(symbol, 10);
         System.out.println(tradeHistoryItemList);
 
         System.out.println("\n ------get klines-----");
-        List<Candlestick> candlestickList = client.getCandlestickBars(symbol, CandlestickInterval.ONE_MINUTE,0l,0L,0);
+        List<Candlestick> candlestickList = client.getCandlestickBars(symbol, CandlestickInterval.ONE_MINUTE, 0l, 0L, 0);
         System.out.println(candlestickList);
 
         System.out.println("\n ------get 24h ticker-----");

@@ -93,12 +93,12 @@ public class TradeHistoryItem {
     @Override
     public String toString() {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
-            .append("id", id)
-            .append("price", price)
-            .append("qty", qty)
-            .append("time", time)
-            .append("isBuyerMaker", isBuyerMaker)
-            .append("isBestMatch", isBestMatch)
-            .toString();
+                .append("id", id)
+                .append("price", price)
+                .append("qty", qty)
+                .append("time", time)
+                .append("isBuyerMaker", isBuyerMaker)
+                .append("isBestMatch", isBestMatch)
+                .toString();
     }
 }

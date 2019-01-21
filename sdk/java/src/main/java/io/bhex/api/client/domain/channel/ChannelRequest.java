@@ -14,7 +14,7 @@ public class ChannelRequest {
 
     private String event;
 
-    private Map<String,String> params = new HashMap<>();
+    private Map<String, String> params = new HashMap<>();
 
     public String getSymbol() {
         return symbol;

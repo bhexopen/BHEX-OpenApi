@@ -32,8 +32,18 @@ public class BHexConstants {
     /**
      * Default ToStringStyle used by toString methods.
      * Override this to change the output format of the overridden toString methods.
-     *  - Example ToStringStyle.JSON_STYLE
+     * - Example ToStringStyle.JSON_STYLE
      */
-    public static ToStringStyle TO_STRING_BUILDER_STYLE = ToStringStyle.SHORT_PREFIX_STYLE;
+    public static final ToStringStyle TO_STRING_BUILDER_STYLE = ToStringStyle.SHORT_PREFIX_STYLE;
+
+
+    public static final String PING_MSG_KEY = "ping";
+
+    public static final String PONG_MSG_KEY = "pong";
+
+    /**
+     * 心跳间隔 1分钟一次
+     */
+    public static final long HEART_BEAT_INTERVAL = 60 * 1000;
 
 }

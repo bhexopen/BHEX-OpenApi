@@ -27,10 +27,10 @@ public class NewOrderResponse {
         this.clientOrderId = clientOrderId;
     }
 
-    public String toString(){
+    public String toString() {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
-                .append("orderId",orderId)
-                .append("clientOrderId",clientOrderId)
+                .append("orderId", orderId)
+                .append("clientOrderId", clientOrderId)
                 .toString();
     }
 }

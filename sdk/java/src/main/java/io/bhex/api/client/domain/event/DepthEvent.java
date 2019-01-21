@@ -16,65 +16,65 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DepthEvent {
 
-  @JsonProperty("t")
-  private long eventTime;
+    @JsonProperty("t")
+    private long eventTime;
 
-  @JsonProperty("s")
-  private String symbol;
+    @JsonProperty("s")
+    private String symbol;
 
-  /**
-   * Bid depth delta.
-   */
-  @JsonProperty("b")
-  private List<OrderBookEntry> bids;
+    /**
+     * Bid depth delta.
+     */
+    @JsonProperty("b")
+    private List<OrderBookEntry> bids;
 
-  /**
-   * Ask depth delta.
-   */
-  @JsonProperty("a")
-  private List<OrderBookEntry> asks;
-
-
-  public long getEventTime() {
-    return eventTime;
-  }
-
-  public void setEventTime(long eventTime) {
-    this.eventTime = eventTime;
-  }
-
-  public String getSymbol() {
-    return symbol;
-  }
-
-  public void setSymbol(String symbol) {
-    this.symbol = symbol;
-  }
+    /**
+     * Ask depth delta.
+     */
+    @JsonProperty("a")
+    private List<OrderBookEntry> asks;
 
 
-  public List<OrderBookEntry> getBids() {
-    return bids;
-  }
+    public long getEventTime() {
+        return eventTime;
+    }
 
-  public void setBids(List<OrderBookEntry> bids) {
-    this.bids = bids;
-  }
+    public void setEventTime(long eventTime) {
+        this.eventTime = eventTime;
+    }
 
-  public List<OrderBookEntry> getAsks() {
-    return asks;
-  }
+    public String getSymbol() {
+        return symbol;
+    }
 
-  public void setAsks(List<OrderBookEntry> asks) {
-    this.asks = asks;
-  }
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
-        .append("eventTime", eventTime)
-        .append("symbol", symbol)
-        .append("bids", bids)
-        .append("asks", asks)
-        .toString();
-  }
+
+    public List<OrderBookEntry> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<OrderBookEntry> bids) {
+        this.bids = bids;
+    }
+
+    public List<OrderBookEntry> getAsks() {
+        return asks;
+    }
+
+    public void setAsks(List<OrderBookEntry> asks) {
+        this.asks = asks;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
+                .append("eventTime", eventTime)
+                .append("symbol", symbol)
+                .append("bids", bids)
+                .append("asks", asks)
+                .toString();
+    }
 }
