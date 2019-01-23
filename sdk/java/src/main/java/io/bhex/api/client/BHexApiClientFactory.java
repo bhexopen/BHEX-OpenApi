@@ -1,6 +1,5 @@
 package io.bhex.api.client;
 
-
 import io.bhex.api.client.impl.BHexApiRestClientImpl;
 import io.bhex.api.client.impl.BHexApiWebSocketClientImpl;
 
@@ -9,7 +8,7 @@ import static io.bhex.api.client.impl.BHexApiServiceGenerator.getSharedClient;
 /**
  * A factory for creating BHexApi client objects.
  */
-public class BHexApiClientFactory {
+public final class BHexApiClientFactory {
 
     /**
      * API Key

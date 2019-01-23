@@ -8,7 +8,6 @@ public class OpenOrderRequest extends OrderRequest {
     public OpenOrderRequest() {
     }
 
-
     public OpenOrderRequest(Integer limit) {
         super();
         this.limit = limit;
@@ -40,6 +39,7 @@ public class OpenOrderRequest extends OrderRequest {
         this.symbol = symbol;
     }
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
                 .append("limit", limit)

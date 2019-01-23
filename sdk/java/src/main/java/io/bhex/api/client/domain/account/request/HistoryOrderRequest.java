@@ -67,6 +67,7 @@ public class HistoryOrderRequest extends OrderRequest {
         this.limit = limit;
     }
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
                 .append("orderId", orderId)

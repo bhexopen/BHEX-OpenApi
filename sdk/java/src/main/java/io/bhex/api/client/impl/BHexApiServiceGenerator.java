@@ -89,4 +89,5 @@ public class BHexApiServiceGenerator {
     public static OkHttpClient getSharedClient() {
         return sharedClient;
     }
+
 }

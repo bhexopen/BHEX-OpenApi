@@ -5,12 +5,8 @@ public enum EventType {
     SUB("sub"),
     CANCEL("cancel"),
     CANCEL_ALL("cancel_all"),
-
-
     ACCOUNT_INFO("outboundAccountInfo"),
-    EXECUTION_REPORT("executionReport"),
-
-    ;
+    EXECUTION_REPORT("executionReport"),;
 
     private String type;
 

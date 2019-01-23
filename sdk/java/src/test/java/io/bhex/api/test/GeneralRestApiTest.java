@@ -9,7 +9,7 @@ public class GeneralRestApiTest {
 
     public static void main(String[] args) {
 
-        BHexApiClientFactory factory = BHexApiClientFactory.newInstance(Constants.ACCESS_KEY, Constants.SECRET_KEY);
+        BHexApiClientFactory factory = BHexApiClientFactory.newInstance();
         BHexApiRestClient client = factory.newRestClient();
 
         System.out.println("\n ------BrokerInfo-----");

@@ -73,7 +73,6 @@ public class BHexApiWebSocketUserListener<T> extends WebSocketListener {
                     }
                 }
             } else {
-
                 JsonNode pingNode = jsonNode.get(BHexConstants.PING_MSG_KEY);
                 if (pingNode != null) {
                     pingTime = pingNode.asLong();
@@ -102,6 +101,7 @@ public class BHexApiWebSocketUserListener<T> extends WebSocketListener {
         closing = true;
     }
 
+    @Override
     public void onClosed(WebSocket webSocket, int code, String reason) {
     }
 
@@ -112,4 +112,5 @@ public class BHexApiWebSocketUserListener<T> extends WebSocketListener {
             callback.onFailure(t);
         }
     }
+
 }

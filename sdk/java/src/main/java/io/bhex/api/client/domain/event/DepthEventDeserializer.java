@@ -30,7 +30,6 @@ public class DepthEventDeserializer extends JsonDeserializer<DepthEvent> {
             List<OrderBookEntry> askList = objectMapper.readValue(eventNode.get("a").toString(), new TypeReference<List<OrderBookEntry>>() {
             });
 
-
             DepthEvent event = new DepthEvent();
             event.setSymbol(node.get("symbol").asText());
             event.setBids(bidList);

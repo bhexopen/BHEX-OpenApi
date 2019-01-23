@@ -7,6 +7,5 @@ package io.bhex.api.client.domain.general;
 public enum FilterType {
     PRICE_FILTER,
     LOT_SIZE,
-    MIN_NOTIONAL,
-    ;
+    MIN_NOTIONAL,;
 }

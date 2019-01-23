@@ -13,7 +13,7 @@ public class TradeEvent {
 
     private String symbol;
 
-    public List<TradeItem> itemList;
+    private List<TradeItem> itemList;
 
     public String getSymbol() {
         return symbol;
@@ -31,6 +31,7 @@ public class TradeEvent {
         this.itemList = itemList;
     }
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
                 .append("symbol", symbol)

@@ -14,8 +14,6 @@ public class TickerEventDeserializer extends JsonDeserializer<TickerEvent> {
 
         ObjectCodec oc = jsonParser.getCodec();
         JsonNode node = oc.readTree(jsonParser);
-
-
         JsonNode tickerNode = node.get("data").get(0);
 
         TickerEvent event = new TickerEvent();
@@ -28,7 +26,5 @@ public class TickerEventDeserializer extends JsonDeserializer<TickerEvent> {
         event.setClosePrice(tickerNode.get("c").asText());
         event.setVolume(tickerNode.get("v").asText());
         return event;
-
-
     }
 }

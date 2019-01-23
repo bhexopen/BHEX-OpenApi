@@ -40,19 +40,22 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
         return executeSync(bHexApiService.getBrokerInfo());
     }
 
-
+    @Override
     public OrderBook getOrderBook(String symbol, Integer limit) {
         return executeSync(bHexApiService.getOrderBook(symbol, limit));
     }
 
+    @Override
     public List<TradeHistoryItem> getTrades(String symbol, Integer limit) {
         return executeSync(bHexApiService.getTrades(symbol, limit));
     }
 
+    @Override
     public List<Candlestick> getCandlestickBars(String symbol, CandlestickInterval interval, Long startTime, Long endTime, Integer limit) {
         return executeSync(bHexApiService.getCandlestickBars(symbol, interval.getIntervalId(), startTime, endTime, limit));
     }
 
+    @Override
     public TickerStatistics get24HrPriceStatistics(String symbol) {
         return executeSync(bHexApiService.get24HrPriceStatistics(symbol));
     }
@@ -62,10 +65,10 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
         return executeSync(bHexApiService.getLatestPrice(symbol));
     }
 
+    @Override
     public BookTicker getBookTicker(String symbol) {
         return executeSync(bHexApiService.getBookTicker(symbol));
     }
-
 
     @Override
     public NewOrderResponse newOrder(NewOrder order) {
@@ -88,7 +91,8 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
 
     @Override
     public List<Order> getOpenOrders(OpenOrderRequest orderRequest) {
-        return executeSync(bHexApiService.getOpenOrders(orderRequest.getSymbol(), orderRequest.getLimit(), orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
+        return executeSync(bHexApiService.getOpenOrders(orderRequest.getSymbol(), orderRequest.getLimit(),
+                orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
     }
 
     @Override
@@ -104,14 +108,14 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
 
     @Override
     public List<Trade> getMyTrades(MyTradeRequest request) {
-        return executeSync(bHexApiService.getMyTrades(request.getFromId(), request.getStartTime(), request.getEndTime(), request.getLimit(),
-                request.getRecvWindow(), request.getTimestamp()));
+        return executeSync(bHexApiService.getMyTrades(request.getFromId(), request.getToId(), request.getStartTime(), request.getEndTime(),
+                request.getLimit(), request.getRecvWindow(), request.getTimestamp()));
     }
 
     @Override
     public List<DepositOrder> getDepositOrders(DepositOrderRequest request) {
-        return executeSync(bHexApiService.getDepositOrders(request.getToken(), request.getStartTime(), request.getEndTime(), request.getFromId(), request.getLimit(),
-                request.getRecvWindow(), request.getTimestamp()));
+        return executeSync(bHexApiService.getDepositOrders(request.getToken(), request.getStartTime(), request.getEndTime(), request.getFromId(),
+                request.getLimit(), request.getRecvWindow(), request.getTimestamp()));
     }
 
     @Override

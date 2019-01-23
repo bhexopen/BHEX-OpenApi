@@ -18,4 +18,5 @@ public class ServerTime {
     public String toString() {
         return String.valueOf(serverTime);
     }
+
 }

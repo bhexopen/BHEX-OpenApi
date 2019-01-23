@@ -7,6 +7,8 @@ public class MyTradeRequest extends OrderRequest {
 
     private Long fromId;
 
+    private Long toId;
+
     private Long startTime;
 
     private Long endTime;
@@ -35,13 +37,20 @@ public class MyTradeRequest extends OrderRequest {
         this.limit = limit;
     }
 
-
     public Long getFromId() {
         return fromId;
     }
 
     public void setFromId(Long fromId) {
         this.fromId = fromId;
+    }
+
+    public Long getToId() {
+        return toId;
+    }
+
+    public void setToId(Long toId) {
+        this.toId = toId;
     }
 
     public Long getStartTime() {
@@ -68,6 +77,7 @@ public class MyTradeRequest extends OrderRequest {
         this.limit = limit;
     }
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)
                 .append("fromId", fromId)

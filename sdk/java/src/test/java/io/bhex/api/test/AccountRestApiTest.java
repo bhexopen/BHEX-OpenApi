@@ -56,7 +56,7 @@ public class AccountRestApiTest {
         System.out.println(account.getAssetBalance("ETH"));
 
         System.out.println("\n ------get trades -----");
-        List<Trade> tradeList = client.getMyTrades(new MyTradeRequest(2));
+        List<Trade> tradeList = client.getMyTrades(new MyTradeRequest(5));
         System.out.println(tradeList);
 
         System.out.println("\n ------get deposit order -----");

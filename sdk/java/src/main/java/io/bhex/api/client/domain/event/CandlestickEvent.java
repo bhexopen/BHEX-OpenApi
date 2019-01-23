@@ -93,4 +93,5 @@ public class CandlestickEvent {
                 .append("volume", volume)
                 .toString();
     }
+
 }

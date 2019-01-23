@@ -1,6 +1,5 @@
 package io.bhex.api.client.exception;
 
-
 import io.bhex.api.client.BHexApiError;
 
 /**

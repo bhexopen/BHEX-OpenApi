@@ -112,7 +112,6 @@ public class DepositOrder {
         this.quantity = quantity;
     }
 
-
     @Override
     public String toString() {
         return new ToStringBuilder(this, BHexConstants.TO_STRING_BUILDER_STYLE)

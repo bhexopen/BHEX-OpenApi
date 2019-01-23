@@ -34,7 +34,6 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
 
     private final OkHttpClient client;
 
-
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     public BHexApiWebSocketClientImpl(OkHttpClient client) {
@@ -63,6 +62,7 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
         return null;
     }
 
+    @Override
     public Closeable onCandlestickEvent(String symbols, CandlestickInterval interval, BHexApiCallback<CandlestickEvent> callback) {
         return this.onCandlestickEvent(symbols, interval, callback, false);
     }
@@ -83,6 +83,7 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
         return null;
     }
 
+    @Override
     public Closeable onTradeEvent(String symbols, BHexApiCallback<TradeEvent> callback) {
         return this.onTradeEvent(symbols, callback, false);
     }
@@ -103,6 +104,7 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
         return null;
     }
 
+    @Override
     public Closeable onTicker24HourEvent(String symbols, BHexApiCallback<TickerEvent> callback) {
         return onTicker24HourEvent(symbols, callback, false);
     }
@@ -225,20 +227,17 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
     }
 
     public Runnable userSocketMonitor(String channel, String listenKey, BHexApiWebSocketUserListener<?> listener) {
-        return new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(200);
-                        if (listener.getFailure()) {
-                            log.debug("user socket monitor : retry to connect");
-                            createNewUserWebSocket(channel, listenKey, listener, true);
-                            break;
-                        }
-                    } catch (Exception e) {
-                        log.error(" user socket monitor catch Exception: ", e);
+        return () -> {
+            while (true) {
+                try {
+                    Thread.sleep(200);
+                    if (listener.getFailure()) {
+                        log.debug("user socket monitor : retry to connect");
+                        createNewUserWebSocket(channel, listenKey, listener, true);
+                        break;
                     }
+                } catch (Exception e) {
+                    log.error(" user socket monitor catch Exception: ", e);
                 }
             }
         };

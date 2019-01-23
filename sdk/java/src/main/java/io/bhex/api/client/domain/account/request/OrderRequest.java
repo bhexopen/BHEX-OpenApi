@@ -17,7 +17,6 @@ public class OrderRequest {
         this.recvWindow = BHexConstants.DEFAULT_RECEIVING_WINDOW;
     }
 
-
     public Long getRecvWindow() {
         return recvWindow;
     }

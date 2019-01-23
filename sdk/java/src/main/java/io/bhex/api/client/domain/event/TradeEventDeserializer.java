@@ -33,6 +33,6 @@ public class TradeEventDeserializer extends JsonDeserializer<TradeEvent> {
             e.printStackTrace();
         }
         return null;
-
     }
+
 }

@@ -59,7 +59,7 @@ public class AuthenticationInterceptor implements Interceptor {
      */
     @SuppressWarnings("unused")
     private static String bodyToString(RequestBody request) {
-        try (final Buffer buffer = new Buffer()) {
+        try (Buffer buffer = new Buffer()) {
             final RequestBody copy = request;
             if (copy != null) {
                 copy.writeTo(buffer);
@@ -74,11 +74,15 @@ public class AuthenticationInterceptor implements Interceptor {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         final AuthenticationInterceptor that = (AuthenticationInterceptor) o;
-        return Objects.equals(apiKey, that.apiKey) &&
-                Objects.equals(secret, that.secret);
+        return Objects.equals(apiKey, that.apiKey)
+                && Objects.equals(secret, that.secret);
     }
 
     @Override

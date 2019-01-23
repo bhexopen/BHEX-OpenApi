@@ -113,12 +113,12 @@ public interface BHexApiService {
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/openapi/account/v1/myTrades")
     Call<List<Trade>> getMyTrades(@Query("fromId") Long fromId,
+                                  @Query("toId") Long toId,
                                   @Query("startTime") Long startTime,
                                   @Query("endTime") Long endTime,
                                   @Query("limit") Integer limit,
                                   @Query("recvWindow") Long recvWindow,
                                   @Query("timestamp") Long timestamp);
-
 
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/openapi/account/v1/depositOrders")

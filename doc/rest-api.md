@@ -831,7 +831,7 @@ timestamp | LONG | YES |
 
 **Notes:**
 
-* If `orderId` is set, it will get orders > that `orderId`. Otherwise most recent orders are returned.
+* If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent orders are returned.
 
 **Response:**
 
@@ -883,7 +883,7 @@ timestamp | LONG | YES |
 
 **Notes:**
 
-* If `orderId` is set, it will get orders > that `orderId`. Otherwise most recent orders are returned.
+* If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent orders are returned.
 
 **Response:**
 
@@ -968,14 +968,18 @@ Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
 startTime | LONG | NO |
 endTime | LONG | NO |
-fromId | LONG | NO | TradeId to fetch from. Default gets most recent trades.
+fromId | LONG | NO | TradeId to fetch from.
+toId | LONG | NO | TradeId to fetch to.
 limit | INT | NO | Default 500; max 1000.
 recvWindow | LONG | NO |
 timestamp | LONG | YES |
 
 **Notes:**
 
-* If `fromId` is set, it will get orders > that `fromId`. Otherwise most recent orders are returned.
+* If only `fromId` is set，it will get orders < that `fromId` in descending order. 
+* If only `toId` is set, it will get orders > that `toId` in ascending order.
+* If `fromId` is set and `toId` is set, it will get orders < that `fromId` and > that `toId` in descending order.
+* If `fromId` is not set and `toId` it not set, most recent order are returned in descending order.
 
 **Response:**
 

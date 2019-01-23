@@ -72,4 +72,5 @@ public class BHexApiWebSocketListener<T> extends WebSocketListener {
             callback.onFailure(t);
         }
     }
+
 }

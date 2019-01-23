@@ -6,9 +6,7 @@ public enum EventTopic {
     TRADES("trade"),
     KLINE("kline_%s"),
     DEPTH("depth"),
-
-    ORDER("order"),
-    ;
+    ORDER("order"),;
 
     private String topic;
 

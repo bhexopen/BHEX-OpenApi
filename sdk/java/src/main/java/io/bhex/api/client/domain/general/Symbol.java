@@ -1,6 +1,5 @@
 package io.bhex.api.client.domain.general;
 
-
 import io.bhex.api.client.constant.BHexConstants;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -59,7 +58,6 @@ public class Symbol implements Serializable {
     public void setBaseAsset(String baseAsset) {
         this.baseAsset = baseAsset;
     }
-
 
     public String getQuoteAsset() {
         return quoteAsset;

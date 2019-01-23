@@ -22,4 +22,5 @@ public class OrderBookDeserializer extends JsonDeserializer<OrderBookEntry> {
         orderBookEntry.setQty(qty);
         return orderBookEntry;
     }
+
 }
