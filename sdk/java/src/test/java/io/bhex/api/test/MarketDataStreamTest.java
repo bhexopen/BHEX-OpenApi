@@ -12,7 +12,7 @@ public class MarketDataStreamTest {
 
         // depth
         client.onDepthEvent("BTCUSDT", response -> System.out.println(response));
-//
+
         // kline
         client.onCandlestickEvent("BTCUSDT", CandlestickInterval.ONE_MINUTE, response -> System.out.println(response));
 
@@ -21,5 +21,8 @@ public class MarketDataStreamTest {
 
         // ticker for 24 hour
         client.onTicker24HourEvent("BTCUSDT", response -> System.out.println(response));
+
+        // index
+        client.onIndexEvent("BTCUSDT", System.out::println);
     }
 }

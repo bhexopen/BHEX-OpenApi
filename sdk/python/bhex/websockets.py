@@ -75,7 +75,7 @@ class BhexClientFactory(WebSocketClientFactory, BhexReconnectingClientFactory):
 
 class BhexSocketManager(threading.Thread):
 
-    def __init__(self, api_key='', secret='', entry_point='wss://wsapi.bhex.com/openapi/', auth=True):
+    def __init__(self, api_key='', secret='', entry_point='wss://wsapi.bhex.com/openapi/', auth=True, rest_entry_point='https://api.bhex.com/openapi/'):
         threading.Thread.__init__(self)
         self.factories = {}
         self._conns = {}
@@ -86,7 +86,7 @@ class BhexSocketManager(threading.Thread):
         self._listen_key = None
 
         if auth:
-            self._client = BhexClient(api_key=self._api_key, secret=self._secret) if api_key and secret else None
+            self._client = BhexClient(api_key=self._api_key, secret=self._secret, entry_point=rest_entry_point) if api_key and secret else None
 
         if not entry_point.endswith('/'):
             entry_point = entry_point + '/'

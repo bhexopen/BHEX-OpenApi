@@ -54,6 +54,12 @@ public interface BHexApiRestClient {
 
     BookTicker getBookTicker(String symbol);
 
+    /**
+     * Get option index for <code>symbol</code>
+     * @param symbol ticker symbol (e.g. ETHBTC)
+     */
+    Index getIndex(String symbol);
+
 
     /**
      * Send in a new order.

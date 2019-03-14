@@ -4,6 +4,7 @@ package io.bhex.api.client;
 import io.bhex.api.client.domain.account.SocketUserResponse;
 import io.bhex.api.client.domain.event.CandlestickEvent;
 import io.bhex.api.client.domain.event.DepthEvent;
+import io.bhex.api.client.domain.event.IndexEvent;
 import io.bhex.api.client.domain.event.TickerEvent;
 import io.bhex.api.client.domain.event.TradeEvent;
 import io.bhex.api.client.domain.market.CandlestickInterval;
@@ -65,6 +66,18 @@ public interface BHexApiWebSocketClient extends Closeable {
     Closeable onTicker24HourEvent(String symbols, BHexApiCallback<TickerEvent> callback, boolean autoRetry);
 
     Closeable onTicker24HourEvent(String symbols, BHexApiCallback<TickerEvent> callback);
+
+    /**
+     * Open a new web socket to receive {@link IndexEvent} on a callback
+     *
+     * @param symbols   SYMBOL must be form with symbol like 'BTCUSDT'
+     * @param callback  the callback to call on new events
+     * @param autoRetry setting the choose to auto retry connect socket
+     * @return a {@link Closeable} that allows the underlying web socket to be closed.
+     */
+    Closeable onIndexEvent(String symbols, BHexApiCallback<IndexEvent> callback, boolean autoRetry);
+
+    Closeable onIndexEvent(String symbols, BHexApiCallback<IndexEvent> callback);
 
     /**
      * Open a new web socket for account infomations on a callback

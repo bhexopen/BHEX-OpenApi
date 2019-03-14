@@ -38,12 +38,25 @@ public class BHexApiServiceGenerator {
                     BHexApiError.class, new Annotation[0], null);
 
     public static <S> S createService(Class<S> serviceClass) {
-        return createService(serviceClass, null, null);
+        return createService(BHexConstants.API_BASE_URL, serviceClass, null, null);
     }
 
     public static <S> S createService(Class<S> serviceClass, String apiKey, String secret) {
+        return createService(BHexConstants.API_BASE_URL, serviceClass, apiKey, secret);
+    }
+
+    /**
+     *
+     * @param baseUrl
+     * @param serviceClass
+     * @param apiKey
+     * @param secret
+     * @param <S>
+     * @return
+     */
+    public static <S> S createService(String baseUrl, Class<S> serviceClass, String apiKey, String secret) {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl(BHexConstants.API_BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(converterFactory);
 
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(secret)) {

@@ -48,5 +48,8 @@ public class MarketDataRestApiTest {
         BookTicker bookTickerList = client.getBookTicker(symbol);
         System.out.println(bookTickerList);
 
+        System.out.println("\n ------get index-----");
+        Index index = client.getIndex(symbol);
+        System.out.println(index);
     }
 }

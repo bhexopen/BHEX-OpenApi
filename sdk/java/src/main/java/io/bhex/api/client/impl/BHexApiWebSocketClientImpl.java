@@ -12,6 +12,7 @@ import io.bhex.api.client.domain.channel.EventTopic;
 import io.bhex.api.client.domain.channel.EventType;
 import io.bhex.api.client.domain.event.CandlestickEvent;
 import io.bhex.api.client.domain.event.DepthEvent;
+import io.bhex.api.client.domain.event.IndexEvent;
 import io.bhex.api.client.domain.event.TickerEvent;
 import io.bhex.api.client.domain.event.TradeEvent;
 import io.bhex.api.client.domain.market.CandlestickInterval;
@@ -33,11 +34,19 @@ import java.util.concurrent.Executors;
 public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Closeable {
 
     private final OkHttpClient client;
+    private String wsApiQuoteUrl = BHexConstants.WS_API_BASE_URL;
+    private String wsApiUserUrl = BHexConstants.WS_API_USER_URL;
 
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     public BHexApiWebSocketClientImpl(OkHttpClient client) {
         this.client = client;
+    }
+
+    public BHexApiWebSocketClientImpl(OkHttpClient client, String wsApiQuoteUrl, String wsApiUserUrl) {
+        this.client = client;
+        this.wsApiQuoteUrl = wsApiQuoteUrl;
+        this.wsApiUserUrl = wsApiUserUrl;
     }
 
     @Override
@@ -125,6 +134,26 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
         return null;
     }
 
+    @Override
+    public Closeable onIndexEvent(String symbols, BHexApiCallback<IndexEvent> callback) {
+        return onIndexEvent(symbols, callback, false);
+    }
+
+    @Override
+    public Closeable onIndexEvent(String symbols, BHexApiCallback<IndexEvent> callback, boolean retry) {
+        ChannelRequest request = new ChannelRequest();
+        request.setSymbol(symbols);
+        request.setTopic(EventTopic.INDEX.getTopic());
+        request.setEvent(EventType.SUB.getType());
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String channel = mapper.writeValueAsString(request);
+            return createNewWebSocket(channel, new BHexApiWebSocketListener<>(callback, IndexEvent.class), retry);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public Closeable onUserEvent(String listenKey, BHexApiCallback<SocketUserResponse> callback) {
@@ -156,7 +185,7 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
     }
 
     private Closeable createNewWebSocket(String channel, BHexApiWebSocketListener<?> listener, boolean retry) {
-        String streamingUrl = String.format("%s/%s", BHexConstants.WS_API_BASE_URL, channel);
+        String streamingUrl = String.format("%s/%s", wsApiQuoteUrl, channel);
         Request request = new Request.Builder().url(streamingUrl).build();
         final WebSocket webSocket = client.newWebSocket(request, listener);
         webSocket.send(channel);
@@ -167,7 +196,7 @@ public class BHexApiWebSocketClientImpl implements BHexApiWebSocketClient, Close
     }
 
     private Closeable createNewUserWebSocket(String channel, String listenKey, BHexApiWebSocketUserListener<?> listener, boolean retry) {
-        Request request = new Request.Builder().url(BHexConstants.WS_API_USER_URL + listenKey).build();
+        Request request = new Request.Builder().url(wsApiUserUrl + listenKey).build();
         listener.setFailure(false);
         final WebSocket webSocket = client.newWebSocket(request, listener);
         webSocket.send(channel);

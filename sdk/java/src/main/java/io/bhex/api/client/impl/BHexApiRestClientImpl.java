@@ -1,6 +1,7 @@
 package io.bhex.api.client.impl;
 
 import io.bhex.api.client.BHexApiRestClient;
+import io.bhex.api.client.constant.BHexConstants;
 import io.bhex.api.client.domain.account.*;
 import io.bhex.api.client.domain.account.request.*;
 import io.bhex.api.client.domain.general.BrokerInfo;
@@ -19,8 +20,8 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
 
     private final BHexApiService bHexApiService;
 
-    public BHexApiRestClientImpl(String apiKey, String secret) {
-        bHexApiService = createService(BHexApiService.class, apiKey, secret);
+    public BHexApiRestClientImpl(String baseUrl, String apiKey, String secret) {
+        bHexApiService = createService(baseUrl, BHexApiService.class, apiKey, secret);
     }
 
     // General endpoints
@@ -68,6 +69,11 @@ public class BHexApiRestClientImpl implements BHexApiRestClient {
     @Override
     public BookTicker getBookTicker(String symbol) {
         return executeSync(bHexApiService.getBookTicker(symbol));
+    }
+
+    @Override
+    public Index getIndex(String symbol) {
+        return executeSync(bHexApiService.getIndex(symbol));
     }
 
     @Override

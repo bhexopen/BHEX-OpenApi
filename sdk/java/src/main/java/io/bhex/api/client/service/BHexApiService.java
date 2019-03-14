@@ -59,6 +59,9 @@ public interface BHexApiService {
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)
     Call<BookTicker> getBookTicker(@Query("symbol") String symbol);
 
+    @GET("/openapi/quote/v1/index")
+    Call<Index> getIndex(@Query("symbol") String symbol);
+
     // Account endpoints
 
     @Headers(BHexConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
