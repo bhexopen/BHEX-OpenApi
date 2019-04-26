@@ -25,7 +25,10 @@ class Request(object):
         self.ping()
 
     def _create_api_uri(self, path, version):
-        return self.entry_point + version + '/' + path
+        version_path = ''
+        if version:
+            version_path = version + '/'
+        return self.entry_point + version_path + path
 
     def _create_quote_api_uri(self, path, version):
         return self.entry_point + 'quote/' + version + '/' + path
@@ -84,7 +87,7 @@ class Request(object):
 
     def _handle_response(self, response):
 
-        if not str(response.status_code).startswith('2'):
+        if not str(response.status_code).startswith('2') and not response.status_code == 400:
             raise BhexAPIException(response)
         try:
             return response.json()
@@ -93,3 +96,39 @@ class Request(object):
 
     def ping(self):
         return self._get('ping')
+
+    def time(self):
+        """
+        Check server time
+        """
+        return self._get('time')
+
+    def broker_info(self):
+        """
+        Broker information
+        """
+        return self._get('brokerInfo')
+
+    def stream_get_listen_key(self):
+        """
+        Start user data stream (USER_STREAM)
+        """
+        return self._post('userDataStream', signed=True)
+
+    def stream_keepalive(self, listen_key):
+        """
+        Keepalive user data stream (USER_STREAM)
+        """
+        params = {
+            'listenKey': listen_key
+        }
+        return self._put('userDataStream', signed=True, params=params)
+
+    def stream_close(self, listen_key):
+        """
+        Close user data stream (USER_STREAM)
+        """
+        params = {
+            'listenKey': listen_key
+        }
+        return self._delete('userDataStream', signed=True, params=params)

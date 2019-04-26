@@ -327,12 +327,12 @@ NONE
   "rateLimits": [{
       "rateLimitType": "REQUESTS_WEIGHT",
       "interval": "MINUTE",
-      "limit": 1200
+      "limit": 1500
     },
     {
       "rateLimitType": "ORDERS",
       "interval": "SECOND",
-      "limit": 10
+      "limit": 20
     },
     {
       "rateLimitType": "ORDERS",
