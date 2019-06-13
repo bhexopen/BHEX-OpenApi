@@ -1,4 +1,4 @@
-# Web Socket Streams for BlueHelix Broker (2018-09-25)
+# Web Socket Streams for Broker (2018-09-25)
 
 ## General WSS information
 
@@ -18,11 +18,11 @@ You must add **HOST** to your request headers
 
 ```
 
-| name | values |
-| :--- | :---- |
-| topic | realtimes,trade,kline_$interval,depth|
-| event | sub,cancel,cancel_all|
-| interval | 1m,3m,5m,15m,30m,1h,2h,6h,8h,12,1d,3d,1w,1M|
+| name     | values                                      |
+| :------- | :------------------------------------------ |
+| topic    | realtimes,trade,kline_$interval,depth       |
+| event    | sub,cancel,cancel_all                       |
+| interval | 1m,3m,5m,15m,30m,1h,2h,6h,8h,12,1d,3d,1w,1M |
 
 ## Detailed Stream information
 
@@ -118,7 +118,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
         "h": "0.1531193171219",//high price
         "l": "0.1531193168802",//low price
         "o": "0.1531193171219", //open price
-        "v": "0.0", //volume  
+        "v": "0.0", //volume
         "e": "301" //ignored
     },{
         "t": "1531193421003",//time
@@ -127,7 +127,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
         "h": "0.1531193171219",//high price
         "l": "0.1531193168802",//low price
         "o": "0.1531193171219", //open price
-        "v": "0.0", //volume  
+        "v": "0.0", //volume
         "e": "301" //ignored
     }]
 }
