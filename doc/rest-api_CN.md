@@ -315,7 +315,7 @@ NONE
     {
       "rateLimitType": "ORDERS",
       "interval": "DAY",
-      "limit": 100000
+      "limit": 350000
     }
   ],
   "brokerFilters":[],
@@ -1106,10 +1106,12 @@ POST /openapi/v1/user/transfer
 
 名称 | 类型 | 是否强制 | 描述
 ------------ | ------------ | ------------ | ------------
-targetUserId | LONG | YES |目标用户ID
+targetUserId | LONG | NO |目标用户ID 如有提币地址可不填
 clientOrderId | LONG | YES |转账幂等ID
 amount | STRING | YES |数量
 tokenId | STRING | YES |tokenID
+address | STRING | NO | 提币地址
+addressExt | STRING | NO | EOS提币tag 非EOS不填
 businessType | INTEGER | YES |转账类型 3转账 70空投
 recvWindow | LONG | NO |
 timestamp | LONG | YES |

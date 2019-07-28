@@ -337,7 +337,7 @@ NONE
     {
       "rateLimitType": "ORDERS",
       "interval": "DAY",
-      "limit": 100000
+      "limit": 350000
     }
   ],
   "brokerFilters":[],
