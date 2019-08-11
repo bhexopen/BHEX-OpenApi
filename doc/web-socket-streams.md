@@ -1,4 +1,4 @@
-# Web Socket Streams for Broker (2018-09-25)
+# Web Socket Streams for BlueHelix Broker (2018-09-25)
 
 ## General WSS information
 
@@ -18,19 +18,21 @@ You must add **HOST** to your request headers
 
 ```
 
-| name     | values                                      |
-| :------- | :------------------------------------------ |
-| topic    | realtimes,trade,kline_$interval,depth       |
-| event    | sub,cancel,cancel_all                       |
-| interval | 1m,3m,5m,15m,30m,1h,2h,6h,8h,12,1d,3d,1w,1M |
+| name | values |
+| :--- | :---- |
+| topic | realtimes,trade,kline_$interval,depth|
+| event | sub,cancel,cancel_all|
+| interval | 1m,5m,15m,30m,1h,2h,6h,12h,1d,1w,1M|
 
 ## Detailed Stream information
 
 ### Trade Streams
 
 The Trade Streams push raw trade information; each trade has a unique buyer and seller.
+After the first successful subscription, system will return 60 historical trades, then will return real-time trades afterwards.
+Variable "v" could be used to determine the version of the data. ("v" will be increasing, but not in a continuous sense, namely v(n + 1) might not be v(n) + 1, and v(n + 1) > v(n) for sure)
 
-**Stream Name:** trades
+**Stream Name:** trade
 
 **Payload:**
 
@@ -42,7 +44,8 @@ The Trade Streams push raw trade information; each trade has a unique buyer and 
         "t": 1528631035415,//time
         "p": "9500.0000",//price
         "q": "3800.000", //quantity
-        "m": true //true is buy, flase is sell
+        "m": true, //true is buy, false is sell
+        "v": "425795633027497984" // version
     }]
 }
 ```
@@ -56,7 +59,6 @@ The Kline/Candlestick Stream push updates to the current klines/candlestick ever
 m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 
 * 1m
-* 3m
 * 5m
 * 15m
 * 30m
@@ -64,10 +66,8 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
 * 2h
 * 4h
 * 6h
-* 8h
 * 12h
 * 1d
-* 3d
 * 1w
 * 1M
 
@@ -118,7 +118,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
         "h": "0.1531193171219",//high price
         "l": "0.1531193168802",//low price
         "o": "0.1531193171219", //open price
-        "v": "0.0", //volume
+        "v": "0.0", //volume  
         "e": "301" //ignored
     },{
         "t": "1531193421003",//time
@@ -127,7 +127,7 @@ m -> minutes; h -> hours; d -> days; w -> weeks; M -> months
         "h": "0.1531193171219",//high price
         "l": "0.1531193168802",//low price
         "o": "0.1531193171219", //open price
-        "v": "0.0", //volume
+        "v": "0.0", //volume  
         "e": "301" //ignored
     }]
 }
