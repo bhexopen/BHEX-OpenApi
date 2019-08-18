@@ -1,11 +1,11 @@
-# User Data Streams for Broker (2018-09-25)
+# User Data Streams for BlueHelix Broker (2018-09-25)
 
 ## General WSS information
 
 * A User Data Stream `listenKey` is valid for 60 minutes after creation.
 * Doing a `PUT` on a `listenKey` will extend its validity for 60 minutes.
 * Doing a `DELETE` on a `listenKey` will close the stream.
-* User Data Streams are accessed at **/ws/\<listenKey\>**
+* User Data Streams are accessed at **/openapi/ws/\<listenKey\>**
 * A single connection to api endpoint is only valid for 24 hours; expect to be disconnected at the 24 hour mark
 * User data stream payloads are **not guaranteed** to be in order during heavy periods; **make sure to order your updates using E**
 
@@ -14,7 +14,7 @@
 ### Create a listenKey
 
 ```shell
-POST /api/v1/userDataStream
+POST /openapi/v1/userDataStream
 ```
 
 Start a new user data stream. The stream will close after 60 minutes unless a keepalive is sent.
@@ -40,7 +40,7 @@ timestamp | LONG | YES |
 ### Ping/Keep-alive a listenKey
 
 ```shell
-PUT /api/v1/userDataStream
+PUT /openapi/v1/userDataStream
 ```
 
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
@@ -65,7 +65,7 @@ timestamp | LONG | YES |
 ### Close a listenKey
 
 ```shell
-DELETE /api/v1/userDataStream
+DELETE /openapi/v1/userDataStream
 ```
 
 Close out a user data stream.
@@ -147,6 +147,7 @@ Average price can be found by doing `Z` divided by `z`.
   "L": "0.00000000",             // Last executed price
   "n": "0",                      // Commission amount
   "N": null,                     // Commission asset
+  "u": true,                     // Is the trade normal, ignore for now
   // "T": 1499405658657,            // Transaction time
   // "t": -1,                       // Trade ID
   // "I": 8641984,                  // Ignore
