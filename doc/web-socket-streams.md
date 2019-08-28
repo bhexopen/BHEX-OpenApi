@@ -35,7 +35,7 @@
 
 ## Heartbeat
 
-The websocket server will send a `ping frame` regularly. If the websocket server does not receive a `pong frame` back from the connection within a 5 minute period, the connection will be disconnected.
+The websocket client will send a `ping frame` regularly. If the websocket server does not receive a `ping frame` back from the connection within a 5 minute period, the connection will be disconnected.
 
 * Request
 ```javascript

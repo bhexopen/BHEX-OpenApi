@@ -944,9 +944,9 @@ timestamp | LONG | YES |
 
 **Notes:**
 
-* 如果只有`fromId`，会返回订单号小于`fromId`的，倒序排列。
-* 如果只有`toId`，会返回订单号小于`toId`的，升序排列。
-* 如果同时有`fromId`和`toId`, 会返回订单号在`fromId`和`toId`的，倒序排列。
+* 如果只有`fromId`，会返回成交号小于`fromId`的，倒序排列。
+* 如果只有`toId`，会返回成交号小于`toId`的，升序排列。
+* 如果同时有`fromId`和`toId`, 会返回成交号在`fromId`和`toId`的，倒序排列。
 * 如果`fromId`和`toId`都没有，会返回最新的成交记录，倒序排列。
 **Response:**
 
