@@ -35,7 +35,7 @@
 
 ## Heartbeat
 
-The websocket client will send a `ping frame` regularly. If the websocket server does not receive a `ping frame` back from the connection within a 5 minute period, the connection will be disconnected.
+The  client need to send a `PING` message to the server regularly through the Websocket, which then the server replies with `PONG`. If the client does not send the message every 5 minutes, the server will close the connection.
 
 * Request
 ```javascript
@@ -363,4 +363,3 @@ PERIOD_EMPTY("-10008", "Period required!")
 PERIOD_ERROR("-10009", "Invalid period!")
 SYMBOLS_ERROR("-100010", "Invalid Symbols!")
 ```
-
