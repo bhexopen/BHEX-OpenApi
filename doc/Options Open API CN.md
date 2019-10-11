@@ -1,6 +1,6 @@
-# BHEX API URL
+# Broker API URL
 
-BHEX Open API的地址为: https://www.bhex.com/openapi
+Broker Open API的地址请见[这里](endpoint.md)
 
 # 期权公共端点
 
@@ -29,7 +29,7 @@ None
 
 
 
-在`symbols`对应的信息组里，显示的是BHEX币币交易的symbol的信息（精度等），与期权交易并无关联，可以忽略。
+在`symbols`对应的信息组里，显示的是币币交易的symbol的信息（精度等），与期权交易并无关联，可以忽略。
 
 在 `options`对应的信息组里，所有当前正在交易的期权信息将会被返回：
 
@@ -369,7 +369,7 @@ POST /openapi/option/order
 ### **Parameters：**
 
 名称|类型|是否强制|描述
------------- | ------------ | ------------ | ------------ 
+------------ | ------------ | ------------ | ------------
 `symbol`|string|`YES`|期权名称
 `clientOrderId`|string/long|`NO`|订单的ID。可自己定义，如果没有发送，将会自动生成。
 `side`|string|`YES`|订单方向。可能出现的值只能为：`BUY`（买入做多） 和 `SELL`（卖出做空）
@@ -443,7 +443,7 @@ DELETE /openapi/option/order/cancel
 ### **Parameter:**
 
 名称|类型|是否强制|描述
------------- | ------------ | ------------ | ------------ 
+------------ | ------------ | ------------ | ------------
 `orderId`|integer|`NO`|系统自动生成的订单ID。
 `clientOrderId`|string/long|`NO`|自己传送的订单ID。
 
@@ -586,7 +586,7 @@ GET /openapi/option/positions
 ### **Parameters:**
 
 名称|类型|是否强制|描述
------------- | ------------ | ------------ | ------------ 
+------------ | ------------ | ------------ | ------------
 `symbol`|string|`NO`|期权名称，如果没有发送默认返回所有期权的仓位。
 
 ### **Response:**
@@ -771,7 +771,7 @@ None
 ### **Responses:**
 
 名称|类型|例子|描述
------------- | ------------ | ------------ | ------------ 
+------------ | ------------ | ------------ | ------------
 `symbol`|string|`BTC0412PS3900`|期权名称
 `optionType`|string|`call`|期权类型
 `margin`|float|`400`|仓位所需的保证金

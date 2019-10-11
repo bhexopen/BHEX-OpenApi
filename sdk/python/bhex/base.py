@@ -14,7 +14,7 @@ class Request(object):
     API_VERSION = 'v1'
     QUOTE_API_VERSION = 'v1'
 
-    def __init__(self, api_key, secret, entry_point='https://api.bhex.com/openapi/', proxies=None):
+    def __init__(self, api_key='', secret='', entry_point='https://api.bhex.com/openapi/', proxies=None):
 
         if not entry_point.endswith('/'):
             entry_point = entry_point + '/'
@@ -67,7 +67,8 @@ class Request(object):
 
     def _request(self, method, uri, signed, **kwargs):
 
-        kwargs['timeout'] = 10
+        if 'timeout' not in kwargs:
+            kwargs['timeout'] = 10
 
         date_type = 'data' if method == 'POST' else 'params'
         if date_type not in kwargs:

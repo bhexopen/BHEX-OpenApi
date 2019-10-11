@@ -2,7 +2,7 @@
 
 ## 基本信息
 
-* 行情基础端点为: **wss://wsapi.bhex.com/**
+* 行情基础端点请参见[这里](endpoint.md)
 * 直接访问时URL格式为 **/openapi/quote/ws/v1**
 
 | 名称 | 值 |

@@ -20,6 +20,12 @@ Init bhex client:
 b = BhexClient(api_key='', secret='')
 ```
 
+Init bhex options client:
+```python
+b = BhexOptionClient(api_key='', secret='')
+```
+
+
 Request with proxies:
 
 ```python
@@ -152,4 +158,11 @@ b.my_trades()
 ```python
 b.deposit_orders()
 ```
+
+Examples
+--------
+
+* [examples.py](https://github.com/bhexopen/BHEX-OpenApi/blob/master/sdk/python/examples.py)
+* [option-examples.py](https://github.com/bhexopen/BHEX-OpenApi/blob/master/sdk/python/option-examples.py)
+* [ws-examples.py](https://github.com/bhexopen/BHEX-OpenApi/blob/master/sdk/python/ws-examples.py)
 

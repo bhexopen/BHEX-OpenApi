@@ -1,4 +1,4 @@
-# Public Rest API for BlueHelix Broker (2018-09-25)
+# Public Rest API for Broker (2018-09-25)
 
 ## General API Information
 
@@ -9,7 +9,7 @@
   the issue is on the sender's side.
 * HTTP `429` return code is used when breaking a request rate limit.
 * HTTP `418` return code is used when an IP has been auto-banned for continuing to send requests after receiving `429` codes.
-* HTTP `5XX` return codes are used for internal errors; the issue is on BlueHelix broker's side.
+* HTTP `5XX` return codes are used for internal errors; the issue is on broker's side.
   It is important to **NOT** treat this as a failure operation; the execution status is
   **UNKNOWN** and could have been a success.
 * Any endpoint can return an ERROR; the error payload is as follows:
@@ -133,7 +133,7 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://api.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
 ```
 
 #### Example 2: As a request body
@@ -150,7 +150,7 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://api.bhex.com/openapi/v1/order' -d 'symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
+[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order' -d 'symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=5f2750ad7589d1d40757a55342e621a44037dad23b5128cc70e18ec1d1c3f4c6'
 ```
 
 #### Example 3: Mixed query string and request body
@@ -168,7 +168,7 @@ timestamp | 1538323200000
 
 ```shell
 (HMAC SHA256)
-[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://api.bhex.com/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
+[linux]$ curl -H "X-BH-APIKEY: tAQfOrPIZAhym0qHISRt8EFvxPemdBm5j5WMlkm3Ke9aFp0EGWC2CGM8GHV4kCYW" -X POST 'https://$HOST/openapi/v1/order?symbol=ETHBTC&side=BUY&type=LIMIT&timeInForce=GTC' -d 'quantity=1&price=0.1&recvWindow=5000&timestamp=1538323200000&signature=885c9e3dd89ccd13408b25e6d54c2330703759d7494bea6dd5a3d1fd16ba3afa'
 ```
 
 Note that the signature is different in example 3.
@@ -979,7 +979,7 @@ timestamp | LONG | YES |
 
 **Notes:**
 
-* If only `fromId` is set，it will get orders < that `fromId` in descending order. 
+* If only `fromId` is set，it will get orders < that `fromId` in descending order.
 * If only `toId` is set, it will get orders > that `toId` in ascending order.
 * If `fromId` is set and `toId` is set, it will get orders < that `fromId` and > that `toId` in descending order.
 * If `fromId` is not set and `toId` it not set, most recent order are returned in descending order.
