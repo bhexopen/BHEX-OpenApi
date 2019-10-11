@@ -1,11 +1,14 @@
-from bhex.websockets import BhexWss
+from broker.websockets import BrokerWss
 
 
 def handler(msg):
     print(msg)
 
 
-client = BhexWss(api_key='', secret='')
+client = BrokerWss(api_key='',
+                   secret='',
+                   entry_point='',
+                   rest_entry_point='')
 
 client.subscribe_to_realtimes(symbol='BTCUSDT,ETHUSDT', callback=handler)
 

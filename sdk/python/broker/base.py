@@ -1,12 +1,14 @@
 import hashlib
 import hmac
+import re
 import time
 import urllib
 
 import requests
 import six
 
-from . exceptions import BhexAPIException, BhexRequestException
+from broker.exceptions import BrokerApiException, BrokerRequestException
+from broker import user_agent
 
 
 class Request(object):
@@ -14,7 +16,7 @@ class Request(object):
     API_VERSION = 'v1'
     QUOTE_API_VERSION = 'v1'
 
-    def __init__(self, api_key='', secret='', entry_point='https://api.bhex.com/openapi/', proxies=None):
+    def __init__(self, api_key='', secret='', entry_point='', proxies=None):
 
         if not entry_point.endswith('/'):
             entry_point = entry_point + '/'
@@ -75,25 +77,46 @@ class Request(object):
             kwargs[date_type] = {}
 
         kwargs[date_type]['timestamp'] = int(time.time() * 1000)
+
+        self._process_parameters(kwargs[date_type])
+
         if signed:
             kwargs[date_type]['signature'] = self._generate_signature(kwargs[date_type])
 
         kwargs['headers'] = {
             'X-BH-APIKEY': self.api_key,
-            'User-Agent': 'Bhex-P 1.0'
+            'User-Agent': user_agent
         }
 
         response = requests.request(method, uri, proxies=self.proxies, **kwargs)
         return self._handle_response(response)
 
-    def _handle_response(self, response):
+    @classmethod
+    def _process_parameters(cls, parameters):
+        assert isinstance(parameters, dict)
+
+        processed_parameters = dict()
+        for name, value in parameters.items():
+            processed_parameters[cls._camelcase(name)] = '' if value is None else value
+        parameters.clear()
+        parameters.update(processed_parameters)
+
+    @classmethod
+    def _camelcase(cls, name):
+        name = re.sub(r"^[\-_.]", '', str(name))
+        if not name:
+            return name
+        return name[0].lower() + re.sub(r"[\-_.\s]([a-z])", lambda matched: matched.group(1).upper(), name[1:])
+
+    @classmethod
+    def _handle_response(cls, response):
 
         if not str(response.status_code).startswith('2') and not response.status_code == 400:
-            raise BhexAPIException(response)
+            raise BrokerApiException(response)
         try:
             return response.json()
         except ValueError:
-            raise BhexRequestException('Invalid Response: %s' % response.text)
+            raise BrokerRequestException('Invalid Response: %s' % response.text)
 
     def ping(self):
         return self._get('ping')
@@ -104,11 +127,14 @@ class Request(object):
         """
         return self._get('time')
 
-    def broker_info(self):
+    def broker_info(self, trade_type=''):
         """
         Broker information
         """
-        return self._get('brokerInfo')
+        params = {
+            'type': trade_type
+        }
+        return self._get('brokerInfo', params=params)
 
     def stream_get_listen_key(self):
         """

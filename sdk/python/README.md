@@ -1,13 +1,13 @@
-Welcome to Bhex-Python
+Welcome to Broker-Python
 ======================
 
-An official Python implementation of the lastest Open API for Bhex.
+An official Python implementation of the lastest Open API for Broker.
 
 Install
 -------
 
 ```bash
-pip install bhex
+pip install broker-client
 ```
 
 Usage
@@ -15,16 +15,20 @@ Usage
 
 #### REST API
 
-Init bhex client:
+Init broker client:
 ```python
-b = BhexClient(api_key='', secret='')
+b = BrokerClient(api_key='', secret='', entry_point='')
 ```
 
-Init bhex options client:
+Init broker options client:
 ```python
-b = BhexOptionClient(api_key='', secret='')
+b = BrokerOptionClient(api_key='', secret='', entry_point='')
 ```
 
+Init broker contract client:
+```python
+b = BrokerContractClient(api_key='', secret='', entry_point='')
+```
 
 Request with proxies:
 
@@ -34,16 +38,16 @@ proxies = {
   "https": "http://ip:port",
 }
 
-b = BhexClient(api_key='', secret='', proxies=proxies)
+b = BrokerClient(api_key='', secret='', proxies=proxies, entry_point='')
 ```
 
 #### Web Socket
 
 ##### Init
 
-Init bhex websocket client:
+Init broker websocket client:
 ```python
-client = BhexWss(api_key='', secret='')
+client = BrokerWss(api_key='', secret='', entry_point='', rest_entry_point='')
 ```
 
 ##### Subscribe
@@ -162,7 +166,8 @@ b.deposit_orders()
 Examples
 --------
 
-* [examples.py](https://github.com/bhexopen/BHEX-OpenApi/blob/master/sdk/python/examples.py)
-* [option-examples.py](https://github.com/bhexopen/BHEX-OpenApi/blob/master/sdk/python/option-examples.py)
-* [ws-examples.py](https://github.com/bhexopen/BHEX-OpenApi/blob/master/sdk/python/ws-examples.py)
+* [examples.py](examples/examples.py)
+* [option-examples.py](examples/option-examples.py)
+* [contract-examples.py](examples/contract-examples.py)
+* [ws-examples.py](examples/ws-examples.py)
 

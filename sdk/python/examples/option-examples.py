@@ -1,8 +1,8 @@
 import logging
 import time
 
-from bhex.client import BhexOptionClient
-from bhex.exceptions import BhexRequestException, BhexAPIException
+from broker.client import BrokerOptionClient
+from broker.exceptions import BrokerRequestException, BrokerApiException
 
 if __name__ == '__main__':
 
@@ -11,7 +11,7 @@ if __name__ == '__main__':
         "https": "",
     }
 
-    b = BhexOptionClient(api_key='', secret='', proxies=proxies)
+    b = BrokerOptionClient(api_key='', secret='', proxies=proxies, entry_point='')
 
     try:
 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         print(b.stream_close(listen_key.get('listenKey')))
 
-    except BhexRequestException as bre:
+    except BrokerRequestException as bre:
         logging.error(bre)
-    except BhexAPIException as bae:
+    except BrokerApiException as bae:
         logging.error(bae)

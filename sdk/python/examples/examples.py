@@ -1,6 +1,6 @@
 import time
 
-from bhex.client import BhexClient
+from broker.client import BrokerClient
 
 if __name__ == '__main__':
 
@@ -9,7 +9,7 @@ if __name__ == '__main__':
         "https": "",
     }
 
-    b = BhexClient(api_key='', secret='', proxies=proxies)
+    b = BrokerClient(api_key='', secret='', proxies=proxies)
 
     print(b.time())
 
