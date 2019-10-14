@@ -210,8 +210,10 @@ Underlying asset index price.
 GET /quote/v1/contract/index
 ```
 ### **Parameters：**
-This endpoint does not take any parameters.
-
+name|type|required|default|description
+------------ | ------------ | ------------ | ------------ | ----
+symbol|string|`NO`||Underlying index symbol. If this parameter is not sent, all symbols
+will be returned.
 
 ### **Response:**
 name|type|example|description
@@ -304,7 +306,7 @@ GET /quote/v1/contract/depth
 ### **Parameters:**
 parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -----
-`symbol`|string|`YES`||The contract name for which to retrieve the order book, use `getContracts` to get contract names.
+`symbol`|string|`YES`||The contract name for which to retrieve the order book
 `limit`|integer|`NO`|`100` (max = 100)|The number of entries to return for bids and asks.
 
 ### **Response:**
@@ -461,7 +463,7 @@ name|type|example|description
 
 ## `order`
 
-Places a buy order for a contract. This API endpoint requires your request to be signed.
+Places order for a contract. This API endpoint requires your request to be signed.
 
 ### **Request Weight:**
 
@@ -484,7 +486,7 @@ Parameter|type|required|default|description
 `priceType`|string|`NO`|`INPUT`|The price type, possible types include: `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `triggerPrice`|float|`NO`. **REQUIRED** for `STOP` orders.||The price at which the trigger order will be executed.
 `timeInForce`|string|`NO`|`GTC`|Time in force for `LIMIT` orders. Possible values include `GTC`,`FOK`,`IOC`,`LIMIT_MAKER`.
-`clientOrderId`|string/long|`NO`||A unique ID of the order. Automatically generated if not sent.
+`clientOrderId`|string/long|`YES`||A unique ID of the order (user defined)
 
 **NOTE** For **Market Orders**, you need to set `orderType` as **`LIMIT`** **AND** `priceType` as **`MARKET`**.
 
@@ -821,7 +823,7 @@ Name|type|example|description
 `symbolId`|string|`BTC-PERP-REV`|Name of the contract.
 `price`|float|`4765.29`|Price of the trade.
 `quantity`|float|`1.01`|Quantity of the trade.
-`feeTokenName`|string|`USDT`|Fee token name.
+`feeTokenId`|string|`USDT`|Fee token name.
 `fee`|||Fee of the trade.
 `side`|string|`BUY`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `orderType`|string|`LIMIT`|The order type, possible types: LIMIT, MARKET
@@ -839,7 +841,7 @@ Name|type|example|description
     'symbolId': 'BTC-PERP-REV',
     'price': '8531.17',
     'quantity': '100',
-    'feeTokenName': 'TBTC',
+    'feeTokenId': 'TBTC',
     'fee': '0.00000586',
     'type': 'LIMIT',
     'side': 'BUY_OPEN'
@@ -1038,17 +1040,17 @@ Price types.
 
 `INPUT`: The system will use the price you entered exactly to fill the orders.
 
-`OPPONENT`: Orders will be filled using the opposite side's best quote. If the first trade is not fully filled, the process will repeat until the order is fully filled.
+`OPPONENT`: Orders will be filled using the opposite side's best quote.
 
-For example, if you are opening 10 contracts long, the best buy price is 10 and the best sell price is 11. You will send an order buying 10 contracts at 11. If the order, is not fully filled, it will find the best sell price again until the order is filled fully.
+For example, if you are opening 10 contracts long, the best buy price is 10 and the best sell price is 11. You will send an order buying 10 contracts at 11. If the order, is not fully filled, the rest will be left on the orderbook.
 
 `QUEUE`: Order will be send using the same side's best quote.
 
 For example, if you are opening 10 contracts long, the best buy price is 10 and the best sell price is 11. You will be send an order buying 10 contracts at 10.
 
-`OVER`: The price will be the best opposite's quote + `overPrice`.
+`OVER`: The price will be the best opposite's quote + overPrice(not a fixed value).
 
-For example, if you are opening 10 contracts long, the best buy price is 10 and the best sell price is 11, you set the `overPrice` at 3. You will be send an order buying 10 contracts at (11+3)=14.
+For example, if you are opening 10 contracts long, the best buy price is 10 and the best sell price is 11, you set the overPrice at 3. You will be send an order buying 10 contracts at (11+3)=14.
 
 `MARKET`: The price will be newest price * (1 ± 5%).
 
@@ -1074,7 +1076,3 @@ Order type.
 
 
 `STOP`: Order that will be triggered once it reaches the `triggerPrice`.
-
-### `marginMode`
-
-`fixed`: This means the position opened is in fixed margin mode. Margin distributed to a certain position is limited to a fixed amount. You can add or remove funds into your margin using this method.
