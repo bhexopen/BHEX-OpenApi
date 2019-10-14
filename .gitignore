@@ -2,6 +2,8 @@ target/
 logs/
 !.mvn/wrapper/maven-wrapper.jar
 
+sdk/python/setup.py
+
 ### STS ###
 .apt_generated
 .classpath
