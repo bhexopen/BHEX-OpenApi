@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.bhex.api</groupId>
-    <artifactId>bhex-api-client</artifactId>
-    <version>2.0</version>
+    <groupId>io.broker.api</groupId>
+    <artifactId>broker-api-client</artifactId>
+    <version>3.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
