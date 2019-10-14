@@ -2,6 +2,7 @@ package io.broker.api.client.domain.general;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.broker.api.client.constant.BrokerConstants;
+import io.broker.api.client.domain.contract.ContractSymbol;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class BrokerInfo {
     private List brokerFilters;
 
     private List<Symbol> symbols;
+
+    private List<ContractSymbol> contracts;
 
     private List<RateLimit> rateLimits;
 
@@ -51,6 +54,14 @@ public class BrokerInfo {
         this.symbols = symbols;
     }
 
+    public List<ContractSymbol> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<ContractSymbol> contracts) {
+        this.contracts = contracts;
+    }
+
     public List<RateLimit> getRateLimits() {
         return rateLimits;
     }
@@ -67,6 +78,7 @@ public class BrokerInfo {
                 .append("brokerFilters", brokerFilters)
                 .append("rateLimits", rateLimits)
                 .append("symbols", symbols)
+                .append("contracts", contracts)
                 .toString();
     }
 
