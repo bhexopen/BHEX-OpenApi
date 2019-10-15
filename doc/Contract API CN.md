@@ -14,7 +14,7 @@ Broker Open API的地址请见[这里](endpoint.md)
 
 ### **Request Url:**
 ```bash
-get /brokerInfo
+GET /openapi/v1/brokerInfo
 ```
 
 ### **Parameters：**
@@ -166,7 +166,7 @@ get /brokerInfo
 
 ### **Request Url:**
 ```bash
-GET /contract/insurance
+GET /openapi/contract/v1/insurance
 ```
 
 ### **Parameters：**
@@ -208,7 +208,7 @@ GET /contract/insurance
 
 ### **Request Url:**
 ```bash
-GET /quote/v1/contract/index
+GET /openapi/quote/v1/contract/index
 ```
 ### **Parameters：**
 名称|类型|是否强制|默认|描述
@@ -248,7 +248,7 @@ symbol|string|`NO`||标的指数名称。如果这个没有发送，所有标的
 
 ### **Request Url:**
 ```bash
-GET /contract/fundingRate
+GET /openapi/contract/v1/fundingRate
 ```
 
 ### **Parameters：**
@@ -296,7 +296,7 @@ GET /contract/fundingRate
 
 ### **Request Url:**
 ```
-GET /quote/v1/contract/depth
+GET /openapi/quote/v1/contract/depth
 ```
 
 ### **Parameters:**
@@ -366,7 +366,7 @@ GET /quote/v1/contract/depth
 
 ### **Request URL:**
 ```
-GET /quote/v1/contract/trades
+GET /openapi/quote/v1/contract/trades
 ```
 ### **Parameters：**
 名称|类型|是否强制|默认|描述
@@ -406,7 +406,7 @@ GET /quote/v1/contract/trades
 
 ### **Request URL:**
 ```
-GET /quote/v1/contract/klines
+GET /openapi/quote/v1/contract/klines
 ```
 
 ### **Parameters：**
@@ -468,7 +468,7 @@ GET /quote/v1/contract/klines
 
 ### **Request URL:**
 ```bash
-POST /openapi/contract/order
+POST /openapi/contract/v1/order
 ```
 
 ### **Parameters：**
@@ -547,7 +547,7 @@ POST /openapi/contract/order
 
 ### **Request Url:**
 ```bash
-DELETE /openapi/contract/order/cancel
+DELETE /openapi/contract/v1/order/cancel
 ```
 
 ### **Parameter:**
@@ -624,7 +624,7 @@ DELETE /openapi/contract/order/cancel
 
 ### **Request Url:**
 ```bash
-DELETE /openapi/contract/order/batchCancel
+DELETE /openapi/contract/v1/order/batchCancel
 ```
 ### **Parameter:**
 
@@ -658,7 +658,7 @@ DELETE /openapi/contract/order/batchCancel
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/openOrders
+GET /openapi/contract/v1/openOrders
 ```
 
 ### **Parameters:**
@@ -736,7 +736,7 @@ Retrieves history of orders that have been partially or fully filled or canceled
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/historyOrders
+GET /openapi/contract/v1/historyOrders
 ```
 
 ### **Parameters:**
@@ -813,7 +813,7 @@ If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent 
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/myTrades
+GET /openapi/contract/v1/myTrades
 ```
 
 ### **Parameters:**
@@ -870,7 +870,7 @@ GET /openapi/contract/myTrades
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/positions
+GET /openapi/contract/v1/positions
 ```
 
 ### **Parameters:**
@@ -929,7 +929,7 @@ GET /openapi/contract/positions
 
 ### **Request Url:**
 ```bash
-GET  /openapi/contract/account
+GET  /openapi/contract/v1/account
 ```
 
 ### **Parameters:**
@@ -965,7 +965,7 @@ None
 
 ### **Request Url:**
 ```bash
-POST  /openapi/contract/modifyMargin
+POST  /openapi/contract/v1/modifyMargin
 ```
 
 ### **Parameters:**
@@ -982,11 +982,11 @@ POST  /openapi/contract/modifyMargin
 ------------ | ------------ | ------------ | ------------
 `symbol`|string|`BTC-PERP-REV`|合约名称
 `margin`|float|`12.3`|更新后的仓位保证金
+`timestamp`|long|`1541161088303`|更新时间戳
 
 ### **Example:**
 ```js
 {
-  'message': 'success',
   'symbol':'BTC-PERP-REV',
   'margin': 15,
   'timestamp': 1541161088303
@@ -1003,7 +1003,7 @@ you to be signed.
 
 ### **Request Url:**
 ```bash
-POST  /openapi/transfer
+POST  /openapi/v1/transfer
 ```
 
 ### **Parameters:**

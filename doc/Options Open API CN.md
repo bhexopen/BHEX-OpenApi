@@ -14,7 +14,7 @@ Broker Open API的地址请见[这里](endpoint.md)
 
 ### **Request Url:**
 ```bash
-get /brokerInfo
+GET /openapi/v1/brokerInfo
 ```
 
 ### **Parameters:**
@@ -106,7 +106,7 @@ None
 
 ### **Request URL:**
 ```
-GET /getOptions
+GET /openapi/v1/getOptions
 ```
 
 ### **Parameters：**
@@ -193,7 +193,7 @@ None
 
 ### **Request Url:**
 ```
-GET /quote/v1/option/depth
+GET /openapi/quote/v1/option/depth
 ```
 
 ### **Parameters:**
@@ -266,7 +266,7 @@ GET /quote/v1/option/depth
 
 ### **Request URL:**
 ```
-GET /quote/v1/option/trades
+GET /openapi/quote/v1/option/trades
 ```
 ### **Parameters：**
 名称|类型|是否强制|默认|描述
@@ -305,7 +305,7 @@ GET /quote/v1/option/trades
 
 ### **Request URL:**
 ```
-GET /quote/v1/option/klines
+GET /openapi/quote/v1/option/klines
 ```
 
 ### **Parameters：**
@@ -363,7 +363,7 @@ GET /quote/v1/option/klines
 
 ### **Request URL:**
 ```bash
-POST /openapi/option/order
+POST /openapi/option/v1/order
 ```
 
 ### **Parameters：**
@@ -437,7 +437,7 @@ POST /openapi/option/order
 
 ### **Request Url:**
 ```bash
-DELETE /openapi/option/order/cancel
+DELETE /openapi/option/v1/order/cancel
 ```
 
 ### **Parameter:**
@@ -506,7 +506,7 @@ DELETE /openapi/option/order/cancel
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/openOrders
+GET /openapi/option/v1/openOrders
 ```
 
 ### **Parameters:**
@@ -580,7 +580,7 @@ GET /openapi/option/openOrders
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/positions
+GET /openapi/option/v1/positions
 ```
 
 ### **Parameters:**
@@ -636,7 +636,7 @@ GET /openapi/option/positions
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/historyOrders
+GET /openapi/option/v1/historyOrders
 ```
 
 ### **Parameters:**
@@ -708,7 +708,7 @@ Parameter|type|required|default|description
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/myTrades
+GET /openapi/option/v1/myTrades
 ```
 
 ### **Parameters:**
@@ -763,7 +763,7 @@ Parameter|type|required|default|description
 
 ### **Request Url:**
 ```bash
-GET  /openapi/option/settlements
+GET  /openapi/option/v1/settlements
 ```
 ### **Parameters:**
 None
@@ -810,7 +810,7 @@ None
 
 ### **Request Url:**
 ```bash
-GET  /openapi/option/account
+GET  /openapi/option/v1/account
 ```
 
 ### **Parameters:**

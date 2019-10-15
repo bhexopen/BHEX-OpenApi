@@ -14,7 +14,7 @@ Current broker trading rules and symbol information.
 
 ### **Request Url:**
 ```bash
-get /brokerInfo
+GET /openapi/v1/brokerInfo
 ```
 
 ### **Parameters:**
@@ -105,7 +105,7 @@ Retrieves available trading and expired options. Expired options will be returne
 
 ### **Request URL:**
 ```
-GET /getOptions
+GET /openapi/v1/getOptions
 ```
 
 ### **Parameters：**
@@ -152,7 +152,7 @@ Retrieves the current index price and EDP. This API endpoint does not take any P
 
 ### **Request URL:**
 ```
-GET /quote/v1/option/index
+GET /openapi/quote/v1/option/index
 ```
 
 ### **Parameters:**
@@ -193,7 +193,7 @@ Limit|Weight
 
 ### **Request Url:**
 ```
-GET /quote/v1/option/depth
+GET /openapi/quote/v1/option/depth
 ```
 
 ### **Parameters:**
@@ -263,7 +263,7 @@ Retrieve the latest trades that have occurred for a specific option.
 
 ### **Request URL:**
 ```
-GET /quote/v1/option/trades
+GET /openapi/quote/v1/option/trades
 ```
 ### **Parameters：**
 Parameter|type|required|default|description
@@ -303,7 +303,7 @@ Retrieves the kline information (open, high, trade volume, etc.) for a specific 
 
 ### **Request URL:**
 ```
-GET /quote/v1/option/klines
+GET /openapi/quote/v1/option/klines
 ```
 
 ### **Parameters：**
@@ -364,7 +364,7 @@ Places a buy order for an option. This API endpoint requires your request to be 
 
 ### **Request URL:**
 ```bash
-POST /openapi/option/order
+POST /openapi/openapi/option/order
 ```
 
 ### **Parameters：**
@@ -436,7 +436,7 @@ Cancels an order, specified by `orderId` or `clientOrderId`. This API endpoint r
 
 ### **Request Url:**
 ```bash
-DELETE /openapi/option/order/cancel
+DELETE /openapi/option/v1/order/cancel
 ```
 
 ### **Parameter:**
@@ -505,7 +505,7 @@ Retrieves open orders. This API endpoint requires your request to be signed.
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/openOrders
+GET /openapi/option/v1/openOrders
 ```
 
 ### **Parameters:**
@@ -579,7 +579,7 @@ Retrieves current positions. This API endpoint requires your request to be signe
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/positions
+GET /openapi/option/v1/positions
 ```
 
 ### **Parameters:**
@@ -634,7 +634,7 @@ Retrieves history of orders that have been partially or fully filled or canceled
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/historyOrders
+GET /openapi/option/v1/historyOrders
 ```
 
 ### **Parameters:**
@@ -705,7 +705,7 @@ Retrieve the trade history of the account. This API endpoint requires your reque
 
 ### **Request Url:**
 ```bash
-GET /openapi/option/myTrades
+GET /openapi/option/v1/myTrades
 ```
 
 ### **Parameters:**
@@ -760,7 +760,7 @@ Retrieves settlement events that have affected your account. This API endpoint r
 
 ### **Request Url:**
 ```bash
-GET  /openapi/option/settlements
+GET  /openapi/option/v1/settlements
 ```
 ### **Parameters:**
 
@@ -809,7 +809,7 @@ you to be signed.
 
 ### **Request Url:**
 ```bash
-GET  /openapi/option/account
+GET  /openapi/option/v1/account
 ```
 
 ### **Parameters:**

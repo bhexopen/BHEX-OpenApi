@@ -13,7 +13,7 @@ Current broker trading rules and symbol information.
 
 ### **Request Url:**
 ```bash
-get /brokerInfo
+GET /openapi/v1/brokerInfo
 ```
 
 ### **Parameters：**
@@ -165,7 +165,7 @@ Get current insurance funding.
 
 ### **Request Url:**
 ```bash
-GET /contract/insurance
+GET /openapi/contract/v1/insurance
 ```
 
 ### **Parameters：**
@@ -207,7 +207,7 @@ Underlying asset index price.
 
 ### **Request Url:**
 ```bash
-GET /quote/v1/contract/index
+GET /openapi/quote/v1/contract/index
 ```
 ### **Parameters：**
 name|type|required|default|description
@@ -248,7 +248,7 @@ Get current funding rate (*historical in process*)
 
 ### **Request Url:**
 ```bash
-GET /contract/fundingRate
+GET /openapi/contract/v1/fundingRate
 ```
 
 ### **Parameters：**
@@ -300,7 +300,7 @@ Limit|Weight
 
 ### **Request Url:**
 ```
-GET /quote/v1/contract/depth
+GET /openapi/quote/v1/contract/depth
 ```
 
 ### **Parameters:**
@@ -370,7 +370,7 @@ Retrieve the latest trades that have occurred for a specific contract.
 
 ### **Request URL:**
 ```
-GET /quote/v1/contract/trades
+GET /openapi/quote/v1/contract/trades
 ```
 ### **Parameters：**
 Parameter|type|required|default|description
@@ -410,7 +410,7 @@ Retrieves the kline information (open, high, trade volume, etc.) for a specific 
 
 ### **Request URL:**
 ```
-GET /quote/v1/contract/klines
+GET /openapi/quote/v1/contract/klines
 ```
 
 ### **Parameters：**
@@ -471,7 +471,7 @@ Places order for a contract. This API endpoint requires your request to be signe
 
 ### **Request URL:**
 ```bash
-POST /openapi/contract/order
+POST /openapi/contract/v1/order
 ```
 
 ### **Parameters：**
@@ -550,7 +550,7 @@ Cancels an order, specified by `orderId` or `clientOrderId`. This API endpoint r
 
 ### **Request Url:**
 ```bash
-DELETE /openapi/contract/order/cancel
+DELETE /openapi/contract/v1/order/cancel
 ```
 
 ### **Parameter:**
@@ -627,7 +627,7 @@ Cancel orders en masse. (**PENDING: batch cancel for STOP orders**)
 
 ### **Request Url:**
 ```bash
-DELETE /openapi/contract/order/batchCancel
+DELETE /openapi/contract/v1/order/batchCancel
 ```
 ### **Parameter:**
 
@@ -661,7 +661,7 @@ Retrieves open orders. This API endpoint requires your request to be signed.
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/openOrders
+GET /openapi/contract/v1/openOrders
 ```
 
 ### **Parameters:**
@@ -732,7 +732,7 @@ Retrieves history of orders that have been partially or fully filled or canceled
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/historyOrders
+GET /openapi/contract/v1/historyOrders
 ```
 
 ### **Parameters:**
@@ -802,7 +802,7 @@ Retrieve the trade history of the account. This API endpoint requires your reque
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/myTrades
+GET /openapi/contract/v1/myTrades
 ```
 
 ### **Parameters:**
@@ -859,7 +859,7 @@ Retrieves current positions. This API endpoint requires your request to be signe
 
 ### **Request Url:**
 ```bash
-GET /openapi/contract/positions
+GET /openapi/contract/v1/positions
 ```
 
 ### **Parameters:**
@@ -919,7 +919,7 @@ you to be signed.
 
 ### **Request Url:**
 ```bash
-GET  /openapi/contract/account
+GET  /openapi/contract/v1/account
 ```
 
 ### **Parameters:**
@@ -955,7 +955,7 @@ Modify margin for a specific symbol. This endpoint requires your position to be 
 
 ### **Request Url:**
 ```bash
-POST  /openapi/contract/modifyMargin
+POST  /openapi/contract/v1/modifyMargin
 ```
 
 ### **Parameters:**
@@ -972,11 +972,11 @@ Name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `symbol`|string|`BTC-PERP-REV`|The name of the contract.
 `margin`|float|`12.3`|Updated margin for the symbol.
+`timestamp`|long|`1541161088303`|Updated timestamp
 
 ### **Example:**
 ```js
 {
-  'message': 'success',
   'symbol':'BTC-PERP-REV',
   'margin': 15,
   'timestamp': 1541161088303
@@ -993,7 +993,7 @@ you to be signed.
 
 ### **Request Url:**
 ```bash
-POST  /openapi/transfer
+POST  /openapi/v1/transfer
 ```
 
 ### **Parameters:**
