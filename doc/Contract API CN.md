@@ -53,6 +53,7 @@ GET /openapi/v1/brokerInfo
 `index`|string|`BTCUSDT`|标的指数的名称。标的指数实时价格可在`index`端点访问得到。比如`BTC-PERP-REV`使用`BTCUSDT`为标的指数，那么可以在`index`端点寻找`BTCUSDT`的实时价格。
 `contractMultiplier`|string|`true`|合约的乘数。
 `icebergAllowed`|string|`false`|是否支持冰山订单。
+`underlying`|string|`BTC`|标的名称
 
 
 在 `contracts`的`filters`信息组里:
@@ -511,7 +512,7 @@ POST /openapi/contract/v1/order
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
 `fees`|||订单的手续费
 
 ### **Example:**
@@ -579,7 +580,7 @@ DELETE /openapi/contract/v1/order/cancel
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）。该端点返回的订单状态都是`CANCELED`
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
 `fees`|||订单的手续费
 
 在`fees`信息组里:
@@ -690,7 +691,7 @@ GET /openapi/contract/v1/openOrders
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
 `fees`|||订单的手续费
 
 在`fees`信息组里:
@@ -768,7 +769,7 @@ If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent 
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
 `fees`|||订单的手续费
 
 在`fees`信息组里:
@@ -1038,11 +1039,11 @@ A confirmation message will be returned.
 
 `BUY_OPEN`: 开多仓
 
-`BUY_CLOSE`: 平多仓
+`BUY_CLOSE`: 平空仓
 
 `SELL_OPEN`: 开空仓
 
-`SELL_CLOSE`: 平空仓
+`SELL_CLOSE`: 平多仓
 
 ### `priceType`
 

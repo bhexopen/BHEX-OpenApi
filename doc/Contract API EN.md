@@ -52,6 +52,7 @@ name|type|example|description
 `index`|string|`BTCUSDT`|Index symbol of the underlying asset. Index price can be accessed at the `index` endpoint. For instance, `BTC-PERP-REV` uses `BTCUSDT` for index price.
 `contractMultiplier`|string|`true`|The multiplier of contract.
 `icebergAllowed`|string|`false`|Whether iceberg orders are allowed.
+`underlying`|string|`BTC`|name of the underlying.
 
 
 For `filters` in `contracts` field:
@@ -514,7 +515,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`
 `fees`|||Fees incurred for this order.
 
 ### **Example:**
@@ -582,7 +583,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY_OPEN`|Direction of the order. Possible values include `BUY_OPEN`, `BUY_CLOSE`, `SELL_OPEN` and `SELL_CLOSE`
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`
 `fees`|||Fees incurred for this order.
 
 In the `fees` field:
@@ -693,7 +694,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY_OPEN`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`.
 `fees`|||Fees incurred for this order.
 
 ### **Example:**
@@ -764,7 +765,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY_OPEN`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`.
 `fees`|||Fees incurred for this order.
 
 ### **Example:**
@@ -1028,11 +1029,11 @@ The side of the trade.
 
 `BUY_OPEN`: open a long position.
 
-`BUY_CLOSE`: close a long position.
+`BUY_CLOSE`: close a short position.
 
 `SELL_OPEN`: open a short position.
 
-`SELL_CLOSE`: close a short position.
+`SELL_CLOSE`: close a long position.
 
 ### `priceType`
 
