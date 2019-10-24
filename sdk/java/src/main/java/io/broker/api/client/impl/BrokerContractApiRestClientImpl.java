@@ -3,6 +3,12 @@ package io.broker.api.client.impl;
 import io.broker.api.client.BrokerContractApiRestClient;
 import io.broker.api.client.domain.contract.*;
 import io.broker.api.client.domain.contract.request.*;
+import io.broker.api.client.domain.general.BrokerInfo;
+import io.broker.api.client.domain.general.TradeType;
+import io.broker.api.client.domain.market.Candlestick;
+import io.broker.api.client.domain.market.CandlestickInterval;
+import io.broker.api.client.domain.market.OrderBook;
+import io.broker.api.client.domain.market.TradeHistoryItem;
 import io.broker.api.client.service.BrokerContractApiService;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,6 +29,11 @@ public class BrokerContractApiRestClientImpl implements BrokerContractApiRestCli
 
     public BrokerContractApiRestClientImpl(String baseUrl, String apiKey, String secret) {
         brokerContractApiService = createService(baseUrl, BrokerContractApiService.class, apiKey, secret);
+    }
+
+    @Override
+    public BrokerInfo getBrokerInfo(TradeType type) {
+        return executeSync(brokerContractApiService.getBrokerInfo(type == null ? "" : type.getValue()));
     }
 
     @Override
@@ -115,5 +126,21 @@ public class BrokerContractApiRestClientImpl implements BrokerContractApiRestCli
     @Override
     public Map<String, ContractAccountResult> getContractAccount() {
         return executeSync(brokerContractApiService.getContractAccount());
+    }
+
+    @Override
+    public OrderBook getContractOrderBook(String symbol, Integer limit) {
+        return executeSync(brokerContractApiService.getOrderBook(symbol, limit));
+    }
+
+    @Override
+    public List<TradeHistoryItem> getContractTrades(String symbol, Integer limit) {
+        return executeSync(brokerContractApiService.getTrades(symbol, limit));
+    }
+
+    @Override
+    public List<Candlestick> getContractCandlestickBars(String symbol, CandlestickInterval interval, Integer limit, Long to) {
+        return executeSync(brokerContractApiService.getCandlestickBars(
+                symbol, interval == null ? "" : interval.getIntervalId(), limit, to));
     }
 }

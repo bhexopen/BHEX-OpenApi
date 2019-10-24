@@ -8,11 +8,6 @@ import lombok.Data;
 public class ModifyMarginResult {
 
     /**
-     * The message response of the cancel request.
-     */
-    private String message;
-
-    /**
      * The timestamp when the response is returned.
      */
     private Long timestamp;

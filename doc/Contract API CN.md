@@ -53,7 +53,6 @@ GET /openapi/v1/brokerInfo
 `index`|string|`BTCUSDT`|标的指数的名称。标的指数实时价格可在`index`端点访问得到。比如`BTC-PERP-REV`使用`BTCUSDT`为标的指数，那么可以在`index`端点寻找`BTCUSDT`的实时价格。
 `contractMultiplier`|string|`true`|合约的乘数。
 `icebergAllowed`|string|`false`|是否支持冰山订单。
-`underlying`|string|`BTC`|标的名称
 
 
 在 `contracts`的`filters`信息组里:
@@ -479,8 +478,8 @@ POST /openapi/contract/v1/order
 `side`|string|`YES`||下单方向，方向类型为`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`。
 `orderType`|string|`YES`||订单类型，支持订单类型为 `LIMIT`和`STOP`。
 `quantity`|float|`YES`||订单的合约数量。
-`leverage`|float|`YES`||订单的杠杆。
-`price`|float|`NO`. `LIMIT`订单 **强制需要** ||订单价格。
+`leverage`|float|`YES`.（\*\_CLOSE平仓单**不强制**）||订单的杠杆。
+`price`|float|`NO`. (`LIMIT`&`INPUT`)订单 **强制需要** ||订单价格。
 `priceType`|string|`NO`|`INPUT`|价格类型，支持的价格类型为`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`。
 `triggerPrice`|float|`NO`. `STOP` 订单 **强制需要** ||计划委托的触发价格。
 `timeInForce`|string|`NO`|`GTC`|`LIMIT`订单的时间指令（Time in Force），目前支持的类型为`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`。
@@ -512,7 +511,7 @@ POST /openapi/contract/v1/order
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
 `fees`|||订单的手续费
 
 ### **Example:**
@@ -580,7 +579,7 @@ DELETE /openapi/contract/v1/order/cancel
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）。该端点返回的订单状态都是`CANCELED`
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
 `fees`|||订单的手续费
 
 在`fees`信息组里:
@@ -691,7 +690,7 @@ GET /openapi/contract/v1/openOrders
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
 `fees`|||订单的手续费
 
 在`fees`信息组里:
@@ -769,7 +768,7 @@ If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent 
 `priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
 `side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
 `status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）
-`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`)
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
 `fees`|||订单的手续费
 
 在`fees`信息组里:
@@ -804,6 +803,82 @@ If `orderId` is set, it will get orders < that `orderId`. Otherwise most recent 
   },...
 ]
 ```
+
+## `getOrder`
+
+获取某个订单的详细信息
+
+### **Request Weight:**
+
+1
+
+### **Request Url:**
+```bash
+GET /openapi/contract/v1/getOrder
+```
+
+### **Parameters:**
+名称|类型|是否强制|默认|描述
+------------ | ------------ | ------------ | ------------ | --------
+`orderId`|integer|`NO`||订单ID
+`clientOrderId`|string|`NO`||用户定义的订单ID
+`orderType`|string|`YES`||订单类型（`LIMIT`和`STOP`）
+
+**注意：**` orderId` 或者 `clientOrderId` **必须发送其中之一**
+
+
+### **Response:**
+名称|类型|例子|描述
+------------ | ------------ | ------------ | ------------
+`time`|long|`1570759718825`|订单生成时的时间戳
+`updateTime`|long|`1551062936784`|订单上次更新的时间戳
+`orderId`|integer|`469961015902208000`|订单ID
+`clientOrderId`|string|`213443`|用户定义的订单ID
+`symbol`|string|`BTC-PERP-REV`|合约名称
+`price`|float|`8200`|订单价格
+`leverage`|float|`4`|订单杠杆
+`origQty`|float|`1.01`|订单数量
+`executedQty`|float|`1.01`|订单已执行数量
+`avgPrice`|float|`4754.24`|平均交易价格
+`marginLocked`|float|`200`|该订单锁定的保证金。这包括实际需要的保证金外加开仓和平仓所需的费用。
+`orderType`|string|`YES`|订单类型（`LIMIT`和`STOP`）
+`priceType`|string|`INPUT`|价格类型（`INPUT`、`OPPONENT`、`QUEUE`、`OVER`、`MARKET`）
+`side`|string|`BUY`|订单方向（`BUY_OPEN`、`SELL_OPEN`、`BUY_CLOSE`、`SELL_CLOSE`）
+`status`|string|`NEW`|订单状态（`NEW`、`PARTIALLY_FILLED`、`FILLED`、`CANCELED`、`REJECTED`）
+`timeInForce`|string|`GTC`|时效单（Time in Force)类型(`GTC`、`FOK`、`IOC`、`LIMIT_MAKER`)
+`fees`|||订单的手续费
+
+在`fees`信息组里:
+
+名称|类型|例子|描述
+------------ | ------------ | ------------ | ------------
+`feeToken`|string|`USDT`|手续费计价类型
+`fee`|float|`0`|实际手续费
+
+### **Example:**
+
+```js
+{
+  'time': '1570760254539',
+  'updateTime': '0',
+  'orderId': '469965509788581888',
+  'clientOrderId': '1570760253946',
+  'symbol': 'BTC-PERP-REV',
+  'price': '8502.34',
+  'leverage': '20',
+  'origQty': '222',
+  'executedQty': '0',
+  'avgPrice': '0',
+  'marginLocked': '0.00130552',
+  'orderType': 'LIMIT',
+  'side': 'BUY_OPEN',
+  'fees': [],
+  'timeInForce': 'GTC',
+  'status': 'NEW',
+  'priceType': 'INPUT'
+}
+```
+
 
 ## `myTrades`
 返回账户的成交历史，这个API端点需要请求签名。
@@ -1039,11 +1114,11 @@ A confirmation message will be returned.
 
 `BUY_OPEN`: 开多仓
 
-`BUY_CLOSE`: 平空仓
+`SELL_CLOSE`: 平多仓
 
 `SELL_OPEN`: 开空仓
 
-`SELL_CLOSE`: 平多仓
+`BUY_CLOSE`: 平空仓
 
 ### `priceType`
 

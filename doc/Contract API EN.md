@@ -52,7 +52,6 @@ name|type|example|description
 `index`|string|`BTCUSDT`|Index symbol of the underlying asset. Index price can be accessed at the `index` endpoint. For instance, `BTC-PERP-REV` uses `BTCUSDT` for index price.
 `contractMultiplier`|string|`true`|The multiplier of contract.
 `icebergAllowed`|string|`false`|Whether iceberg orders are allowed.
-`underlying`|string|`BTC`|name of the underlying.
 
 
 For `filters` in `contracts` field:
@@ -482,8 +481,8 @@ Parameter|type|required|default|description
 `side`|string|`YES`||Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `orderType`|string|`YES`||The order type, possible types: `LIMIT`, `STOP`
 `quantity`|float|`YES`||The number of contracts to buy.
-`leverage`|float|`YES`||Leverage of the order.
-`price`|float|`NO`. **REQUIRED** for `LIMIT` orders||Price of the order
+`leverage`|float|`YES`(**NOT REQUIRED** for \*\_CLOSE" orders)||Leverage of the order.
+`price`|float|`NO`. **REQUIRED** for (`LIMIT` & `INPUT`) orders||Price of the order
 `priceType`|string|`NO`|`INPUT`|The price type, possible types include: `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `triggerPrice`|float|`NO`. **REQUIRED** for `STOP` orders.||The price at which the trigger order will be executed.
 `timeInForce`|string|`NO`|`GTC`|Time in force for `LIMIT` orders. Possible values include `GTC`,`FOK`,`IOC`,`LIMIT_MAKER`.
@@ -515,7 +514,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`
 `fees`|||Fees incurred for this order.
 
 ### **Example:**
@@ -583,7 +582,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY_OPEN`|Direction of the order. Possible values include `BUY_OPEN`, `BUY_CLOSE`, `SELL_OPEN` and `SELL_CLOSE`
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`
 `fees`|||Fees incurred for this order.
 
 In the `fees` field:
@@ -694,7 +693,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY_OPEN`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`.
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
 `fees`|||Fees incurred for this order.
 
 ### **Example:**
@@ -765,7 +764,7 @@ Name|type|example|description
 `priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
 `side`|string|`BUY_OPEN`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
-`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`.
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
 `fees`|||Fees incurred for this order.
 
 ### **Example:**
@@ -792,6 +791,72 @@ Name|type|example|description
     'priceType': 'INPUT'
   },...
 ]
+```
+
+## `getOrder`
+Get details on a specific order, regardless of order state.
+
+### **Request Weight:**
+
+1
+
+### **Request Url:**
+```bash
+GET /openapi/contract/v1/getOrder
+```
+
+### **Parameters:**
+Parameter|type|required|default|description
+------------ | ------------ | ------------ | ------------ | -------
+`orderId`|integer|`NO`|| Order ID.
+`clientOrderId`|string|`NO`||Unique client customized ID of the order.
+`orderType`|string|`YES`||The order type, possible types: `LIMIT`, `STOP`
+
+**Either `orderId` or `clientOrderId` must be sent**
+
+### **Response:**
+Name|type|example|description
+------------ | ------------ | ------------ | ------------
+`time`|long|`1551062936784`|Timestamp when the order is created.
+`updateTime`|long|`1551062936784`|Last time this order was updated
+`orderId`|integer|`891`|ID of the order.
+`clientOrderId`|string|`213443`|A unique ID of the order.
+`symbol`|string|`BTC-PERP-REV`|Name of the contracts.
+`price`|float|`4765.29`|Price of the order.
+`leverage`|float|`4`|Leverage of the order.
+`origQty`|float|`1.01`|Quantity ordered
+`executedQty`|float|`1.01`|Quantity of orders that has been executed
+`avgPrice`|float|`4754.24`|Average price of filled orders.
+`marginLocked`|float|`200`|Amount of margin locked for this order. This includes the actually margin needed plus fees to open and close the position.
+`orderType`|string|`LIMIT`|The order type, possible types: `LIMIT` and `STOP`.
+`priceType`|string|`INPUT`|The price type. Possible values include `INPUT`, `OPPONENT`, `QUEUE`, `OVER`, and `MARKET`.
+`side`|string|`BUY_OPEN`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
+`status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`, and `LIMIT_MAKER`.
+`fees`|||Fees incurred for this order.
+
+### **Example:**
+
+```js
+{
+  'time': '1570760254539',
+  'updateTime': '0',
+  'orderId': '469965509788581888',
+  'clientOrderId': '1570760253946',
+  'symbol': 'BTC-PERP-REV',
+  'price': '8502.34',
+  'leverage': '20',
+  'origQty': '222',
+  'executedQty': '0',
+  'avgPrice': '0',
+  'marginLocked': '0.00130552',
+  'orderType': 'LIMIT',
+  'side': 'BUY_OPEN',
+  'fees': [],
+  'timeInForce': 'GTC',
+  'status': 'NEW',
+  'priceType': 'INPUT'
+}
 ```
 
 ## `myTrades`
@@ -1029,11 +1094,11 @@ The side of the trade.
 
 `BUY_OPEN`: open a long position.
 
-`BUY_CLOSE`: close a short position.
+`SELL_CLOSE`: close a long position.
 
 `SELL_OPEN`: open a short position.
 
-`SELL_CLOSE`: close a long position.
+`BUY_CLOSE`: close a short position.
 
 ### `priceType`
 

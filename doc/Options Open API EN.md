@@ -696,6 +696,71 @@ Name|type|example|description
 }
 ```
 
+## `getOrder`
+Get details on a specific order, regardless of order state.
+
+### **Request Weight:**
+
+1
+
+### **Request Url:**
+```bash
+GET /openapi/option/v1/getOrder
+```
+
+### **Parameters:**
+Parameter|type|required|default|description
+------------ | ------------ | ------------ | ------------ | -------
+`orderId`|integer|`NO`|| Order ID. **Either `orderId` or `clientOrderId` must be sent**
+`clientOrderId`|string|`NO`||Unique client customized ID of the order. **Either `orderId` or `clientOrderId` must be sent**
+
+### **Response:**
+
+Name|type|example|description
+------------ | ------------ | ------------ | ------------
+`time`|long|`1541161088303`|Timestamp when order request is submitted (ms).
+`updateTime`|long|`1551062936784`|Last time this order was updated
+`orderId`|integer|`713637304`|ID of the order
+`clientOrderId`|string|`213443`|Unique ID of the order.
+`symbol`|string|`BTC0412CS4200`|Name of the option
+`price`|float||Price of the order.
+`origQty`|float|`1.01`|Quantity ordered
+`executedQty`|float|`1.01`|Quantity of orders that has been executed
+`avgPrice`|float|`44.24`|Average price of filled orders.
+`type`|string|`LIMIT`|The order type, possible types: `LIMIT`, `MARKET`
+`side`|string|`BUY`|Direction of the order. Possible values include `BUY` or `SELL`
+`status`|string|`NEW`|The state of the order.Possible values include `NEW`, `PARTIALLY_FILLED`, `FILLED`, `CANCELED`, and `REJECTED`.
+`timeInForce`|string|`GTC`|Time in force. Possible values include `GTC`,`FOK`,`IOC`.
+`fees`|||Fees incurred for this order.
+
+In the `fees` field:
+
+Name|type|example|description
+------------ | ------------ | ------------ | ------------
+`feeToken`|string|`USDT`|Fee token kind.
+`fee`|float|`0`|Actual transaction fees occurred.
+
+### **Example:**
+
+```js
+{
+  'time':1541161088303,
+  'updateTime': 1541161088303,
+  'orderId': 28,
+  'clientOrderId': 213443,
+  'symbol': 'BTC0412CS4200',
+  'price': 102.32,
+  'origQty': 21.3,
+  'executedQty': 10.2,
+  'avgPrice': 3121.13
+  'type': 'LIMIT',
+  'side': 'SELL',
+  'status': 'NEW',
+  'timeInForce': 'GTC',
+  'fees':[]
+}
+```
+
 ## `myTrades`
 Retrieve the trade history of the account. This API endpoint requires your request to be signed.
 

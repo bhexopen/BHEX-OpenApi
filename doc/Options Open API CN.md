@@ -698,6 +698,74 @@ Parameter|type|required|default|description
 }
 ```
 
+## `getOrder`
+
+获取某个订单的详细信息
+
+### **Request Weight:**
+
+1
+
+### **Request Url:**
+```bash
+GET /openapi/option/v1/getOrder
+```
+
+### **Parameters:**
+名称|类型|是否强制|默认|描述
+------------ | ------------ | ------------ | ------------ | --------
+`orderId`|integer|`NO`||订单ID
+`clientOrderId`|string|`NO`||用户定义的订单ID
+
+**注意：**` orderId` 或者 `clientOrderId` **必须发送其中之一**
+
+
+### **Response:**
+名称|类型|例子|描述
+------------ | ------------ | ------------ | ------------
+`time`|long|`1551062936784`|订单创建时的时间戳，毫秒（ms）
+`updateTime`|long|`1551062936784`|上次订单更新时间，毫秒（ms)
+`orderId`|integer|`891`|订单ID（系统生成）
+`clientOrderId`|integer|`213443`|订单ID（自己发送的）
+`symbol`|string|`BTC0412CS4200`|期权名称
+`price`|float|`4765.29`|订单价格
+`origQty`|float|`1.01`|订单数量
+`executedQty`|float|`1.01`|已经成交订单数量
+`avgPrice`|float|`4754.24`|订单已经成交的平均价格
+`type`|string|`LIMIT`|订单类型。可能出现的值只能为:`LIMIT`(限价)和`MARKET`（市价）
+`side`|string|`BUY`|订单方向。可能出现的值只能为：`BUY`（买入做多） 和 `SELL`（卖出做空）
+`status`|string|`NEW`|订单状态。可能出现的值为：`NEW`(新订单，无成交)、`PARTIALLY_FILLED`（部分成交）、`FILLED`（全部成交）、`CANCELED`（已取消）和`REJECTED`（订单被拒绝）.
+`timeInForce`|string|`GTC`|订单时间指令（Time in Force）。可能出现的值为：`GTC`（Good Till Canceled，一直有效），`FOK`（Fill or Kill，全部成交或者取消），`IOC`（Immediate or Cancel，立即成交或者取消）.
+`fees`|||订单产生的手续费
+
+在`fees`里:
+
+名称|类型|例子|描述
+------------ | ------------ | ------------ | ------------
+`feeToken`|string|`USDT`|手续费计价单位
+`fee`|float|`0`|实际费用值
+
+### **Example:**
+
+```js
+{
+  'time':1541161088303,
+  'updateTime': 1541161088303,
+  'orderId': 28,
+  'clientOrderId': 213443,
+  'symbol': 'BTC0412CS4200',
+  'price': 102.32,
+  'origQty': 21.3,
+  'executedQty': 10.2,
+  'avgPrice': 3121.13
+  'type': 'LIMIT',
+  'side': 'SELL',
+  'status': 'NEW',
+  'timeInForce': 'GTC',
+  'fees':[]
+}
+```
+
 ## `myTrades`
 
 获取当前账户的成交订单记录。这个API端点需要你的签名。
