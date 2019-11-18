@@ -3,6 +3,7 @@ logs/
 !.mvn/wrapper/maven-wrapper.jar
 
 sdk/python/setup.py
+doc/finance_support.md
 
 ### STS ###
 .apt_generated
