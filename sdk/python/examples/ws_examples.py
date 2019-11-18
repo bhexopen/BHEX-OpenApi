@@ -5,10 +5,10 @@ def handler(msg):
     print(msg)
 
 
-client = BrokerWss(api_key='',
-                   secret='',
-                   entry_point='',
-                   rest_entry_point='')
+entry_point = 'wss://wsapi.yourbroker.com/openapi/'  # input your broker websocket api url
+rest_entry_point = 'https://api.yourbroker.com/openapi/'  # input your broker api uri
+
+client = BrokerWss(entry_point, rest_entry_point, api_key='', secret='')
 
 client.subscribe_to_realtimes(symbol='BTCUSDT,ETHUSDT', callback=handler)
 

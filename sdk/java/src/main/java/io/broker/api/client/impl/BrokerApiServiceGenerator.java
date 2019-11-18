@@ -6,6 +6,7 @@ import io.broker.api.client.BrokerApiError;
 import io.broker.api.client.exception.BrokerApiException;
 import io.broker.api.client.security.AuthenticationInterceptor;
 import io.broker.api.client.service.BrokerApiService;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Generates a Broker API implementation based on @see {@link BrokerApiService}.
  */
+@Slf4j
 public class BrokerApiServiceGenerator {
     private static final OkHttpClient sharedClient = new OkHttpClient.Builder()
             .pingInterval(20, TimeUnit.SECONDS)
@@ -58,8 +60,12 @@ public class BrokerApiServiceGenerator {
             retrofitBuilder.client(sharedClient);
         } else {
             // `adaptedClient` will use its own interceptor, but share thread pool etc with the 'parent' client
-            AuthenticationInterceptor interceptor = new AuthenticationInterceptor(apiKey, secret);
-            OkHttpClient adaptedClient = sharedClient.newBuilder().addInterceptor(interceptor).build();
+            AuthenticationInterceptor authInterceptor = new AuthenticationInterceptor(apiKey, secret);
+            BrokerLoggingInterceptor loggingInterceptor = new BrokerLoggingInterceptor();
+            OkHttpClient adaptedClient = sharedClient.newBuilder()
+                    .addInterceptor(authInterceptor)
+                    .addInterceptor(loggingInterceptor)
+                    .build();
             retrofitBuilder.client(adaptedClient);
         }
 

@@ -42,6 +42,12 @@ public interface BrokerContractApiService {
     Call<BatchCancelOrderResult> batchCancelContractOrder(@Query("symbol") String symbol);
 
     @Headers(BrokerConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/openapi/contract/v1/getOrder")
+    Call<ContractOrderResult> getContractOrder(@Query("orderType") String orderType,
+                                               @Query("orderId") String orderId,
+                                               @Query("clientOrderId") String clientOrderId);
+
+    @Headers(BrokerConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/openapi/contract/v1/openOrders")
     Call<List<ContractOrderResult>> getContractOpenOrders(@Query("symbol") String symbol,
                                                           @Query("orderId") Long orderId,

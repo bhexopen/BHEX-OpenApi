@@ -49,6 +49,17 @@ public interface BrokerContractApiRestClient {
     BatchCancelOrderResult batchCancelContractOrder(BatchCancelOrderRequest request);
 
     /**
+     * Get contract order detail.
+     * include LIMIT and STOP orders
+     *
+     * @param orderType the order type.
+     * @param clientOrderId client unique id.
+     * @param orderId order id.
+     * @return order detail
+     */
+    ContractOrderResult getContractOrder(OrderType orderType, String clientOrderId, Long orderId);
+
+    /**
      * Get contract open orders.
      *
      * @param orderRequest open order request parameters

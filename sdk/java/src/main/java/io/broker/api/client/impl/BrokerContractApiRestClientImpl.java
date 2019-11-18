@@ -74,6 +74,14 @@ public class BrokerContractApiRestClientImpl implements BrokerContractApiRestCli
     }
 
     @Override
+    public ContractOrderResult getContractOrder(OrderType orderType, String clientOrderId, Long orderId) {
+        return executeSync(brokerContractApiService.getContractOrder(
+                orderType == null ? "" : orderType.name(),
+                orderId == null ? "" : orderId.toString(),
+                clientOrderId));
+    }
+
+    @Override
     public List<ContractOrderResult> getContractOpenOrders(ContractOpenOrderRequest orderRequest) {
         return executeSync(brokerContractApiService.getContractOpenOrders(
                 orderRequest.getSymbol(),

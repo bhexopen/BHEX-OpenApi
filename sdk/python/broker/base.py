@@ -8,7 +8,7 @@ import requests
 import six
 
 from broker.exceptions import BrokerApiException, BrokerRequestException
-from broker import user_agent
+from broker import user_agent, broker_log
 
 
 class Request(object):
@@ -16,7 +16,7 @@ class Request(object):
     API_VERSION = 'v1'
     QUOTE_API_VERSION = 'v1'
 
-    def __init__(self, api_key='', secret='', entry_point='', proxies=None):
+    def __init__(self, entry_point, api_key='', secret='', proxies=None):
 
         if not entry_point.endswith('/'):
             entry_point = entry_point + '/'
@@ -88,7 +88,17 @@ class Request(object):
             'User-Agent': user_agent
         }
 
+        broker_log.debug("Request method: [{}] url: [{}] headers: [{}] params: [{}]".format(
+            method, uri, kwargs['headers'], kwargs[date_type]))
+
+        begin_time = time.time()
         response = requests.request(method, uri, proxies=self.proxies, **kwargs)
+        end_time = time.time()
+
+        req_time = int((begin_time-end_time)*1000)
+        broker_log.debug("Response code: [{}] message: [{}] body: [{}] reqTime: [{}ms]".format(
+            method, uri, response.text, req_time))
+
         return self._handle_response(response)
 
     @classmethod

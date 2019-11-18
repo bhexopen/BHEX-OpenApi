@@ -3,13 +3,18 @@ import time
 from broker.client import BrokerClient
 
 if __name__ == '__main__':
+    from broker import broker_log
+
+    broker_log.setLevel(logging.DEBUG)
+    broker_log.addHandler(logging.StreamHandler())
 
     proxies = {
         "http": "",
         "https": "",
     }
 
-    b = BrokerClient(api_key='', secret='', proxies=proxies)
+    entry_point = ''  # input your broker api entry point
+    b = BrokerClient(entry_point, api_key='', secret='', proxies=proxies)
 
     print(b.time())
 

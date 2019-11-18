@@ -256,16 +256,22 @@ class BrokerContractClient(Request):
         }
         return self._delete('contract/order/cancel', signed=True, params=params, version=None)
 
-    def order_batch_cancel(self, symbols='', order_ids='', client_order_ids=''):
+    def order_batch_cancel(self, symbols):
         """
         Batch cancel contract order
         """
         params = {
             'symbol': isinstance(symbols, (list, tuple)) and ','.join(symbols) or symbols,
-            'orderIds': isinstance(order_ids, (list, tuple)) and ','.join(order_ids) or order_ids,
-            'clientOrderIds': isinstance(client_order_ids, (list, tuple)) and ','.join(client_order_ids) or client_order_ids,
         }
         return self._delete('contract/order/batchCancel', signed=True, params=params, version=None)
+
+    def get_order(self, order_type, order_id='', client_order_id=''):
+        params = {
+            'orderType': order_type,
+            'orderId': order_id,
+            'clientOrderId': client_order_id,
+        }
+        return self._get('contract/getOrder', signed=True, params=params, version=None)
 
     def open_orders(self, symbol='', order_id='', order_side='', order_type='', limit=20):
         """
@@ -370,12 +376,15 @@ class BrokerContractClient(Request):
         }
         return self._get('contract/fundingRate', params=params, version=None)
 
-    def index(self):
+    def index(self, symbol=''):
         """
         Get underlying index and EDP
         :return:
         """
-        return self._quote_get('contract/index')
+        params = {
+            'symbol': symbol
+        }
+        return self._quote_get('contract/index', params=params, version=None)
 
     def klines(self, symbol, interval='1m', start_time='', end_time='', limit=100):
         """

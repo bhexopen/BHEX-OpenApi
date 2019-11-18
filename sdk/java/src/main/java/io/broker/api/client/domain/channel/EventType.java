@@ -6,7 +6,9 @@ public enum EventType {
     CANCEL("cancel"),
     CANCEL_ALL("cancel_all"),
     ACCOUNT_INFO("outboundAccountInfo"),
-    EXECUTION_REPORT("executionReport"),;
+    EXECUTION_REPORT("executionReport"),
+    OPTION_EXECUTION_REPORT("optionExecutionReport"),
+    CONTRACT_EXECUTION_REPORT("contractExecutionReport");
 
     private String type;
 

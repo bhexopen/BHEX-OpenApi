@@ -5,13 +5,18 @@ from broker.client import BrokerOptionClient
 from broker.exceptions import BrokerRequestException, BrokerApiException
 
 if __name__ == '__main__':
+    from broker import broker_log
+
+    broker_log.setLevel(logging.DEBUG)
+    broker_log.addHandler(logging.StreamHandler())
 
     proxies = {
         "http": "",
         "https": "",
     }
 
-    b = BrokerOptionClient(api_key='', secret='', proxies=proxies, entry_point='')
+    entry_point = ''  # input your broker api entry point
+    b = BrokerOptionClient(entry_point, api_key='', secret='', proxies=proxies)
 
     try:
 

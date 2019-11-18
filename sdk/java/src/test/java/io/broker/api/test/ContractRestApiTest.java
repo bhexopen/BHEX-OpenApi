@@ -19,6 +19,8 @@ import java.util.UUID;
 public class ContractRestApiTest {
 
     public static void main(String[] args) {
+        System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "debug");
+
         BrokerApiClientFactory factory = BrokerApiClientFactory.newInstance(Constants.API_BASE_URL, Constants.ACCESS_KEY, Constants.SECRET_KEY);
         BrokerContractApiRestClient client = factory.newContractRestClient();
 
@@ -53,6 +55,10 @@ public class ContractRestApiTest {
                         .build()
         );
         System.out.println(openOrders);
+
+        System.out.println("\n ------get contract order info-----");
+        ContractOrderResult sOrderResult = client.getContractOrder(OrderType.LIMIT, "", 478799682544402176L);
+        System.out.println(sOrderResult);
 
         System.out.println("\n ------get contract history orders-----");
         List<ContractOrderResult> historyOrders = client.getContractHistoryOrders(
@@ -99,12 +105,13 @@ public class ContractRestApiTest {
         );
         System.out.println(positionResults);
 
+
         System.out.println("\n ------modify contract margin-----");
         ModifyMarginResult modifyMarginResult = client.modifyMargin(
                 ModifyMarginRequest.builder()
                         .symbol("BTC0808")
                         .side(PositionSide.LONG)
-                        .amount("0.001")
+                        .amount("0.01")
                         .build()
         );
         System.out.println(modifyMarginResult);

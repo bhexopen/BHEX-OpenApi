@@ -76,7 +76,7 @@ class BrokerClientFactory(WebSocketClientFactory, BrokerReconnectingClientFactor
 
 class BrokerSocketManager(threading.Thread):
 
-    def __init__(self, api_key='', secret='', entry_point='', auth=True, rest_entry_point=''):
+    def __init__(self, entry_point, rest_entry_point, api_key='', secret='', auth=True):
         threading.Thread.__init__(self)
         self.factories = {}
         self._conns = {}
@@ -87,7 +87,7 @@ class BrokerSocketManager(threading.Thread):
         self._listen_key = None
 
         if auth:
-            self._client = BrokerClient(api_key=self._api_key, secret=self._secret, entry_point=rest_entry_point) if api_key and secret else None
+            self._client = BrokerClient(rest_entry_point, api_key=self._api_key, secret=self._secret) if api_key and secret else None
 
         if not entry_point.endswith('/'):
             entry_point = entry_point + '/'

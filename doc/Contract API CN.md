@@ -1069,6 +1069,96 @@ POST  /openapi/contract/v1/modifyMargin
 }
 ```
 
+
+
+## `withdraw`
+
+按提币地址进行提币操作。
+
+### **Request Weight:**
+1
+
+### **Request Url:**
+```bash
+POST  /openapi/account/v1/withdraw
+```
+
+### **Parameters:**
+
+名称|类型|是否强制|默认|描述
+------------ | ------------ | ------------ | ------------ | -------
+`clientOrderId`|string|`YES`||客户端发起提币请求ID。
+`address`|string|`YES`||提币地址。
+`addressExt`|string|`NO`||EOS tag。
+`tokenId`|string|`YES`||tokenId。
+`withdrawQuantity`|string|`YES`||提币数量。
+`isQuick`|boolean|`YES`||true 加速提币 false 正常提币 矿工费不同
+
+### **Response:**
+
+名称|类型|例子|描述
+------------ | ------------ | ------------ | ------------
+`success`|boolean|true|
+`needBrokerAudit`|boolean|true|是否需要券商审核
+`orderId`|long|`423885103582776064`|提币成功订单id
+
+### **Example:**
+```js
+{
+    "status": 0,
+    "data": {
+        "success": true,
+        "needBrokerAudit": false, // 是否需要券商审核
+        "orderId": "423885103582776064" // 提币成功订单id
+    }
+}
+```
+
+
+
+## `withdrawDetail`
+
+按提币地址进行提币操作。
+
+### **Request Weight:**
+1
+
+### **Request Url:**
+```bash
+POST  /openapi/account/v1/withdraw
+```
+
+### **Parameters:**
+
+名称|类型|是否强制|默认|描述
+------------ | ------------ | ------------ | ------------ | -------
+`clientOrderId`|string|`YES`||客户端发起提币请求ID。
+`address`|string|`YES`||提币地址。
+`addressExt`|string|`NO`||EOS tag。
+`tokenId`|string|`YES`||tokenId。
+`withdrawQuantity`|string|`YES`||提币数量。
+`isQuick`|boolean|`YES`||true 加速提币 false 正常提币 矿工费不同
+
+### **Response:**
+
+名称|类型|例子|描述
+------------ | ------------ | ------------ | ------------
+`success`|boolean|true|
+`needBrokerAudit`|boolean|true|是否需要券商审核
+`orderId`|long|`423885103582776064`|提币成功订单id
+
+### **Example:**
+```js
+{
+    "status": 0,
+    "data": {
+        "success": true,
+        "needBrokerAudit": false, // 是否需要券商审核
+        "orderId": "423885103582776064" // 提币成功订单id
+    }
+}
+```
+
 <!-- ## `transfer` **(PENDING)**
 
 This endpoint is used to transfer funds across different accounts. This endpoint requires

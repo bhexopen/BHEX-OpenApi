@@ -10,6 +10,8 @@ Install
 pip install broker-client
 ```
 
+or download from github
+
 Usage
 -----
 
@@ -17,17 +19,17 @@ Usage
 
 Init broker client:
 ```python
-b = BrokerClient(api_key='', secret='', entry_point='')
+b = BrokerClient(entry_point='', api_key='', secret='')
 ```
 
 Init broker options client:
 ```python
-b = BrokerOptionClient(api_key='', secret='', entry_point='')
+b = BrokerOptionClient(entry_point='', api_key='', secret='')
 ```
 
 Init broker contract client:
 ```python
-b = BrokerContractClient(api_key='', secret='', entry_point='')
+b = BrokerContractClient(entry_point='', api_key='', secret='')
 ```
 
 Request with proxies:
@@ -38,7 +40,7 @@ proxies = {
   "https": "http://ip:port",
 }
 
-b = BrokerClient(api_key='', secret='', proxies=proxies, entry_point='')
+b = BrokerClient(entry_point='', api_key='', secret='', proxies=proxies)
 ```
 
 #### Web Socket
@@ -47,7 +49,7 @@ b = BrokerClient(api_key='', secret='', proxies=proxies, entry_point='')
 
 Init broker websocket client:
 ```python
-client = BrokerWss(api_key='', secret='', entry_point='', rest_entry_point='')
+client = BrokerWss(entry_point='', rest_entry_point='', api_key='', secret='')
 ```
 
 ##### Subscribe

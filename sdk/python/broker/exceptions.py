@@ -8,7 +8,8 @@ class BrokerApiException(Exception):
         try:
             json_res = response.json()
         except ValueError:
-            self.message = 'Invalid JSON error message from Broker: {}'.format(response.text)
+            self.message = 'Invalid JSON error message from Broker: {} http code: {}'.format(
+                response.text, response.status_code)
         else:
             self.code = json_res['code']
             self.message = json_res['msg']

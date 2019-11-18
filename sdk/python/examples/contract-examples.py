@@ -5,6 +5,10 @@ from broker.client import BrokerContractClient
 from broker.exceptions import BrokerRequestException, BrokerApiException
 
 if __name__ == '__main__':
+    from broker import broker_log
+
+    broker_log.setLevel(logging.DEBUG)
+    broker_log.addHandler(logging.StreamHandler())
 
     proxies = {
         "http": '',
@@ -13,7 +17,7 @@ if __name__ == '__main__':
 
     entry_point = ''  # enter your open api entry point
 
-    b = BrokerContractClient(api_key='', secret='', proxies=proxies, entry_point=entry_point)
+    b = BrokerContractClient(entry_point, api_key='', secret='', proxies=proxies)
 
     try:
         print(b.time())
@@ -36,6 +40,8 @@ if __name__ == '__main__':
         order_id = result['orderId']
 
         print(order_id)
+
+        print(b.get_order('LIMIT', order_id=order_id))
 
         print(b.order_cancel(order_id=order_id))
 
