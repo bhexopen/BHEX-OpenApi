@@ -1,3 +1,4 @@
+import logging
 import time
 
 from broker.client import BrokerClient

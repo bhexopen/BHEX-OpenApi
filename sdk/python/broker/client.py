@@ -346,7 +346,7 @@ class BrokerContractClient(Request):
             'side': order_side,
             'amount': amount
         }
-        return self._post('contract/modifyMargin', signed=True, params=params, version=None)
+        return self._post('contract/modifyMargin', signed=True, data=params, version=None)
 
     def get_contracts(self):
         """
