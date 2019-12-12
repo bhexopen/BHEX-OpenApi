@@ -52,6 +52,8 @@ public class Trade {
 
     private String orderId;
 
+    private String matchOrderId;
+
     public Long getId() {
         return id;
     }
@@ -134,6 +136,14 @@ public class Trade {
         this.orderId = orderId;
     }
 
+    public String getMatchOrderId() {
+        return matchOrderId;
+    }
+
+    public void setMatchOrderId(String matchOrderId) {
+        this.matchOrderId = matchOrderId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, BrokerConstants.TO_STRING_BUILDER_STYLE)
@@ -147,6 +157,7 @@ public class Trade {
                 .append("buyer", buyer)
                 .append("maker", maker)
                 .append("orderId", orderId)
+                .append("matchOrderId", matchOrderId)
                 .toString();
     }
 }

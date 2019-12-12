@@ -24,6 +24,11 @@ public class ContractMatchResult {
     private Long orderId;
 
     /**
+     * ID of the match order.
+     */
+    private Long matchOrderId;
+
+    /**
      * Name of the contract.
      */
     private String symbolId;

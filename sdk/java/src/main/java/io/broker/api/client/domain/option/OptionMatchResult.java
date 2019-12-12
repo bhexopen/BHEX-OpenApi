@@ -24,6 +24,12 @@ public class OptionMatchResult {
      * Order id.
      */
     private Long orderId;
+
+    /**
+     * Match order id.
+     */
+    private Long matchOrderId;
+
     /**
      * Account id.
      */

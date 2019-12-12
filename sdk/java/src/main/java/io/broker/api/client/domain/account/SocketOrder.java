@@ -47,6 +47,9 @@ public class SocketOrder {
     @JsonProperty("i")
     private Long orderId;
 
+    @JsonProperty("M")
+    private Long matchOrderId;
+
     @JsonProperty("z")
     private String executedQuantity;
 
@@ -56,8 +59,6 @@ public class SocketOrder {
 
     @JsonProperty("m")
     private Boolean isMaker;
-//
-//    private Boolean M;
 
     @JsonProperty("O")
     private Long createTime;
