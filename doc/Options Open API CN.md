@@ -795,6 +795,7 @@ Parameter|type|required|default|description
 `time`|long|`1503439494351`|订单成交时的时间戳，毫秒（ms）
 `tradeId`|long|`49366`|成交订单ID
 `orderId`|long|`630491422`|	订单ID
+`matchOrderId`|long|`630491432`| 成交对方订单ID
 `price`|float|`0.055`|订单价格
 `quantity`|float|`23.3`|订单数量
 `feeTokenName`|string|`USDT`|手续费计价单位
@@ -810,6 +811,7 @@ Parameter|type|required|default|description
     'time': '1554897921663',
     'tradeId': '336902617393292032',
     'orderId': '336902617267462912',
+    "matchOrderId": 336002617267469062,
     'price': '99',
     'quantity': '11.414',
     'feeTokenName': 'BUSDT',

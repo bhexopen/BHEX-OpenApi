@@ -789,6 +789,7 @@ Name|type|example|description
 `time`|long|`1503439494351`|The timestamp of the trade（ms）
 `tradeId`|long|`49366`|The ID for the trade
 `orderId`|long|`630491422`|	ID of the order
+`matchOrderId`|long|`630491432`| ID of the match order
 `price`|float|`0.055`|The price of the trade.
 `quantity`|float|`23.3`|Quantity of the trade.
 `feeTokenName`|string|`USDT`|Fee token name
@@ -804,6 +805,7 @@ Name|type|example|description
     'time': '1554897921663',
     'tradeId': '336902617393292032',
     'orderId': '336902617267462912',
+    "matchOrderId": 336002617267469062,
     'price': '99',
     'quantity': '11.414',
     'feeTokenName': 'BUSDT',

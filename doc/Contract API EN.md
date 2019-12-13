@@ -886,6 +886,7 @@ Name|type|example|description
 `time`|long|`1551062936784`|Timestamp when the order is created.
 `tradeId`|long|`49366`|The ID for the trade
 `orderId`|integer|`891`|ID of the order.
+`matchOrderId`|long|`630491432`| ID of the match order.
 `symbolId`|string|`BTC-PERP-REV`|Name of the contract.
 `price`|float|`4765.29`|Price of the trade.
 `quantity`|float|`1.01`|Quantity of the trade.
@@ -903,6 +904,7 @@ Name|type|example|description
     'time': '1570760582848',
     'tradeId': '469968263995080704',
     'orderId': '469968263793737728',
+    "matchOrderId": 436002617267469062,
     'accountId': '456552319339779840',
     'symbolId': 'BTC-PERP-REV',
     'price': '8531.17',

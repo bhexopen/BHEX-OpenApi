@@ -992,6 +992,7 @@ timestamp | LONG | YES |
     "symbol": "ETHBTC",
     "id": 28457,
     "orderId": 100234,
+    "matchOrderId": 109834,
     "price": "4.00000100",
     "qty": "12.00000000",
     "commission": "10.10000000",

@@ -906,7 +906,8 @@ GET /openapi/contract/v1/myTrades
 ------------ | ------------ | ------------ | ------------
 `time`|long|`1551062936784`|订单生成是的时间戳
 `tradeId`|long|`49366`|成交ID
-`orderId`|integer|`891`|成交ID
+`orderId`|long|`630491436`|订单ID
+`matchOrderId`|long|`630491432`| 成交对手订单ID
 `symbolId`|string|`BTC-PERP-REV`|合约名称
 `price`|float|`4765.29`|成交价格
 `quantity`|float|`1.01`|成交数量
@@ -924,6 +925,7 @@ GET /openapi/contract/v1/myTrades
     'time': '1570760582848',
     'tradeId': '469968263995080704',
     'orderId': '469968263793737728',
+    "matchOrderId": 436002617267469062,
     'accountId': '456552319339779840',
     'symbolId': 'BTC-PERP-REV',
     'price': '8531.17',
