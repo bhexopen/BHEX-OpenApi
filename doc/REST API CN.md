@@ -1091,40 +1091,6 @@ timestamp | LONG | YES |
 {}
 ```
 
-#### 用户转账 (TRANSFER)
-
-```shell
-POST /openapi/v1/user/transfer
-```
-
-转账
-
-**Weight:**
-1
-
-**Parameters:**
-
-名称 | 类型 | 是否强制 | 描述
------------- | ------------ | ------------ | ------------
-targetUserId | LONG | NO |目标用户ID 如有提币地址可不填
-clientOrderId | string | YES | 转账幂等ID
-amount | STRING | YES | 转账数量
-tokenId | STRING | YES | tokenID
-address | STRING | NO |  提币地址
-addressExt | STRING | NO | EOS提币tag 非EOS不填
-businessType | INTEGER | YES | 转账流水类型 3转账 70空投
-subBusinessType | INTEGER | NO | 二级流失类型
-recvWindow | LONG | NO |
-timestamp | LONG | YES |
-
-**Response:**
-
-```javascript
-{
-    "ret":0 // 0成功
-}
-```
-
 #### 子账户列表(SUB_ACCOUNT_LIST)
 
 ```shell
@@ -1203,9 +1169,12 @@ amount | STRING | YES | 转账数量
 ```
 
 **说明**
+
 1、转账账户和收款账户的其中一方，必须是主账户(钱包账户)
+
 2、主账户Api可以从钱包账户向其他账户(包括子账户)转账，也可以从其他账户向钱包账户转账
-3、`子账户Api调用的时候只能从当前子账户向主账户(钱包账户)转账，所以fromAccountType\fromAccountIndex\toAccountType\toAccountIndex不用填`
+
+3、**子账户Api调用的时候只能从当前子账户向主账户(钱包账户)转账，所以fromAccountType\fromAccountIndex\toAccountType\toAccountIndex不用填**
 
 
 #### 查询流水 (BALANCE_FLOW)
@@ -1221,13 +1190,13 @@ POST /openapi/v1/balance_flow
 
 **Parameters:**
 
-名称 | 类型 | 是否强制 | 描述
+|名称 | 类型 | 是否强制 | 描述
 ------------ | ------------ | ------------ | ------------
-| accountType   | int     | 否 | 账户对应的account_type | 默认1 |
-| accountIndex  | int     | 否 | 账户对应的account_index | 默认0 |
-| tokenId       | string  | 否     | token_id     | eg: BTC                                |
-| fromFlowId  | long    | 否     | 顺向查询数据 | 指定查询 id < fromFlowId的数据 |
-| endFlowId   | long    | 否     | 反向查询数据 | 指定查询 id > endFlowId的数据  |
+ | accountType   | int     | 否 | 账户对应的account_type | 默认1 |
+ | accountIndex  | int     | 否 | 账户对应的account_index | 默认0 |
+ | tokenId       | string  | 否     | token_id     | eg: BTC                                |
+ | fromFlowId  | long    | 否     | 顺向查询数据 | 指定查询 id < fromFlowId的数据 |
+ | endFlowId   | long    | 否     | 反向查询数据 | 指定查询 id > |endFlowId的数据  |
 | startTime     | long    | 否     | 开始时间     | 毫秒时间戳                             |
 | endTime       | long    | 否     | 结束时间     | 毫秒时间戳                             |
 | limit          | integer | 否     | 每页记录数   | 默认50，最大100                                       |
@@ -1264,9 +1233,34 @@ POST /openapi/v1/balance_flow
 ```
 
 **说明**
-1、主账户Api可以查询钱包账户或者其他账户(包括子账户，指定accountType和accountIndex)的流水
+
+1、主账户Api可以查询钱包账户或者其他账户(包括子账户，指定accountType和accountIndex)的流水’
+
 2、子账户Api只能查询当前子账户的流水，所以不用指定accountType和accountIndex
 
+**流水类型说明请见如下**
+
+归类|类型参数名|类型参数代号|解释说明|
+------|------|------|------|
+通用流水类|TRADE|1|交易|
+通用流水类|FEE|2|交易手续费|
+通用流水类|TRANSFER|3|转账|
+通用流水类|DEPOSIT|4|充值|
+衍生品业务|MAKER_REWARD|27|maker奖励
+衍生品业务|PNL|28|期货等的盈亏
+衍生品业务|SETTLEMENT|30|交割
+衍生品业务|LIQUIDATION|31|强平
+衍生品业务|FUNDING_SETTLEMENT|32|期货等的资金费率结算
+用户子账户之间内部转账|USER_ACCOUNT_TRANSFER|51|userAccountTransfer 专用，流水没有subjectExtId
+OTC|OTC_BUY_COIN|65|OTC 买入coin
+OTC|OTC_SELL_COIN|66|OTC 卖出coin
+OTC|OTC_FEE|73|OTC 手续费
+OTC|OTC_TRADE|200|旧版 OTC 流水
+活动|ACTIVITY_AWARD|67|活动奖励
+活动|INVITATION_REFERRAL_BONUS|68|邀请返佣
+活动|REGISTER_BONUS|69|注册送礼
+活动|AIRDROP|70|空投
+活动|MINE_REWARD|71|挖矿奖励
 
 ### 过滤层
 

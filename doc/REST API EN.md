@@ -1127,6 +1127,178 @@ timestamp | LONG | YES |
 {}
 ```
 
+#### Sub-account list(SUB_ACCOUNT_LIST)
+
+```shell
+POST /openapi/v1/subAccount/query
+```
+
+Query sub-account lists
+
+**Parameters:**
+
+None
+
+**Weight:**
+5
+
+**Response:**
+
+```javascript
+[
+    {
+        "accountId": "122216245228131",
+        "accountName": "",
+        "accountType": 1,
+        "accountIndex": 0 // main-account: 0, sub-account: 1
+    },
+    {
+        "accountId": "482694560475091200",
+        "accountName": "createSubAccountByCurl", // sub-account name
+        "accountType": 1, // sub-account type 1. token trading 3. contract trading
+        "accountIndex": 1
+    },
+    {
+        "accountId": "422446415267060992",
+        "accountName": "",
+        "accountType": 3,
+        "accountIndex": 0
+    },
+    {
+        "accountId": "482711469199298816",
+        "accountName": "createSubAccountByCurl",
+        "accountType": 3,
+        "accountIndex": 1
+    },
+]
+```
+
+
+#### Internal Account Transfer (ACCOUNT_TRANSFER)
+
+```shell
+POST /openapi/v1/transfer
+```
+
+Internal transfer
+
+**Weight:**
+1
+
+**Parameters:**
+
+Name | Typee | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+fromAccountType | int | YES |source account type: 1. token trading account 2.Options account 3. Contracts account
+fromAccountIndex | int | YES |sub-account index(valid when using main-account api, get sub-account indices from `SUB_ACCOUNT_LIST` endpoint)
+toAccountType | int | YES | Target account type: 1. token trading account 2.Options account 3. Contracts account
+toAccountIndex | int | YES | sub-account index(valid when using main-account api, get sub-account indices from `SUB_ACCOUNT_LIST` endpoint)
+tokenId | STRING | YES | tokenID
+amount | STRING | YES | Transfer amount
+
+**Response:**
+
+```javascript
+{
+    "success":"true" // success
+}
+```
+
+**Explanation**
+
+1. Either transferring or receiving account must be the main account (Token trading account)
+
+2. Main account api can support transferring to other account(including sub-accounts) and receiving from other accounts
+
+3. **Sub-account API only supports transferring from current account to the main-account. Therefore `fromAccountType\fromAccountIndex\toAccountType\toAccountIndex` should be left empty.**
+
+
+
+#### Check Balance Flow (BALANCE_FLOW)
+
+```shell
+POST /openapi/v1/balance_flow
+```
+
+Check blance flow
+
+**Weight:**
+5
+
+**Parameters:**
+
+|Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+ | accountType   | int     | no | Account account_type | 默认1 |
+ | accountIndex  | int     | no | Account account_index | 默认0 |
+ | tokenId       | string  | no     | token_id     | eg: BTC                                |
+ | fromFlowId  | long    | no     |  | Query data that id < fromFlowId|
+ | endFlowId   | long    | no     |  | Query data that id > |endFlowId  |
+| startTime     | long    | no    | Start Time     | Timestamp (millisecond)                             |
+| endTime       | long    | no     | End Time     | Timestamp (millisecond)                             |
+| limit          | integer | no    | Number of entries   | Default is 50，max is 100                                       |
+
+**Response:**
+
+```javascript
+[
+    {
+        "id": "539870570957903104",
+        "accountId": "122216245228131",
+        "tokenId": "BTC",
+        "tokenName": "BTC",
+        "flowTypeValue": 51, // balance flow type
+        "flowType": "USER_ACCOUNT_TRANSFER", // balance flow type name
+        "flowName": "Transfer", // balance flow type Explanation
+        "change": "-12.5", // change
+        "total": "379.624059937852365", // total asset after change
+        "created": "1579093587214"
+    },
+    {
+        "id": "536072393645448960",
+        "accountId": "122216245228131",
+        "tokenId": "USDT",
+        "tokenName": "USDT",
+        "flowTypeValue": 7,
+        "flowType": "AIRDROP",
+        "flowName": "Airdrop",
+        "change": "-2000",
+        "total": "918662.0917630848",
+        "created": "1578640809195"
+    }
+]
+```
+
+**Explanation**
+
+1. Main-account API can query balance flow for token account and other accounts(including sub-accounts, or designated `accountType` and `accountIndex` accounts)
+
+2. Sub-account API can only query current sub-account, therefore `accountType` and `accountIndex` is not required.
+
+**Please see the following for balance flow types**
+
+Category|Parameter Type Name|Parameter Type Id|Explanation|
+------|------|------|------|
+General Balance Flow|TRADE|1|trades|
+General Balance Flow|FEE|2|trading fees|
+General Balance Flow|TRANSFER|3|transfer|
+General Balance Flow|DEPOSIT|4|deposit|
+Derivatives|MAKER_REWARD|27|maker reward
+Derivatives|PNL|28|PnL from contracts
+Derivatives|SETTLEMENT|30|Settlement
+Derivatives|LIQUIDATION|31|Liquidation
+Derivatives|FUNDING_SETTLEMENT|32|期货等的资金费率结算
+Internal Transfer|USER_ACCOUNT_TRANSFER|51|userAccountTransfer 专用，流水没有subjectExtId
+OTC|OTC_BUY_COIN|65|OTC buy coin
+OTC|OTC_SELL_COIN|66|OTC sell coin
+OTC|OTC_FEE|73|OTC fees
+OTC|OTC_TRADE|200|Old OTC balance flow
+Campaign|ACTIVITY_AWARD|67|Campaign reward
+Campaign|INVITATION_REFERRAL_BONUS|68|邀请返佣
+Campaign|REGISTER_BONUS|69|Registration reward
+Campaign|AIRDROP|70|Airdrop
+Campaign|MINE_REWARD|71|Mining reward
+
 ### Filters
 
 Filters define trading rules on a symbol or an broker.
