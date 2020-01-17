@@ -1125,6 +1125,149 @@ timestamp | LONG | YES |
 }
 ```
 
+#### 子账户列表(SUB_ACCOUNT_LIST)
+
+```shell
+POST /openapi/v1/subAccount/query
+```
+
+查询子账户列表
+
+**Parameters:**
+
+无
+
+**Weight:**
+5
+
+**Response:**
+
+```javascript
+[
+    {
+        "accountId": "122216245228131",
+        "accountName": "",
+        "accountType": 1,
+        "accountIndex": 0 // 账户index 0 默认账户 >0, 创建的子账户
+    },
+    {
+        "accountId": "482694560475091200",
+        "accountName": "createSubAccountByCurl", // 子账户名称
+        "accountType": 1, // 子账户类型 1 币币账户 3 合约账户
+        "accountIndex": 1
+    },
+    {
+        "accountId": "422446415267060992",
+        "accountName": "",
+        "accountType": 3,
+        "accountIndex": 0
+    },
+    {
+        "accountId": "482711469199298816",
+        "accountName": "createSubAccountByCurl",
+        "accountType": 3,
+        "accountIndex": 1
+    },
+]
+```
+
+
+#### 账户内转账 (ACCOUNT_TRANSFER)
+
+```shell
+POST /openapi/v1/transfer
+```
+
+转账
+
+**Weight:**
+1
+
+**Parameters:**
+
+名称 | 类型 | 是否强制 | 描述
+------------ | ------------ | ------------ | ------------
+fromAccountType | int | YES |源账户类型, 1 钱包(币币)账户 2 期权账户 3 合约账户
+fromAccountIndex | int | YES |子账户index, 主账户Api调用时候有用，从子账户列表接口获取
+toAccountType | int | YES | 目标账户类型, 1 钱包(币币)账户 2 期权账户 3 合约账户
+toAccountIndex | int | YES | 子账户index, 主账户Api调用时候有用，从子账户列表接口获取
+tokenId | STRING | YES | tokenID
+amount | STRING | YES | 转账数量
+
+**Response:**
+
+```javascript
+{
+    "success":"true" // 0成功
+}
+```
+
+**说明**
+1、转账账户和收款账户的其中一方，必须是主账户(钱包账户)
+2、主账户Api可以从钱包账户向其他账户(包括子账户)转账，也可以从其他账户向钱包账户转账
+3、`子账户Api调用的时候只能从当前子账户向主账户(钱包账户)转账，所以fromAccountType\fromAccountIndex\toAccountType\toAccountIndex不用填`
+
+
+#### 查询流水 (BALANCE_FLOW)
+
+```shell
+POST /openapi/v1/balance_flow
+```
+
+查询账户流水
+
+**Weight:**
+5
+
+**Parameters:**
+
+名称 | 类型 | 是否强制 | 描述
+------------ | ------------ | ------------ | ------------
+| accountType   | int     | 否 | 账户对应的account_type | 默认1 |
+| accountIndex  | int     | 否 | 账户对应的account_index | 默认0 |
+| tokenId       | string  | 否     | token_id     | eg: BTC                                |
+| fromFlowId  | long    | 否     | 顺向查询数据 | 指定查询 id < fromFlowId的数据 |
+| endFlowId   | long    | 否     | 反向查询数据 | 指定查询 id > endFlowId的数据  |
+| startTime     | long    | 否     | 开始时间     | 毫秒时间戳                             |
+| endTime       | long    | 否     | 结束时间     | 毫秒时间戳                             |
+| limit          | integer | 否     | 每页记录数   | 默认50，最大100                                       |
+
+**Response:**
+
+```javascript
+[
+    {
+        "id": "539870570957903104",
+        "accountId": "122216245228131",
+        "tokenId": "BTC",
+        "tokenName": "BTC",
+        "flowTypeValue": 51, // 流水类型
+        "flowType": "USER_ACCOUNT_TRANSFER", // 流水类型名称
+        "flowName": "Transfer", // 流水类型说明
+        "change": "-12.5", // 变动值
+        "total": "379.624059937852365", // 变动后当前tokenId总资产
+        "created": "1579093587214"
+    },
+    {
+        "id": "536072393645448960",
+        "accountId": "122216245228131",
+        "tokenId": "USDT",
+        "tokenName": "USDT",
+        "flowTypeValue": 7,
+        "flowType": "AIRDROP",
+        "flowName": "Airdrop",
+        "change": "-2000",
+        "total": "918662.0917630848",
+        "created": "1578640809195"
+    }
+]
+```
+
+**说明**
+1、主账户Api可以查询钱包账户或者其他账户(包括子账户，指定accountType和accountIndex)的流水
+2、子账户Api只能查询当前子账户的流水，所以不用指定accountType和accountIndex
+
+
 ### 过滤层
 
 过滤层（filter）定义某个broker的某个symbol的交易规则
