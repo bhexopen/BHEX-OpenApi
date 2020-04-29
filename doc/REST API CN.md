@@ -983,6 +983,7 @@ GET /openapi/v1/depositOrders  (HMAC SHA256)
 
 名称 | 类型 | 是否强制 | 描述
 ------------ | ------------ | ------------ | ------------
+token | STRING | NO | 默认全部
 startTime | LONG | NO |
 endTime | LONG | NO |
 fromId | LONG | NO | 从哪个OrderId起开始抓取。默认抓取最新的存款记录。
@@ -1010,6 +1011,146 @@ timestamp | LONG | YES |
   }
 ]
 ```
+
+#### 获取某个提币记录 (USER_DATA)
+
+```shell
+GET /openapi/v1/withdraw/detail  (HMAC SHA256)
+```
+
+获取当前账户的提币记录
+
+**Weight:**
+2
+
+**Parameters:**
+
+名称 | 类型 | 是否强制 | 描述
+------------ | ------------ | ------------ | ------------
+orderId | LONG | NO | orderId和clientOrderId两者必须有一个有值
+clientOrderId | STRING | NO | orderId和clientOrderId两者必须有一个有值
+
+**Response:**
+
+```javascript
+
+{
+    "time":"1536232111669",
+    "orderId":"90161227158286336",
+    "accountId":"517256161325920",
+    "tokenId":"BHC",
+    "tokenName":"BHC",
+    "address":"0x815bF1c3cc0f49b8FC66B21A7e48fCb476051209",
+    "addressExt":"address tag",
+    "quantity":"14", // 提币金额
+    "arriveQuantity":"14", // 到账金额
+    "statusCode":"PROCESSING_STATUS",
+    "status":3,
+    "txid":"",
+    "txidUrl":"",
+    "walletHandleTime":"1536232111669",
+    "feeTokenId":"BHC",
+    "feeTokenName":"BHC",
+    "fee":"0.1",
+    "requiredConfirmNum":0, // 要求确认数
+    "confirmNum":0, // 确认数
+    "kernelId":"", // BEAM 和 GRIN 独有
+    "isInternalTransfer": false // 是否内部转账
+}
+```
+
+#### 账户提币记录 (USER_DATA)
+
+```shell
+GET /openapi/v1/withdrawalOrders  (HMAC SHA256)
+```
+
+获取当前账户的提币记录
+
+**Weight:**
+5
+
+**Parameters:**
+
+名称 | 类型 | 是否强制 | 描述
+------------ | ------------ | ------------ | ------------
+token | STRING | NO | 默认全部
+startTime | LONG | NO |
+endTime | LONG | NO |
+fromId | LONG | NO | 从哪个OrderId起开始抓取。默认抓取最新的存款记录。
+limit | INT | NO | 默认 500; 最大 1000.
+recvWindow | LONG | NO |
+timestamp | LONG | NO |
+
+**Notes:**
+
+* 如果`orderId`设定好了，会筛选订单小于`orderId`的。否则会返回最近的订单信息。
+
+**Response:**
+
+```javascript
+[
+    {
+        "time":"1536232111669",
+        "orderId":"90161227158286336",
+        "accountId":"517256161325920",
+        "tokenId":"BHC",
+        "tokenName":"BHC",
+        "address":"0x815bF1c3cc0f49b8FC66B21A7e48fCb476051209",
+        "addressExt":"address tag",
+        "quantity":"14", // 提币金额
+        "arriveQuantity":"14", // 到账金额
+        "statusCode":"PROCESSING_STATUS",
+        "status":3,
+        "txid":"",
+        "txidUrl":"",
+        "walletHandleTime":"1536232111669",
+        "feeTokenId":"BHC",
+        "feeTokenName":"BHC",
+        "fee":"0.1",
+        "requiredConfirmNum":0, // 要求确认数
+        "confirmNum":0, // 确认数
+        "kernelId":"", // BEAM 和 GRIN 独有
+        "isInternalTransfer": false // 是否内部转账
+    },
+    {
+        "time":"1536053746220",
+        "orderId":"762522731831527",
+        "accountId":"517256161325920",
+        "tokenId":"BHC",
+        "tokenName":"BHC",
+        "address":"fdfasdfeqfas12323542rgfer54135123",
+        "addressExt":"EOS tag",
+        "quantity":"",
+        "arriveQuantity":"10",
+        "statusCode":"BROKER_AUDITING_STATUS",
+        "status":"2",
+        "txid":"",
+        "txidUrl":"",
+        "walletHandleTime":"1536232111669",
+        "feeTokenId":"BHC",
+        "feeTokenName":"BHC",
+        "fee":"0.1",
+        "requiredConfirmNum":0, // 要求确认数
+        "confirmNum":0, // 确认数
+        "kernelId":"", // BEAM 和 GRIN 独有
+        "isInternalTransfer": false // 是否内部转账
+    }
+]
+```
+
+**提币状态说明**
+
+| status | statusCode | 描述 |
+| :--- | :--- | :--- |
+| 1 | BROKER_AUDITING_STATUS | 券商审核中 |
+| 2 | BROKER_REJECT_STATUS | 券商审核拒绝 |
+| 3 | AUDITING_STATUS | 平台审核中 |
+| 4 | AUDIT_REJECT_STATUS | 平台审核拒绝 |
+| 5 | PROCESSING_STATUS | 钱包处理中 |
+| 6 | WITHDRAWAL_SUCCESS_STATUS | 提币成功 |
+| 7 | WITHDRAWAL_FAILURE_STATUS | 提币失败 |
+| 8 | BLOCK_MINING_STATUS | 区块打包中 |
 
 ### 用户数据流端点
 
@@ -1192,11 +1333,11 @@ POST /openapi/v1/balance_flow
 
 |名称 | 类型 | 是否强制 | 描述
 ------------ | ------------ | ------------ | ------------
- | accountType   | int     | 否 | 账户对应的account_type | 默认1 |
- | accountIndex  | int     | 否 | 账户对应的account_index | 默认0 |
- | tokenId       | string  | 否     | token_id     | eg: BTC                                |
- | fromFlowId  | long    | 否     | 顺向查询数据 | 指定查询 id < fromFlowId的数据 |
- | endFlowId   | long    | 否     | 反向查询数据 | 指定查询 id > |endFlowId的数据  |
+| accountType   | int     | 否 | 账户对应的account_type | 默认1 |
+| accountIndex  | int     | 否 | 账户对应的account_index | 默认0 |
+| tokenId       | string  | 否     | token_id     | eg: BTC                                |
+| fromFlowId  | long    | 否     | 顺向查询数据 | 指定查询 id < fromFlowId的数据 |
+| endFlowId   | long    | 否     | 反向查询数据 | 指定查询 id > |endFlowId的数据  |
 | startTime     | long    | 否     | 开始时间     | 毫秒时间戳                             |
 | endTime       | long    | 否     | 结束时间     | 毫秒时间戳                             |
 | limit          | integer | 否     | 每页记录数   | 默认50，最大100                                       |
@@ -1230,6 +1371,39 @@ POST /openapi/v1/balance_flow
         "created": "1578640809195"
     }
 ]
+```
+
+#### 提现
+
+```shell
+POST /openapi/v1/withdraw
+```
+
+提现
+
+**Weight:**
+1
+
+**Parameters:**
+
+名称 | 类型 | 是否强制 | 描述
+------------ | ------------ | ------------ | ------------
+| tokenId | string | 必填 | tokenId |  |
+| clientOrderId | long | 必填 | 券商端生成的订单id， 防止重复提币 |  |
+| address | string | 必填| 提币地址(注意：提现地址必须是在PC端或者APP端维护在常用地址列表里面的地址) |  |
+| addressExt | string | 选填| EOS tag |  |
+| withdrawQuantity | string | 必填 | 提币数量 |  |
+| chainType | string | 非必填 |chain type, USDT的chainType分别是OMNI ERC20 TRC20，默认OMNI |
+
+**Response:**
+
+```javascript
+    {
+        "status": 0,
+        "success": true,
+        "needBrokerAudit": false, // 是否需要券商审核
+        "orderId": "423885103582776064" // 提币成功订单id
+    }
 ```
 
 **说明**

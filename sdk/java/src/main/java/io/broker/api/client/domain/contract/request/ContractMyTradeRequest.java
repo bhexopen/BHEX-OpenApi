@@ -1,6 +1,6 @@
 package io.broker.api.client.domain.contract.request;
 
-import io.broker.api.client.domain.account.OrderSide;
+import io.broker.api.client.domain.contract.OrderSide;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +30,9 @@ public class ContractMyTradeRequest {
 
     /**
      * Direction of the order.
+     * <strong>This parameter is no longer supported</strong>
      */
+    @Deprecated
     private OrderSide side;
 
     /**

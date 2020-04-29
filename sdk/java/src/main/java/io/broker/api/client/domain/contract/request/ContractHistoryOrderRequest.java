@@ -26,7 +26,9 @@ public class ContractHistoryOrderRequest {
 
     /**
      * Direction of the order.
+     * <strong>This parameter is no longer supported</strong>
      */
+    @Deprecated
     private OrderSide side;
 
     /**

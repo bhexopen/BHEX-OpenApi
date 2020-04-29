@@ -1229,11 +1229,11 @@ Check blance flow
 
 |Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
- | accountType   | int     | no | Account account_type | 默认1 |
- | accountIndex  | int     | no | Account account_index | 默认0 |
- | tokenId       | string  | no     | token_id     | eg: BTC                                |
- | fromFlowId  | long    | no     |  | Query data that id < fromFlowId|
- | endFlowId   | long    | no     |  | Query data that id > |endFlowId  |
+| accountType   | int     | no | Account account_type | 默认1 |
+| accountIndex  | int     | no | Account account_index | 默认0 |
+| tokenId       | string  | no     | token_id     | eg: BTC                                |
+| fromFlowId  | long    | no     |  | Query data that id < fromFlowId|
+| endFlowId   | long    | no     |  | Query data that id > |endFlowId  |
 | startTime     | long    | no    | Start Time     | Timestamp (millisecond)                             |
 | endTime       | long    | no     | End Time     | Timestamp (millisecond)                             |
 | limit          | integer | no    | Number of entries   | Default is 50，max is 100                                       |
