@@ -7,7 +7,7 @@ Install
 -------
 
 ```bash
-pip install broker-client
+pip install broker-trade-client
 ```
 
 or download from github
