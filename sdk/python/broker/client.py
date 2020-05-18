@@ -384,7 +384,7 @@ class BrokerContractClient(Request):
         params = {
             'symbol': symbol
         }
-        return self._quote_get('contract/index', params=params, version=None)
+        return self._quote_get('contract/index', params=params)
 
     def klines(self, symbol, interval='1m', start_time='', end_time='', limit=100):
         """

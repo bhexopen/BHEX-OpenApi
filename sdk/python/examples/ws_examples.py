@@ -18,6 +18,8 @@ client.subscribe_to_kline(symbol='BTCUSDT', interval='5m', callback=handler)
 
 client.subscribe_to_depth(symbol='BTCUSDT', callback=handler)
 
+client.subscribe_to_index(symbol='BTCUSDT', callback=handler)
+
 client.user_data_stream(callback=handler)
 
 client.start()

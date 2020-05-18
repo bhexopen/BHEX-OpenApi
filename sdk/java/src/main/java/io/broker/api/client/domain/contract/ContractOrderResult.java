@@ -1,6 +1,7 @@
 package io.broker.api.client.domain.contract;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.broker.api.client.domain.account.OrderStatus;
 import io.broker.api.client.domain.option.OrderMatchFeeInfo;
 import lombok.Data;
@@ -55,6 +56,7 @@ public class ContractOrderResult {
     /**
      * Quantity of orders that has been executed
      */
+    @JsonProperty("executedQty")
     private String executeQty;
 
     /**

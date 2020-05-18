@@ -6,7 +6,7 @@
 
     <groupId>io.broker.api</groupId>
     <artifactId>broker-api-client</artifactId>
-    <version>3.2.1</version>
+    <version>3.2.2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

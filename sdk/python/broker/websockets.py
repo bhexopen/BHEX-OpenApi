@@ -109,6 +109,9 @@ class BrokerSocketManager(threading.Thread):
     def _start_quote_socket(self, id_, payload, callback):
         self._start_socket(id_, 'quote/ws/v1', payload, callback)
 
+    def _start_quote_socket_v2(self, id_, payload, callback):
+        self._start_socket(id_, 'quote/ws/v2', payload, callback)
+
     def _start_auth_socket(self, id_, payload, callback):
         listen_key = self._client.stream_get_listen_key()
         if not listen_key:
@@ -152,6 +155,7 @@ class BrokerSocketManager(threading.Thread):
         for key in keys:
             self.stop_socket(key)
 
+        reactor.callFromThread(reactor.stop)
         self._conns = {}
 
 
@@ -197,6 +201,84 @@ class BrokerWss(BrokerSocketManager):
         payload = json.dumps(data, ensure_ascii=False).encode('utf8')
         return self._start_quote_socket(id_, payload, callback)
 
+    def subscribe_to_index(self, symbol, callback):
+        id_ = "_".join(["index", symbol])
+        data = {
+            'event': 'sub',
+            'topic': 'index',
+            'symbol': symbol,
+        }
+        payload = json.dumps(data, ensure_ascii=False).encode('utf8')
+        return self._start_quote_socket(id_, payload, callback)
+
     def user_data_stream(self, callback):
         return self._start_auth_socket('user_data_stream', None, callback)
 
+
+class BrokerWssV2(BrokerWss):
+
+    def subscribe_to_realtimes(self, symbol, callback):
+        id_ = "_".join(["realtimes", symbol])
+        data = {
+            'topic': 'realtimes',
+            'event': "sub",
+            'params': {
+                'binary': False,
+                'symbol': symbol
+            }
+        }
+        payload = json.dumps(data, ensure_ascii=False).encode('utf8')
+        return self._start_quote_socket_v2(id_, payload, callback)
+
+    def subscribe_to_trades(self, symbol, callback):
+        id_ = "_".join(["trade", symbol])
+        data = {
+            'topic': 'trade',
+            'event': "sub",
+            'params': {
+                'binary': False,
+                'symbol': symbol
+            }
+        }
+        payload = json.dumps(data, ensure_ascii=False).encode('utf8')
+        return self._start_quote_socket_v2(id_, payload, callback)
+
+    def subscribe_to_kline(self, symbol, interval, callback):
+        id_ = "_".join(["kline", symbol, interval])
+        data = {
+            'topic': 'kline',
+            'event': "sub",
+            'params': {
+                'binary': False,
+                'symbol': symbol,
+                'klineType': interval
+            }
+        }
+        payload = json.dumps(data, ensure_ascii=False).encode('utf8')
+        return self._start_quote_socket_v2(id_, payload, callback)
+
+    def subscribe_to_depth(self, symbol, callback):
+        id_ = "_".join(["depth", symbol])
+        data = {
+            'topic': 'depth',
+            'event': "sub",
+            'params': {
+                'binary': False,
+                'symbol': symbol
+            }
+        }
+        payload = json.dumps(data, ensure_ascii=False).encode('utf8')
+        return self._start_quote_socket_v2(id_, payload, callback)
+
+    def subscribe_to_book_ticker(self, symbol, callback):
+        id_ = "_".join(["bookTicker", symbol])
+        data = {
+            'topic': 'bookTicker',
+            'event': "sub",
+            'params': {
+                'binary': False,
+                'symbol': symbol
+            }
+        }
+        payload = json.dumps(data, ensure_ascii=False).encode('utf8')
+        return self._start_quote_socket_v2(id_, payload, callback)

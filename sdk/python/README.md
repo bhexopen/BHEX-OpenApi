@@ -12,6 +12,8 @@ pip install broker-client
 
 or download from github
 
+Note: pip install may be fail. We are working on fix this. if so, just download from github
+
 Usage
 -----
 

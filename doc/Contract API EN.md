@@ -669,7 +669,6 @@ Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Symbol to return open orders for. If not sent, orders of all contracts will be returned.
 `orderId`|integer|`NO`|| Order ID
-`side`|string|`NO`||Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `orderType`|string|`YES`||The order type, possible types: `LIMIT` and `STOP`.
 `limit`|integer|`NO`|`20`|Number of entries to return.
 
@@ -740,7 +739,6 @@ Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | --------
 `symbol`|string|`NO`||Symbol to return open orders for. If not sent, orders of all contracts will be returned.
 `orderId`|integer|`NO`|| Order ID
-`side`|string|`NO`||Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `orderType`|string|`YES`||The order type, possible types: `LIMIT`, `STOP`
 `limit`|integer|`NO`|`20`|Number of entries to return.
 
@@ -876,7 +874,6 @@ Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | -------
 `symbol`|string|`NO`|| Name of the contract. If not sent, trades for all symbols will be returned.
 `limit`|integer|`NO`|`20`|The number of trades returned (clamped to max 1000)
-`side`|string|`NO`||Direction of the order.
 `fromId`|integer|`NO`||TradeId to fetch from.
 `toId`|integer|`NO`||TradeId to fetch to.
 
@@ -894,6 +891,7 @@ Name|type|example|description
 `fee`|||Fee of the trade.
 `side`|string|`BUY`|Direction of the order. Possible values include `BUY_OPEN`, `SELL_OPEN`, `BUY_CLOSE`, and `SELL_CLOSE`.
 `orderType`|string|`LIMIT`|The order type, possible types: LIMIT, MARKET
+`pnl`|float|`100.1`|Profit and loss
 
 
 ### **Example:**
@@ -912,7 +910,8 @@ Name|type|example|description
     'feeTokenId': 'TBTC',
     'fee': '0.00000586',
     'type': 'LIMIT',
-    'side': 'BUY_OPEN'
+    'side': 'BUY_OPEN',
+    'pnl': '100.1'
   },...
 ]
 ```

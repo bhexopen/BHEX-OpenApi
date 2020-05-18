@@ -6,6 +6,7 @@ import urllib
 
 import requests
 import six
+from requests.adapters import HTTPAdapter
 
 from broker.exceptions import BrokerApiException, BrokerRequestException
 from broker import user_agent, broker_log
@@ -16,6 +17,8 @@ class Request(object):
     API_VERSION = 'v1'
     QUOTE_API_VERSION = 'v1'
 
+    _session = None
+
     def __init__(self, entry_point, api_key='', secret='', proxies=None):
 
         if not entry_point.endswith('/'):
@@ -25,6 +28,13 @@ class Request(object):
         self.entry_point = entry_point
         self.proxies = proxies
         self.ping()
+
+    @classmethod
+    def init_connection_args(cls, pool_connections=16, pool_maxsize=16, max_retries=3, pool_block=False):
+        http_adapter = HTTPAdapter(pool_connections, pool_maxsize, max_retries, pool_block)
+        cls._session = requests.Session()
+        cls._session.mount('https://', http_adapter)
+        cls._session.mount('http://', http_adapter)
 
     def _create_api_uri(self, path, version):
         version_path = ''
@@ -92,7 +102,10 @@ class Request(object):
             method, uri, kwargs['headers'], kwargs[date_type]))
 
         begin_time = time.time()
-        response = requests.request(method, uri, proxies=self.proxies, **kwargs)
+        if self._session is None:
+            response = requests.request(method, uri, proxies=self.proxies, **kwargs)
+        else:
+            response = self._session.request(method, uri, proxies=self.proxies, **kwargs)
         end_time = time.time()
 
         req_time = int((begin_time-end_time)*1000)
