@@ -5,9 +5,11 @@ import java.util.List;
 import io.broker.api.client.domain.account.request.CancelOrderRequest;
 import io.broker.api.client.domain.option.OptionMatchResult;
 import io.broker.api.client.domain.option.OptionOrderResult;
+import io.broker.api.client.domain.option.OrderResult;
 import io.broker.api.client.domain.option.PositionResult;
 import io.broker.api.client.domain.option.SettlementResult;
 import io.broker.api.client.domain.option.TokenOptionResult;
+import io.broker.api.client.domain.option.request.GetOrderRequest;
 import io.broker.api.client.domain.option.request.OptionHistoryOrderRequest;
 import io.broker.api.client.domain.option.request.OptionOpenOrderRequest;
 import io.broker.api.client.domain.option.request.OptionOrderRequest;
@@ -82,4 +84,12 @@ public interface BrokerOptionApiRestClient {
      * @return settlements
      */
     List<SettlementResult> getOptionSettlements(OptionSettlementRequest request);
+
+    /**
+     * Get order
+     *
+     * @param request options request parameters
+     * @return orderInfo
+     */
+    OrderResult getOrder(GetOrderRequest request);
 }

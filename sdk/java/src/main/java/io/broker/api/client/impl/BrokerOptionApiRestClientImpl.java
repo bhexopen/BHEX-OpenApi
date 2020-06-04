@@ -6,9 +6,11 @@ import io.broker.api.client.BrokerOptionApiRestClient;
 import io.broker.api.client.domain.account.request.CancelOrderRequest;
 import io.broker.api.client.domain.option.OptionMatchResult;
 import io.broker.api.client.domain.option.OptionOrderResult;
+import io.broker.api.client.domain.option.OrderResult;
 import io.broker.api.client.domain.option.PositionResult;
 import io.broker.api.client.domain.option.SettlementResult;
 import io.broker.api.client.domain.option.TokenOptionResult;
+import io.broker.api.client.domain.option.request.GetOrderRequest;
 import io.broker.api.client.domain.option.request.OptionHistoryOrderRequest;
 import io.broker.api.client.domain.option.request.OptionOpenOrderRequest;
 import io.broker.api.client.domain.option.request.OptionOrderRequest;
@@ -18,10 +20,9 @@ import io.broker.api.client.domain.option.request.OptionTradeRequest;
 import io.broker.api.client.domain.option.request.OptionsRequest;
 import io.broker.api.client.service.BrokerOptionApiService;
 
-import static io.broker.api.client.impl.BrokerApiServiceGenerator.createService;
-
 /**
- * Implementation of Broker's Option REST API using Retrofit with synchronous/blocking method calls.
+ * Implementation of Broker's Option REST API using Retrofit with synchronous/blocking method
+ * calls.
  */
 public class BrokerOptionApiRestClientImpl implements BrokerOptionApiRestClient {
 
@@ -113,6 +114,16 @@ public class BrokerOptionApiRestClientImpl implements BrokerOptionApiRestClient 
     public List<SettlementResult> getOptionSettlements(OptionSettlementRequest request) {
         return BrokerApiServiceGenerator.executeSync(brokerOptionApiService.getOptionSettlements(
                 request.getSymbol(),
+                request.getRecvWindow(),
+                request.getTimestamp()
+        ));
+    }
+
+    @Override
+    public OrderResult getOrder(GetOrderRequest request) {
+        return BrokerApiServiceGenerator.executeSync(brokerOptionApiService.getOrder(
+                request.getOrderId(),
+                request.getClientOrderId(),
                 request.getRecvWindow(),
                 request.getTimestamp()
         ));
