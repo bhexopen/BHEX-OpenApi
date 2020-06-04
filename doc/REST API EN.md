@@ -999,7 +999,9 @@ timestamp | LONG | YES |
     "commissionAsset": "ETH",
     "time": 1499865549590,
     "isBuyer": true,
-    "isMaker": false
+    "isMaker": false,
+    "feeTokenId": "ETH",
+    "fee": "0.012"
   }
 ]
 ```

@@ -52,6 +52,8 @@ if __name__ == '__main__':
 
         print(b.my_trades())
 
+        print(b.get_order(order_id=order_id))
+
         listen_key = b.stream_get_listen_key()
 
         print(listen_key)

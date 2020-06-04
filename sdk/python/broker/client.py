@@ -230,6 +230,13 @@ class BrokerOptionClient(Request):
         """
         return self._get('option/settlements', signed=True, params=params, version=None)
 
+    def get_order(self, order_id='', client_order_id=''):
+        params = {
+            'orderId': order_id,
+            'clientOrderId': client_order_id,
+        }
+        return self._get('option/getOrder', signed=True, params=params, version=None)
+
 
 class BrokerContractClient(Request):
 
