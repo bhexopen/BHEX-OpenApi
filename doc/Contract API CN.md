@@ -372,7 +372,7 @@ GET /openapi/quote/v1/contract/trades
 名称|类型|是否强制|默认|描述
 ------------ | ------------ | ------------ | ------------ | ------
 `symbol`|string|`YES`||合约名称
-`limit`|integer|`NO` (最大值为1000)|`100`|返回成交订单的数量
+`limit`|integer|`NO` (最大值为60)|`60`|返回成交订单的数量
 
 ### **Response:**
 

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * [{"e":"executionReport","E":"1596180140878","s":"HBCUSDT","c":"159618014059858","S":"BUY","o":"LIMIT","f":"GTC","q":"10","p":"1","X":"CANCELED","i":"683202969400788736","M":"0","l":"0","z":"0","L":"0","n":"0","N":"","u":true,"w":true,"m":false,"O":"1596180140602","Z":"0","A":"0","C":false,"v":"0"}]
+ */
 @Data
 @Builder
 @AllArgsConstructor

@@ -428,7 +428,7 @@ limit | INT | NO | Default 100; max 100.
 GET /openapi/quote/v1/trades
 ```
 
-Get recent trades (up to last 500).
+Get recent trades (up to last 60).
 
 **Weight:**
 1
@@ -438,7 +438,7 @@ Get recent trades (up to last 500).
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
 symbol | STRING | YES |
-limit | INT | NO | Default 500; max 1000.
+limit | INT | NO | Default 60; max 60.
 
 **Response:**
 
@@ -995,13 +995,13 @@ timestamp | LONG | YES |
     "matchOrderId": 109834,
     "price": "4.00000100",
     "qty": "12.00000000",
-    "commission": "10.10000000",
+    "commission": "0.012",
     "commissionAsset": "ETH",
     "time": 1499865549590,
     "isBuyer": true,
     "isMaker": false,
     "feeTokenId": "ETH",
-    "fee": "0.012"
+    "feeAmount": "0.012"
   }
 ]
 ```

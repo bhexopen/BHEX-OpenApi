@@ -187,7 +187,9 @@ public class BrokerApiWebSocketClientImpl implements BrokerApiWebSocketClient, C
         webSocket.send(channel);
         Closeable closeable = createCloseable(listener, webSocket);
         // 添加监控线程
-        executorService.execute(this.socketMonitor(webSocket, channel, listener, retry));
+        if (retry) {
+            executorService.execute(this.socketMonitor(webSocket, channel, listener, retry));
+        }
         return closeable;
     }
 

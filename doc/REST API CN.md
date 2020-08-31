@@ -407,7 +407,7 @@ limit | INT | NO | 默认 100; 最大 100.
 GET /openapi/quote/v1/trades
 ```
 
-获取当前最新成交（最多500）
+获取当前最新成交（最多60）
 
 **Weight:**
 1
@@ -417,7 +417,7 @@ GET /openapi/quote/v1/trades
 名称 | 类型 | 是否强制 | 描述
 ------------ | ------------ | ------------ | ------------
 symbol | STRING | YES |
-limit | INT | NO | Default 500; max 1000.
+limit | INT | NO | Default 60; max 60.
 
 **Response:**
 
@@ -965,7 +965,7 @@ timestamp | LONG | YES |
     "isBuyer": true,
     "isMaker": false,
     "feeTokenId": "ETH",
-    "fee": "0.012"
+    "feeAmount": "0.012"
   }
 ]
 ```

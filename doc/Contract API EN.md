@@ -376,7 +376,7 @@ GET /openapi/quote/v1/contract/trades
 Parameter|type|required|default|description
 ------------ | ------------ | ------------ | ------------ | ------
 `symbol`|string|`YES`||The name of the contract.
-`limit`|integer|`NO` (clamped to max 1000)|`100`|The number of trades returned
+`limit`|integer|`NO` (clamped to max 60)|`60`|The number of trades returned
 
 ### **Response:**
 

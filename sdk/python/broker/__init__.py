@@ -1,6 +1,6 @@
 import logging
 
-version = "2.1.0"
+version = "2.1.1"
 
 user_agent = "Broker-P V" + version
 
