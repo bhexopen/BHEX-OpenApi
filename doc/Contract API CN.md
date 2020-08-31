@@ -196,7 +196,7 @@ GET /openapi/contract/v1/insurance
     },...
   ],...
 }
-``` -->
+​``` -->
 
 
 ## `index`
@@ -207,7 +207,7 @@ GET /openapi/contract/v1/insurance
 0
 
 ### **Request Url:**
-```bash
+​```bash
 GET /openapi/quote/v1/contract/index
 ```
 ### **Parameters：**
@@ -410,8 +410,8 @@ GET /openapi/quote/v1/contract/klines
 ```
 
 ### **Parameters：**
-| 名称|类型|是否强制|默认|描述 |
-| ------------ | ------------ | ------------ | ------------ | ---- |
+ 名称|类型|是否强制|默认|描述 
+ ------------ | ------------ | ------------ | ------------ | ---- 
 `symbol`|string|`YES`||合约名称
 `interval`|string|`YES`||K线图区间。可识别发送的值为：  `1m`,`5m`,`15m`,`30m`,`1h`,`1d`,`1w`,`1M`（`m`=分钟，`h`=小时,`d`=天，`w`=星期，`M`=月）
 `limit`|integer|`NO`|`1000`|返回值的数量，最大值为1000
@@ -454,6 +454,76 @@ GET /openapi/quote/v1/contract/klines
 `base asset` 代表买方收到了该数量的合约
 
 `quote asset` 代表该数量的token用来获得合约
+
+
+## Contracts
+
+列出所有合约币对详细信息
+
+### **Request Weight:**
+1
+
+### **Request Url:**
+```bash
+GET /openapi/v1/contracts
+```
+
+### **Parameters:**
+无
+
+### **Response:**
+
+```javascript
+[
+  {
+    "symbol":"BTC-PERP-REV",
+    "symbolName":"BTC-PERP-REV",
+    "baseToken":"BTC-PERP-REV",
+    "quoteToken":"TBTC",
+    "lastPrice":"11682.8",
+    "baseVolume":"13621303",
+    "quoteVolume":"1094.487444013737088362",
+    "bid":"11682",
+    "ask":"11683.3",
+    "high":"11730.1",
+    "low":"11567.1",
+    "productType":"futures",
+    "openInterest":"23797354",
+    "indexPrice":"11679.5433333333333333",
+    "index":"BTCUSDT",
+    "indexBaseToken":"USD",
+    "startTs":"1598789083",
+    "endTs":"1598875483",
+    "fundingRate":"0.000038494841395324",
+    "nextFundingRate":"0.000088260431150408",
+    "nextFundingRateTs":1598904000
+  },
+  {
+    "symbol":"BTC-SWAP",
+    "symbolName":"BTC-SWAP",
+    "baseToken":"BTC-SWAP",
+    "quoteToken":"BTC",
+    "lastPrice":"11682.2",
+    "baseVolume":"27337579",
+    "quoteVolume":"2348.305049590008405635",
+    "bid":"11681.4",
+    "ask":"11683.7",
+    "high":"11730.6",
+    "low":"11567.4",
+    "productType":"futures",
+    "openInterest":"3289364",
+    "indexPrice":"11679.5433333333333333",
+    "index":"BTCUSDT",
+    "indexBaseToken":"USD",
+    "startTs":"1598789092",
+    "endTs":"1598875492",
+    "fundingRate":"0.000084351317877269",
+    "nextFundingRate":"0.000084285978912247",
+    "nextFundingRateTs":1598904000
+  }
+]
+
+```
 
 # Private Endpoints
 
@@ -1195,7 +1265,7 @@ A confirmation message will be returned.
   'message': 'success',
   'timestamp': 1541161088303
 }
-``` -->
+​``` -->
 
 ## 关键参数解释说明:
 

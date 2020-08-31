@@ -459,6 +459,77 @@ name|type|example|description
 
 `quote asset` means the amount of tokens paid to acquire the contracts.
 
+
+
+## Contracts
+
+a summary of all contracts traded on the exchange
+
+### **Request Weight:**
+1
+
+### **Request Url:**
+```bash
+GET /openapi/v1/contracts
+```
+
+### **Parameters:**
+None
+
+### **Response:**
+
+```javascript
+[
+  {
+    "symbol":"BTC-PERP-REV",
+    "symbolName":"BTC-PERP-REV",
+    "baseToken":"BTC-PERP-REV",
+    "quoteToken":"TBTC",
+    "lastPrice":"11682.8",
+    "baseVolume":"13621303",
+    "quoteVolume":"1094.487444013737088362",
+    "bid":"11682",
+    "ask":"11683.3",
+    "high":"11730.1",
+    "low":"11567.1",
+    "productType":"futures",
+    "openInterest":"23797354",
+    "indexPrice":"11679.5433333333333333",
+    "index":"BTCUSDT",
+    "indexBaseToken":"USD",
+    "startTs":"1598789083",
+    "endTs":"1598875483",
+    "fundingRate":"0.000038494841395324",
+    "nextFundingRate":"0.000088260431150408",
+    "nextFundingRateTs":1598904000
+  },
+  {
+    "symbol":"BTC-SWAP",
+    "symbolName":"BTC-SWAP",
+    "baseToken":"BTC-SWAP",
+    "quoteToken":"BTC",
+    "lastPrice":"11682.2",
+    "baseVolume":"27337579",
+    "quoteVolume":"2348.305049590008405635",
+    "bid":"11681.4",
+    "ask":"11683.7",
+    "high":"11730.6",
+    "low":"11567.4",
+    "productType":"futures",
+    "openInterest":"3289364",
+    "indexPrice":"11679.5433333333333333",
+    "index":"BTCUSDT",
+    "indexBaseToken":"USD",
+    "startTs":"1598789092",
+    "endTs":"1598875492",
+    "fundingRate":"0.000084351317877269",
+    "nextFundingRate":"0.000084285978912247",
+    "nextFundingRateTs":1598904000
+  }
+]
+
+```
+
 # Private Endpoints
 
 ## `order`

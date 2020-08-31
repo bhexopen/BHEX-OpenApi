@@ -621,6 +621,37 @@ OR
   }
 ]
 ```
+#### 现货币对
+
+```shell
+GET /openapi/v1/pairs
+```
+
+列出所有现货的币对列表，包括baseToken和quoteToken
+
+**Weight:**
+1
+
+**Parameters:**
+
+无
+
+**Response:**
+
+```javascript
+[
+  {
+    "symbol": "LTCBTC",
+    "quoteToken": "LTC",
+    "baseToken": "BTC"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "quoteToken": "BTC",
+    "baseToken": "USDT"
+  }
+]
+```
 
 ### 账户端点
 

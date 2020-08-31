@@ -642,6 +642,37 @@ OR
 ]
 ```
 
+#### Cryptoasset trading pairs
+
+```shell
+GET /openapi/v1/pairs
+```
+a summary on cryptoasset trading pairs available on the exchange
+
+**Weight:**
+1
+
+**Parameters:**
+
+None
+
+**Response:**
+
+```javascript
+[
+  {
+    "symbol": "LTCBTC",
+    "quoteToken": "LTC",
+    "baseToken": "BTC"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "quoteToken": "BTC",
+    "baseToken": "USDT"
+  }
+]
+```
+
 ### Account endpoints
 
 #### New order  (TRADE)
