@@ -64,12 +64,13 @@ public class BrokerApiWebSocketUserListener<T> extends WebSocketListener {
                     }
 
                     String eventType = node.get("e").asText();
-                    if (eventType.equals(EventType.ACCOUNT_INFO.getType())) {
+                    if (eventType.equals(EventType.ACCOUNT_INFO.getType()) || eventType.equals(EventType.MARGIN_ACCOUNT_INFO.getType())) {
                         SocketAccount account = mapper.readValue(node.toString(), SocketAccount.class);
                         accountList.add(account);
                     } else if (eventType.equals(EventType.EXECUTION_REPORT.getType())
                             || eventType.equals(EventType.OPTION_EXECUTION_REPORT.getType())
-                            || eventType.equals(EventType.CONTRACT_EXECUTION_REPORT.getType())) {
+                            || eventType.equals(EventType.CONTRACT_EXECUTION_REPORT.getType())
+                            || eventType.equals(EventType.MARGIN_EXECUTION_REPORT.getType())) {
                         SocketOrder order = mapper.readValue(node.toString(), SocketOrder.class);
                         orderList.add(order);
                     }

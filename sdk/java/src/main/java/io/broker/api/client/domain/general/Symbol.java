@@ -18,6 +18,15 @@ public class Symbol implements Serializable {
     private String quoteAsset;
     private String quotePrecision;
     private boolean icebergAllowed;
+    private boolean allowMargin;
+
+    public Boolean getAllowMargin() {
+        return allowMargin;
+    }
+
+    public void setAllowMargin(Boolean allowMargin) {
+        this.allowMargin = allowMargin;
+    }
 
     public List<SymbolFilter> getFilters() {
         return filters;

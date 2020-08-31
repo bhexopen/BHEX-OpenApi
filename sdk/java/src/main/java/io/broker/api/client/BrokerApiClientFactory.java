@@ -1,9 +1,6 @@
 package io.broker.api.client;
 
-import io.broker.api.client.impl.BrokerApiRestClientImpl;
-import io.broker.api.client.impl.BrokerApiWebSocketClientImpl;
-import io.broker.api.client.impl.BrokerOptionApiRestClientImpl;
-import io.broker.api.client.impl.BrokerContractApiRestClientImpl;
+import io.broker.api.client.impl.*;
 
 import static io.broker.api.client.impl.BrokerApiServiceGenerator.getSharedClient;
 
@@ -92,5 +89,9 @@ public final class BrokerApiClientFactory {
      */
     public BrokerApiWebSocketClient newWebSocketClient(String wsBaseQuoteUrl, String wsBaseUserUrl) {
         return new BrokerApiWebSocketClientImpl(getSharedClient(), wsBaseQuoteUrl, wsBaseUserUrl);
+    }
+
+    public BrokerMarginApiRestClient newMarginRestClient(){
+        return new BrokerMarginApiRestClientImpl(baseUrl, apiKey, secret);
     }
 }

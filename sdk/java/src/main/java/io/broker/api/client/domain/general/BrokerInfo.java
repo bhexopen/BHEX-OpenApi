@@ -22,6 +22,16 @@ public class BrokerInfo {
 
     private List<RateLimit> rateLimits;
 
+    private List<Symbol> margins;
+
+    public List<Symbol> getMargins() {
+        return margins;
+    }
+
+    public void setMargins(List<Symbol> margins) {
+        this.margins = margins;
+    }
+
     public String getTimezone() {
         return timezone;
     }
@@ -79,6 +89,7 @@ public class BrokerInfo {
                 .append("rateLimits", rateLimits)
                 .append("symbols", symbols)
                 .append("contracts", contracts)
+                .append("margins",margins)
                 .toString();
     }
 
