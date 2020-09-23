@@ -79,6 +79,31 @@ MARKET_DATA | 端点需要发送有效的API-Key。
 
 ## 公共接口
 
+### 查询Margin Token（包含利息）
+
+* 接口地址:  `/openapi/v1/margin/token`
+* 请求方法: GET 
+* 请求参数
+    无
+**返回数据**
+```javascript
+[
+  {
+    "exchangeId": 1,//交易所ID
+    "tokenId":"BTC",//币种id
+    "convertRate":0.9,//折算率
+    "leverage":1000,//杠杆倍数
+    "canBorrow": 1, //是否可借，1:是 2:否
+    "maxQuantity":"1000",//融币最大数量
+    "minQuantity":"1",//融币最下数量
+    "quantityPrecision":1,//融币数量精度
+    "repayMinQuantity":"1",//最小还币数量
+    "interest":0.01,//秒利率
+    "isOpen":1 //1.启用  2.禁用 禁用时不可入金且不作为保证金
+  }
+]
+```
+
 ### 查询杠杆可交易币对  
 * 接口地址:  `/openapi/v1/brokerInfo`
 * 请求方法: GET 
@@ -199,6 +224,24 @@ MARKET_DATA | 端点需要发送有效的API-Key。
   }
 ```
 
+### 查询风控配置
+
+* 接口地址:  `/openapi/v1/margin/riskConfig`
+* 请求方法: GET 
+* 请求参数
+    无
+
+**返回数据**
+
+```javascript
+{
+   "withdrawLine":"1",//提币线
+   "warnLine":"1.2",//预警线
+   "appendLine":"1.2",//追加线
+   "stopLine":"1.2",//止损线
+}
+```
+
 ## 账户接口
 
 ### 开通杠杆账户
@@ -233,7 +276,7 @@ MARKET_DATA | 端点需要发送有效的API-Key。
     "safety": "2.23" //安全度
 }
 ```
-### 查询杠杆账户资产信息
+### 查询杠杆账户资产
 * 接口地址:  `/openapi/v1/margin/account`
 * 请求方法: GET 
 * 请求参数
@@ -259,6 +302,370 @@ MARKET_DATA | 端点需要发送有效的API-Key。
     }
   ]
 }
+```
+
+### 账户可借查询
+
+* 接口地址:  `/openapi/v1/margin/loanable`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| tokenId | String | 是 |  |  |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+{
+    "tokenId":"BTC", // token
+    "loanable": "1000.00"//可借
+}
+```
+
+
+
+### 账户已借查询
+
+* 接口地址:  `/openapi/v1/margin/loanPosition`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| tokenId | String | 否 |  |  |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+[
+    {
+    		"tokenId":"BTC", // token Id
+        "loanTotal":"2.000",
+        "loanBtcValue":"2.000",//借款折算BTC值
+        "interestPaid":"1.00",//已还利息
+        "interestUnpaid":"1.00",//未还利息
+        "unpaidBtcValue":"2.000"//未还利息折算BTC值
+    }
+]
+```
+### 账户可出金数量查询
+
+* 接口地址:  `/openapi/v1/margin/availWithdraw`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| tokenId | String | 是 |  |  |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+{
+    "token":"BTC", // token
+    "availWithdrawAmount": "1000.00"//可出金
+}
+```
+
+### 账户内转账（账户出入金）
+
+* 接口地址:  `/openapi/v1/margin/transfer`
+* 请求方法: GET
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| fromAccountType | Int | 是 |  | 源账户类型, 1 钱包(币币)账户 27杠杆账户 |
+| toAccountType | Int | 是 |  | 目标账户类型, 1 钱包(币币)账户 27杠杆账户  |
+| tokenId | String | 是 |  |  |
+| amount | DECIMAL | 是 |  |  |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+{
+    "success":"true" // 0成功
+}
+```
+**说明**
+
+1、转账账户和收款账户的其中一方，必须是主账户(钱包账户)
+
+2、主账户Api可以从钱包账户向其他账户(包括子账户)转账，也可以从其他账户向钱包账户转账
+
+3、**子账户Api调用的时候只能从当前子账户向主账户(钱包账户)转账，所以fromAccountType\fromAccountIndex\toAccountType\不用填**
+
+
+
+### 借币
+
+* 接口地址:  `/openapi/v1/margin/loan`
+* 请求方法: POST 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| clientOrderId | String | 否 |  | 一个自己给订单定义的ID，如果没有发送会自动生成。 |
+| loanAmount | DECIMAL | 是 |  | 申请借款金额  |
+| tokenId | String | 是 |  |  |
+| recvWindow | Long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+{
+  "loanOrderId": 28,
+  "clientOrderId": "6k9M212T12092"
+}
+```
+
+### 还币
+
+* 接口地址:  `/openapi/v1/margin/repay`
+* 请求方法: POST 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| clientOrderId | String | 否 |  | 一个自己给订单定义的ID，如果没有发送会自动生成。 |
+| loanOrderId | Long | 是 |  | 申请借款金额  |
+| repayType | int | 否 |  | 0.全部还币 1.还本金  2.还币还息 ，默认还总额	|
+| repayAmount | DECIMAL | 否 |  | 除全部还币之外，必填 |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+{
+  "repayOrderId": 28,
+  "clientOrderId": "6k9M212T12092"
+}
+```
+### 保证杠杆总资产 （包含 可用保证金&占用保证金）
+
+* 接口地址:  `/openapi/v1/margin/allPosition`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+* 统一转化为BTC进行统计。
+
+**返回数据**
+
+```javascript
+{
+        "total": "1000.00", //总资产 
+        "loanAmount":"500.00",//已借
+        "availMargin":"500.00",//可用保证金
+        "occupyMargin":"500.00"//占用 
+}
+```
+
+### 查询借币记录（list）
+
+* 接口地址:  `/openapi/v1/margin/loanOrders`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| tokenId | String | 否 |  ||
+| status | Int | 否 |  | 1:借款中 2: 已还款	 |
+| fromLoanId | Long | 否 |  | 查询 小于fromLoanId 的数据|
+| endLoanId | Long | 否 |  | 查询大于endLoanId 的数据（倒序输出）如果给定endLoanId去查询，endLoanId不能为0	 |
+| limit | int | 否 |  | 默认 50 |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+[
+        {
+            "loanOrderId":11,//借款订单Id
+            "clientId":"1",
+            "tokenId":"USDT",//借款币种
+            "loanAmount":"100",//借款数量
+            "repaidAmount":"110",//还款数量
+            "unpaidAmount":"10",//未还数量
+            "interestRate":"0.1",//利息比例
+            "interestStart": 123456789,//记息时间
+            "status":1,//1:借款中  2: 已还款
+            "interestPaid":"10",//应还利息
+            "interestUnpaid":"10",//未还利息
+            "createdAt":1234567890123,//创建时间戳（13位）
+            "updatedAt":1234567890123,//更新时间戳（13位）
+            "accountId": 123456789//账户Id
+        }
+]
+```
+
+### 获取借币记录（loanId）
+* 接口地址:  `/openapi/v1/margin/getLoanOrder`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| loanOrderId | Long | 是 |  ||
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+
+{
+     "loanOrderId":11,//借款订单Id
+     "clientId":"1",
+     "tokenId":"USDT",//借款币种
+     "loanAmount":"100",//借款数量
+     "repaidAmount":"110",//还款数量
+     "unpaidAmount":"10",//未还数量
+     "interestRate":"0.1",//利息比例
+     "interestStart": 123456789,//记息时间
+     "status":1,//1:借款中  2: 已还款
+     "interestPaid":"10",//应还利息
+     "interestUnpaid":"10",//未还利息
+     "createdAt":1234567890123,//创建时间戳（13位）
+     "updatedAt":1234567890123,//更新时间戳（13位）
+     "accountId": 123456789//账户Id
+}
+
+```
+
+### 查询还币记录 （list）
+* 接口地址:  `/openapi/v1/margin/repayOrders`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| tokenId | String | 否 |  ||
+| fromRepayId | Long | 否 |  | 查询 fromRepayId 的数据|
+| endRepayId | Long | 否 |  | 查询大于 endRepayId 的数据（倒序输出）endRepayId 去查询，endRepayId 不能为0	 |
+| limit | Int | 否 |  | 默认 50 |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+[
+        {
+            "repayOrderId":11,//还款订单Id
+            "accountId": 123456789//账户Id
+            "clientId":"1",
+            "tokenId":"USDT",//币种
+            "loanOrderId":11,//借出订单Id
+            "amount":"10",//还币数量
+            "interest":"1",//利息
+            "createdAt":1234567890123//创建时间戳（13位）
+        },
+        {
+            "repayOrderId":12,//还款订单Id
+            "accountId": 123456789//账户Id
+            "clientId":"1",
+            "tokenId":"USDT",//币种
+            "loanOrderId":11,//借出订单Id
+            "amount":"10",//还币数量
+            "interest":"1",//利息
+            "createdAt":1234567890123//创建时间戳（13位）
+        }
+    ]
+```
+### 根据借币记录获取还币记录
+
+* 接口地址:  `/openapi/v1/margin/getRepayOrder`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| loanOrderId | Long | 是 |  ||
+| fromRepayId | Long | 否 |  | 查询 fromRepayId 的数据|
+| endRepayId | Long | 否 |  | 查询大于 endRepayId 的数据（倒序输出）endRepayId 去查询，endRepayId 不能为0	 |
+| limit | Long | 否 |  | 默认 50 |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+[
+        {
+            "repayOrderId":11,//还款订单Id
+            "accountId": 123456789//账户Id
+            "clientId":"1",
+            "tokenId":"USDT",//币种
+            "loanOrderId":11,//借出订单Id
+            "amount":"10",//还币数量
+            "interest":"1",//利息
+            "createdAt":1234567890123//创建时间戳（13位）
+        },
+        {
+            "repayOrderId":12,//还款订单Id
+            "accountId": 123456789//账户Id
+            "clientId":"1",
+            "tokenId":"USDT",//币种
+            "loanOrderId":11,//借出订单Id
+            "amount":"10",//还币数量
+            "interest":"1",//利息
+            "createdAt":1234567890123//创建时间戳（13位）
+        }
+    ]
+```
+
+
+### 查询杠杆balance flow （划转，还币，还息）
+
+* 接口地址:  `/openapi/v1/margin/balanceFlow`
+* 请求方法: GET 
+* 请求参数
+
+| 参数  | 类型 | 是否必填 | 描述   | 备注 |
+| :-------- | :--- | :------- | :----- | :--- |
+| tokenId | String | 否 |  ||
+| fromFlowId | Long | 否 |  | 顺向查询数据|
+| endFlowId | Long | 否 |  | 反向查询数据	 |
+| startTime | Long | 否 |  | 毫秒时间戳 |
+| endTime | long | 否 |  |  毫秒时间戳 |
+| limit | Int | 否 |  | 默认 50 |
+| recvWindow | long | 否 |  |  |
+| timestamp | Long | 是 |  |  |
+
+**返回数据**
+
+```javascript
+ [
+    {
+        "id": "539870570957903104",
+        "accountId": "122216245228131",
+        "tokenId": "BTC",
+        "tokenName": "BTC",
+        "flowTypeValue": 51, // 流水类型
+        "flowType": "USER_ACCOUNT_TRANSFER", // 流水类型名称
+        "flowName": "Transfer", // 流水类型说明
+        "change": "-12.5", // 变动值
+        "total": "379.624059937852365", // 变动后当前tokenId总资产
+        "created": "1579093587214"
+    }
+ ]
 ```
 
 ## 交易接口
