@@ -1,7 +1,8 @@
-# Base Url
-The base url of broker open API can be found [here](doc/endpoint.md)
-
 # Broker Contract Public Endpoint
+
+## Base Url
+
+The base url of broker open API can be found [here](doc/endpoint.md)
 
 ## `brokerInfo`
 
@@ -12,6 +13,7 @@ Current broker trading rules and symbol information.
 0
 
 ### **Request Url:**
+
 ```bash
 GET /openapi/v1/brokerInfo
 ```

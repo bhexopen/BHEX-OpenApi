@@ -1,4 +1,4 @@
-# 公有Broker Rest API (2019-07-01)
+# 公有Broker Rest API
 
 ## 通用API信息
 

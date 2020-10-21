@@ -1,4 +1,4 @@
-# Public Rest API for Broker (2018-09-25)
+# Public Rest API for Broker
 
 ## General API Information
 

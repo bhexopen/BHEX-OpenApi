@@ -1,4 +1,4 @@
-# Web Socket Streams for bBoker (2019-08-12)
+# Web Socket Streams for Broker
 
 ## General WSS information
 

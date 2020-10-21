@@ -1,8 +1,8 @@
-# Base URL
+# Public Options Endpoints
+
+## Base URL
 
 The base url of broker open API can be found [here](endpoint.md)
-
-# Public Options Endpoints
 
 ## `brokerInfo`
 
@@ -13,6 +13,7 @@ Current broker trading rules and symbol information.
 0
 
 ### **Request Url:**
+
 ```bash
 GET /openapi/v1/brokerInfo
 ```
@@ -22,6 +23,7 @@ GET /openapi/v1/brokerInfo
 None
 
 ### **Response:**
+
 name|type|example|description
 ------------ | ------------ | ------------ | ------------
 `timezone`|string|`UTC`|Timezone of timestamp

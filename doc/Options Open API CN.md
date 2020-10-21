@@ -1,8 +1,8 @@
-# Broker API URL
+# 期权公共端点
+
+## Broker API URL
 
 Broker Open API的地址请见[这里](endpoint.md)
-
-# 期权公共端点
 
 ## `brokerInfo`
 
@@ -13,6 +13,7 @@ Broker Open API的地址请见[这里](endpoint.md)
 0
 
 ### **Request Url:**
+
 ```bash
 GET /openapi/v1/brokerInfo
 ```
@@ -22,6 +23,7 @@ GET /openapi/v1/brokerInfo
 None
 
 ### **Response:**
+
 名称|类型|例子|描述
 ------------ | ------------ | ------------ | ------------
 `timezone`|string|`UTC`|服务器所在时区
