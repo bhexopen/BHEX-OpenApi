@@ -27,4 +27,6 @@ dist/
 nbdist/
 .nb-gradle/
 
+# python
 */__pycache__/
+*/venv/

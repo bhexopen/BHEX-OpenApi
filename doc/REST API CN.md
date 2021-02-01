@@ -1,4 +1,4 @@
-# 公有Broker Rest API
+# 公有Broker Rest API (2021-02-01)
 
 ## 通用API信息
 
@@ -1090,6 +1090,41 @@ clientOrderId | STRING | NO | orderId和clientOrderId两者必须有一个有值
     "kernelId":"", // BEAM 和 GRIN 独有
     "isInternalTransfer": false // 是否内部转账
 }
+```
+
+#### 根据tokenId获取充币地址信息
+
+```shell
+GET /openapi/v1/depositAddress  (HMAC SHA256)
+```
+
+获取充币地址信息
+
+**Weight:**
+1
+
+**Parameters:**
+
+名称 | 类型 | 是否强制 | 描述
+------------ | ------------ | ------------ | ------------
+tokenId | STRING | 是 | tokenId
+chainType | string | 非必填 |chain type, USDT的chainType分别是OMNI ERC20 TRC20，默认OMNI |
+
+**Notes:**
+
+**Response:**
+
+
+```javascript
+    {
+        "allowDeposit":false,//是否可充值
+        "address":"0x815bF1c3cc0f49b8FC66B21A7e48fCb476051209",//地址
+        "addressExt":"address tag",
+        "minQuantity":"100",//最小金额
+        "requiredConfirmNum":1,//到账确认数
+        "canWithdrawConfirmNum":12,//提币确认数
+        "tokenType":"ERC20_TOKEN"//链类型
+    }
 ```
 
 #### 账户提币记录 (USER_DATA)
